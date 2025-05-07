@@ -30,10 +30,11 @@ try:
     collection = db["sf_tennis_courts"]
     collection.drop()
 
-    for park in formatted_html:
-        user_result = collection.insert_one(park)
 
+    for park in formatted_html["data"]:
+        user_result = collection.insert_one(park)
     logger.info("Successfully stored parks data in DB")
+
 
 except Exception as e:
     print(f"Error: {e}")
