@@ -6,7 +6,7 @@ import api_requests
 def main():
     enable_log
     db_connect
-    db_store
+    # db_store
     api_requests
 
 if __name__ == '__main__':
