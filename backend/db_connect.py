@@ -3,7 +3,7 @@ from pymongo.server_api import ServerApi
 import certifi
 from enable_log import logger
 
-# NTD: This should be encrypted 
+# TODO This should be encrypted 
 uri = "mongodb+srv://vdalfaro:bananasoup@itstennistime.86wi2nl.mongodb.net/?"
 client = MongoClient(uri, server_api=ServerApi('1'), tls=True, tlsCAFile=certifi.where())
 
