@@ -1,8 +1,7 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 .logo {
@@ -10,6 +9,11 @@
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
+}
+
+.box {
+  background-color: #9EAB9A;
+  margin-top: 100px;
 }
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
