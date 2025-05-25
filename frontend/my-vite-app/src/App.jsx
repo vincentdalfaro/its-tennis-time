@@ -1,14 +1,11 @@
+import React from 'react';
+import MapComponent from './Map';
+import './App.css';
 
-import './App.css'
-
-function App() {
-
+export default function App() {
   return (
     <div className="box">
-      <h1> Fucking finally</h1>
-
+      <MapComponent />
     </div>
-  )
+  );
 }
-
-export default App
