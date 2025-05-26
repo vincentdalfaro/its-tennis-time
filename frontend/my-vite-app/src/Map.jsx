@@ -7,7 +7,7 @@ const TOKEN = 'pk.eyJ1IjoidmRhbGZhcm8iLCJhIjoiY21iMDk2MnA3MG9sYzJrcHNveXJ2MnQ2cy
 const initialView = {
   longitude: -122.43,
   latitude: 37.78,
-  zoom: 10.5,
+  zoom: 11.5,
 };
 
 export default function MapComponent() {
