@@ -1,7 +1,7 @@
-import MapComponent from './Map';
-import './App.css';
-import logo from  './assets/logos/logo_lime_green.png'
-import Sidebar from './sidebar.jsx'
+import MapComponent from '../components/Map.jsx';
+import '../App.css';
+import logo from  '../assets/logos/logo_lime_green.png'
+import Sidebar from '../components/sidebar.jsx'
 
 export default function titlepage() {
 
@@ -16,8 +16,10 @@ export default function titlepage() {
   return (
     <div> 
       <Sidebar icon = {logo}/>
-      <div className="box" style = {{marginTop: '55px'}}>
-        <MapComponent />
+      <div className="box-green" style = {{marginTop: '55px'}}>
+        <div className='box-cream'>
+          <MapComponent />
+        </div>
       </div>
     </div>
     );
