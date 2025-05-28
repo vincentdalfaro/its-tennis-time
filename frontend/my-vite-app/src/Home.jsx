@@ -15,14 +15,7 @@ export default function titlepage() {
 
   return (
     <div> 
-
-      <Sidebar/>
-
-      <div style = {{textAlign: "right"}}>
-        <img src = {logo} 
-             style={{ width: '300px'}}/>   
-      </div>
-
+      <Sidebar icon = {logo}/>
       <div className="box">
         <MapComponent />
       </div>

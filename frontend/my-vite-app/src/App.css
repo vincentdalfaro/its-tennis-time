@@ -2,6 +2,7 @@ html, body, #root {
   margin: 0;
   padding: 0;
   height: 100%;
+  width: 100%;
 }
 
 .box {
@@ -12,3 +13,11 @@ html, body, #root {
   box-sizing: border-box;
   border-radius: 10px;
 }
+
+.flex-container {
+  display: flex;
+  justify-content: space-between; /* Pushes items to the ends */
+  align-items: center;            /* Optional: aligns items vertically */
+  padding: 0 1rem; 
+}
+

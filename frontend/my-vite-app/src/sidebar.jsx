@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import logo from  './assets/logos/logo_green.png'
 
-export default function Sidebar() {
+export default function Sidebar({icon}) {
   const [isOpen, setIsOpen] = useState(false);
 
   const w3_open = () => {
@@ -15,11 +16,14 @@ export default function Sidebar() {
     <div>
       {/* Hamburger button */}
       <div className="w3-teal">
-        <button className="w3-button w3-teal w3-xlarge" onClick={w3_open}>
-          ☰
-        </button>
-        <div className="w3-container">
-          <h1>My Page</h1>
+        <div class = "flex-container">
+            <button className="w3-button w3-teal w3-xlarge" onClick={w3_open}>
+            ☰ 
+            </button>
+            <div style = {{textAlign: "right"}}>
+                <img src = {icon} 
+                    style={{ width: '300px'}}/>   
+            </div>
         </div>
       </div>
 
@@ -41,13 +45,6 @@ export default function Sidebar() {
         <a href="#" className="w3-bar-item w3-button">
           Link 3
         </a>
-      </div>
-
-      {/* Page content */}
-      <div className="w3-container" style={{ marginLeft: isOpen ? "200px" : "0" }}>
-        <p>This sidebar is hidden by default.</p>
-        <p>You must click on the "hamburger" icon (top left) to open it.</p>
-        <p>The sidebar will hide a part of the page content.</p>
       </div>
     </div>
   );
