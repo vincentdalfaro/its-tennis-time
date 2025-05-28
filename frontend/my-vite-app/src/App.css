@@ -1,23 +1,19 @@
-html, body, #root {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-}
 
 .box {
   background-color: #9EAB9A;
   width: fit-content;
   margin: 0 auto;
-  padding: 1rem;
+  padding: .5rem;
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .flex-container {
   display: flex;
-  justify-content: space-between; /* Pushes items to the ends */
-  align-items: center;            /* Optional: aligns items vertically */
-  padding: 0 1rem; 
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  width: 100%; /* ✅ Use 100% instead of 100vw */
+  box-sizing: border-box;
 }
 

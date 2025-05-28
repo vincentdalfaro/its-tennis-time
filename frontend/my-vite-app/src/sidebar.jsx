@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import logo from  './assets/logos/logo_green.png'
 
 export default function Sidebar({icon}) {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,12 +11,16 @@ export default function Sidebar({icon}) {
     setIsOpen(false);
   };
 
+   function toggleOpen() {
+    setIsOpen(prev => !prev); // Toggle true/false
+  }
+
   return (
     <div>
       {/* Hamburger button */}
-      <div className="w3-teal">
+      <div className="w3-teal w-full">
         <div class = "flex-container">
-            <button className="w3-button w3-teal w3-xlarge" onClick={w3_open}>
+            <button className="w3-button w3-teal w3-xlarge" onClick={toggleOpen}>
             ☰ 
             </button>
             <div style = {{textAlign: "right"}}>
@@ -33,17 +36,17 @@ export default function Sidebar({icon}) {
         style={{ display: isOpen ? "block" : "none", zIndex: 1 }}
         id="mySidebar"
       >
-        <button onClick={w3_close} className="w3-bar-item w3-large">
-          Close &times;
-        </button>
         <a href="#" className="w3-bar-item w3-button">
-          Link 1
+          Home
         </a>
         <a href="#" className="w3-bar-item w3-button">
-          Link 2
+          Data Visualizations
         </a>
         <a href="#" className="w3-bar-item w3-button">
-          Link 3
+          About
+        </a>
+        <a href="#" className="w3-bar-item w3-button">
+          Contact
         </a>
       </div>
     </div>
