@@ -22,7 +22,23 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 1rem;
-  width: 100%; /* ✅ Use 100% instead of 100vw */
+  width: 100%;
   box-sizing: border-box;
+}
+
+
+.custom-button {
+  background-color: #009688;
+  border: none;
+  color: white;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.custom-button:hover{
+  background-color: #00796B;
 }
 
