@@ -1,6 +1,10 @@
-2025-05-29 11:49:31,517 Successfully connected to MongoDB
-2025-05-29 11:49:31,517 Requesting data from API
-2025-05-29 11:49:31,525 Starting new HTTPS connection (1): api.rec.us:443
-2025-05-29 11:49:31,579 https://api.rec.us:443 "GET /v1/locations?radius=1000000000&organizationSlug=san-francisco-rec-park HTTP/1.1" 200 None
-2025-05-29 11:49:32,860 Successfully stored parks data in DB
-2025-05-29 11:49:32,864 in api_requests
+2025-05-29 14:16:22,428 INFO Logger is enabled
+2025-05-29 14:16:22,914 INFO Successfully connected to MongoDB
+2025-05-29 14:16:22,914 INFO Requesting data from API
+2025-05-29 14:16:22,918 DEBUG Starting new HTTPS connection (1): api.rec.us:443
+2025-05-29 14:16:22,956 DEBUG https://api.rec.us:443 "GET /v1/locations?radius=1000000000&organizationSlug=san-francisco-rec-park HTTP/1.1" 200 None
+2025-05-29 14:16:24,211 INFO Successfully stored parks data in DB
+2025-05-29 14:16:24,213 INFO in api_requests
+2025-05-29 14:16:24,238 WARNING  * Debugger is active!
+2025-05-29 14:16:24,244 INFO  * Debugger PIN: 452-302-233
+2025-05-29 14:16:25,794 INFO 127.0.0.1 - - [29/May/2025 14:16:25] "GET /parks/coordinates HTTP/1.1" 200 -
