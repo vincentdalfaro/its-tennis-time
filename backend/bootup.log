@@ -1,6 +1,6 @@
-2025-05-13 10:26:38,426 Successfully connected to MongoDB
-2025-05-13 10:26:38,426 Requesting data from API
-2025-05-13 10:26:38,431 Starting new HTTPS connection (1): api.rec.us:443
-2025-05-13 10:26:38,500 https://api.rec.us:443 "GET /v1/locations?radius=1000000000&organizationSlug=san-francisco-rec-park HTTP/1.1" 200 None
-2025-05-13 10:26:39,776 Successfully stored parks data in DB
-2025-05-13 10:26:39,777 in api_requests
+2025-05-29 11:49:31,517 Successfully connected to MongoDB
+2025-05-29 11:49:31,517 Requesting data from API
+2025-05-29 11:49:31,525 Starting new HTTPS connection (1): api.rec.us:443
+2025-05-29 11:49:31,579 https://api.rec.us:443 "GET /v1/locations?radius=1000000000&organizationSlug=san-francisco-rec-park HTTP/1.1" 200 None
+2025-05-29 11:49:32,860 Successfully stored parks data in DB
+2025-05-29 11:49:32,864 in api_requests
