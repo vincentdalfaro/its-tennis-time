@@ -8,8 +8,8 @@ const TOKEN = 'pk.eyJ1IjoidmRhbGZhcm8iLCJhIjoiY21iMDk2MnA3MG9sYzJrcHNveXJ2MnQ2cy
 
 const initialView = {
   longitude: -122.43,
-  latitude: 37.78,
-  zoom: 11.5,
+  latitude: 37.76,
+  zoom: 11.3,
 };
 
 export default function MapComponent() {
@@ -46,7 +46,7 @@ export default function MapComponent() {
       style={{
         position: 'relative',
         height: '500px',
-        width: '1000px',
+        width: '900px',
         display: 'block',
       }}
     >
@@ -54,7 +54,7 @@ export default function MapComponent() {
         initialViewState={initialView}
         mapStyle="mapbox://styles/mapbox/light-v9"
         mapboxAccessToken={TOKEN} 
-        minZoom = {11.5}
+        minZoom = {11.3}
         style={{
           width: '100%',
           height: '100%',
