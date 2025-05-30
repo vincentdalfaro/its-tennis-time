@@ -13,7 +13,7 @@ export default function Sidebar({icon}) {
   return (
     <div>
       <div className="w3-teal w-full">
-        <div class = "flex-container">
+        <div className = "flex-container">
             <button className="custom-button" onClick={toggleOpen}>
              <i className={buttonIcon}></i>
             </button>

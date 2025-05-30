@@ -1,43 +1,32 @@
-from bs4 import BeautifulSoup
-import json
 import requests
-from db_connect import client
-from enable_log import logger
 
+def get_collection(client, logger):
+    logger.info("Requesting data from API")
+    URL = "https://api.rec.us/v1/locations/availability?publishedSites=true&organizationSlug=san-francisco-rec-park"
 
-# API request for data 
-logger.info("Requesting data from API")
-URL = "https://api.rec.us/v1/locations?radius=1000000000&organizationSlug=san-francisco-rec-park"
+    try:
+        response = requests.get(URL)
+        response.raise_for_status()
+    except Exception as e:
+        logger.error(f"An error occurred while fetching data: {e}")
+        return
 
-try: 
-    response = requests.get(URL)
+    json_data = response.json()  # This is a list, not a dict
+    logger.info(f"Fetched {len(json_data)} park items")
 
-except:
-    logger.error("An error occured")
-    
-html_data = response.text
+    try:
+        db = client["itstennistime_db"]
+        collection = db["sf_tennis_courts"]
+        collection.drop()  # Clear old data
 
+        # Insert each location
+        for park in json_data:
+            location = park.get("location")
+            if location:
+                collection.insert_one(location)
 
-#Converting data into HTML format
-soup = BeautifulSoup(html_data, 'html.parser')
-formatted_html = soup.prettify()
+        logger.info("Successfully stored parks data in DB")
+    except Exception as e:
+        logger.error(f"Error storing data in DB: {e}")
 
-formatted_html = json.loads(formatted_html)
-
-# Connecting to our db and storing data in sf_tennis_courts collection
-try:
-    db = client["itstennistime_db"]
-    collection = db["sf_tennis_courts"]
-    collection.drop()
-
-
-    for park in formatted_html["data"]:
-        user_result = collection.insert_one(park)
-    logger.info("Successfully stored parks data in DB")
-
-
-except Exception as e:
-    print(f"Error: {e}")
-    logger.error("An error occured storing parks data the DB")
-
-
+    return collection

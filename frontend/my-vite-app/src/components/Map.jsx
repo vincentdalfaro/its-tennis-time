@@ -1,36 +1,68 @@
-import React from 'react';
-import { Map, NavigationControl } from 'react-map-gl/mapbox';
+import { Map, NavigationControl, Marker} from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { fetchParkCoordinates } from '../api/api.jsx';
+import { useState, useEffect, useMemo } from 'react';
+import Pin from './pin';
 
 const TOKEN = 'pk.eyJ1IjoidmRhbGZhcm8iLCJhIjoiY21iMDk2MnA3MG9sYzJrcHNveXJ2MnQ2cyJ9.nSBsNvmgeK-6kyHM2-9h2g';
 
 const initialView = {
   longitude: -122.43,
   latitude: 37.78,
-  zoom: 11,
+  zoom: 11.5,
 };
 
 export default function MapComponent() {
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    fetchParkCoordinates()
+      .then(json => {
+        setData(json);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
+  const pins = useMemo(
+    () =>
+      data.map((city, index) => (
+        <Marker
+          key={`marker-${index}`}
+          longitude={city.lng}
+          latitude={city.lat}
+          anchor="bottom"
+        >
+          <Pin />
+        </Marker>
+      )),
+    [data]
+  );
+
+
   return (
     <div
       style={{
         position: 'relative',
         height: '500px',
         width: '1000px',
-        display: 'block', // ✅ Ensures it's treated as a block element
+        display: 'block',
       }}
     >
       <Map
         initialViewState={initialView}
         mapStyle="mapbox://styles/mapbox/light-v9"
-        mapboxAccessToken={TOKEN}
+        mapboxAccessToken={TOKEN} 
+        minZoom = {11.5}
         style={{
           width: '100%',
           height: '100%',
-          display: 'block', // ✅ Prevents collapsing map
+          display: 'block',
         }}
       >
         <NavigationControl style={{ position: 'absolute', top: 10, right: 10 }} />
+        {pins}
       </Map>
     </div>
   );

@@ -1,6 +1,18 @@
-2025-05-13 10:26:38,426 Successfully connected to MongoDB
-2025-05-13 10:26:38,426 Requesting data from API
-2025-05-13 10:26:38,431 Starting new HTTPS connection (1): api.rec.us:443
-2025-05-13 10:26:38,500 https://api.rec.us:443 "GET /v1/locations?radius=1000000000&organizationSlug=san-francisco-rec-park HTTP/1.1" 200 None
-2025-05-13 10:26:39,776 Successfully stored parks data in DB
-2025-05-13 10:26:39,777 in api_requests
+2025-05-30 10:13:55,774 INFO Logger is enabled
+2025-05-30 10:13:56,650 INFO Successfully connected to MongoDB
+2025-05-30 10:13:56,650 INFO Requesting data from API
+2025-05-30 10:13:56,661 DEBUG Starting new HTTPS connection (1): api.rec.us:443
+2025-05-30 10:14:00,019 DEBUG https://api.rec.us:443 "GET /v1/locations/availability?publishedSites=true&organizationSlug=san-francisco-rec-park HTTP/1.1" 200 None
+2025-05-30 10:14:00,105 INFO Fetched 28 park items
+2025-05-30 10:14:03,286 INFO Successfully stored parks data in DB
+2025-05-30 10:14:03,293 INFO in api_requests
+2025-05-30 10:14:03,326 WARNING  * Debugger is active!
+2025-05-30 10:14:03,332 INFO  * Debugger PIN: 452-302-233
+2025-05-30 10:14:20,019 INFO 127.0.0.1 - - [30/May/2025 10:14:20] "GET /parks/coordinates HTTP/1.1" 200 -
+2025-05-30 10:14:23,912 INFO 127.0.0.1 - - [30/May/2025 10:14:23] "GET /parks/coordinates HTTP/1.1" 200 -
+2025-05-30 10:14:23,990 INFO 127.0.0.1 - - [30/May/2025 10:14:23] "GET /parks/coordinates HTTP/1.1" 200 -
+2025-05-30 10:14:50,717 INFO 127.0.0.1 - - [30/May/2025 10:14:50] "GET /parks/coordinates HTTP/1.1" 200 -
+2025-05-30 10:14:50,794 INFO 127.0.0.1 - - [30/May/2025 10:14:50] "GET /parks/coordinates HTTP/1.1" 200 -
+2025-05-30 10:14:55,718 INFO 127.0.0.1 - - [30/May/2025 10:14:55] "GET /parks/coordinates HTTP/1.1" 200 -
+2025-05-30 10:14:55,778 INFO 127.0.0.1 - - [30/May/2025 10:14:55] "GET /parks/coordinates HTTP/1.1" 200 -
+2025-05-30 10:15:47,129 INFO 127.0.0.1 - - [30/May/2025 10:15:47] "GET /parks/coordinates HTTP/1.1" 200 -
