@@ -11,13 +11,14 @@ def get_collection(client, logger):
         logger.error(f"An error occurred while fetching data: {e}")
         return
 
-    json_data = response.json()  # This is a list, not a dict
+    # Requests all data from the parks
+    json_data = response.json()
     logger.info(f"Fetched {len(json_data)} park items")
 
     try:
         db = client["itstennistime_db"]
         collection = db["sf_tennis_courts"]
-        collection.drop()  # Clear old data
+        collection.drop()  # Clear old data again maybe TODO is not doing this
 
         # Insert each location
         for park in json_data:
