@@ -1,8 +1,9 @@
 import { Map, NavigationControl, Marker} from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { fetchParkCoordinates } from '../api/api.jsx';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import Pin from './pin';
+import ControlPanel from './Control-Panel.jsx';
 
 const TOKEN = 'pk.eyJ1IjoidmRhbGZhcm8iLCJhIjoiY21iMDk2MnA3MG9sYzJrcHNveXJ2MnQ2cyJ9.nSBsNvmgeK-6kyHM2-9h2g';
 
@@ -40,7 +41,6 @@ export default function MapComponent() {
     [data]
   );
 
-
   return (
     <div
       style={{
@@ -63,6 +63,7 @@ export default function MapComponent() {
       >
         <NavigationControl style={{ position: 'absolute', top: 10, right: 10 }} />
         {pins}
+        <ControlPanel />
       </Map>
     </div>
   );
