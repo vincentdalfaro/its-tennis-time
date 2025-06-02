@@ -1,67 +1,103 @@
-import * as React from 'react';
+import React, { useState, useCallback } from 'react';
 
-const camelPattern = /(^|[A-Z])[a-z]*/g;
-function formatSettingName(name) {
-  return name.match(camelPattern).join(' ');
-}
-
-function Checkbox({name, value, onChange}) {
+// Your reusable input components
+function Checkbox({ name, value, onChange, label }) {
   return (
-    <div className="input">
-      <label>{formatSettingName(name)}</label>
-      <input type="checkbox" checked={value} onChange={evt => onChange(name, evt.target.checked)} />
-    </div>
+      <div className="flex-container-map">
+        <label htmlFor={name}>{label}</label>
+        <input
+          type="checkbox"
+          checked={value}
+          onChange={e => onChange(name, e.target.checked)}
+          id={name}
+        />
+      </div>
   );
 }
 
-function NumericInput({name, value, onChange}) {
+function NumericInput({ name, value, onChange, label }) {
   return (
-    <div className="input">
-      <label>{formatSettingName(name)}</label>
+    <div className="flex-container-map">
       <input
         type="number"
         value={value}
-        onChange={evt => onChange(name, Number(evt.target.value))}
+        onChange={e => onChange(name, Number(e.target.value))}
+        id={name}
       />
+      {/* <label htmlFor={name}>{label}</label> */}
     </div>
   );
 }
 
-function ControlPanel(props) {
-  const {settings, onChange} = props;
+function OptionInput({ name, value, onChange, options, label }) {
+  return (
+    <div className="flex-container-map">
+      <label htmlFor={name}>{label}</label>
+      <select
+        value={value}
+        onChange={e => onChange(name, e.target.value)}
+        id={name}
+      >
+        {options.map(opt => (
+          <option key={opt} value={opt}>
+            {opt}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+}
 
-  const renderSetting = (name, value) => {
-    switch (typeof value) {
-      case 'boolean':
-        return <Checkbox key={name} name={name} value={value} onChange={onChange} />
-      case 'number':
-        return <div>
-      {/* <p>Synchronize two maps.</p> */}
+const initialSettings = {
+  checkbox1: {
+    component: Checkbox,
+    label: 'Pickleball',
+    value: false,
+  },
+  // numeric1: {
+  //   component: NumericInput,
+  //   label: 'Number of items',
+  //   value: 5,
+  // },
+  option1: {
+    component: OptionInput,
+    label: 'Time',
+    value: 'morning',
+    options: ['morning', 'afternoon', 'night'],
+  },
+};
 
-      <div style = {{marginTop: '20px'}}>
-        <label>Time: </label>
-        <select value={props.mode} onChange={onChange}>
-          <option value="side-by-side">Side by side</option>
-          <option value="split-screen">Split screen</option>
-        </select>
-      </div>
-            </div>
-      default:
-        return null;
-    }
-  };
+export default function ControlPanel() {
+  const [settings, setSettings] = useState(initialSettings);
+
+  // Update function updates value inside each setting object
+  const updateSettings = useCallback((name, newValue) => {
+    setSettings(s => ({
+      ...s,
+      [name]: {
+        ...s[name],
+        value: newValue,
+      },
+    }));
+  }, []);
 
   return (
-    <div className="control-panel">
+    <div>
       <h3>Settings</h3>
-      <p>Turn interactive features off/on.</p>
-      <hr />
-
-      {Object.keys(settings).map(name => renderSetting(name, settings[name]))}
-
-      <hr />
+      {Object.entries(settings).map(([key, setting]) => {
+        const Component = setting.component;
+        
+        return (
+          <Component
+            key={key}
+            name={key}
+            value={setting.value}
+            onChange={updateSettings}
+            label={setting.label}
+            options={setting.options}
+          />
+        );
+      })}
     </div>
   );
 }
-
-export default React.memo(ControlPanel);

@@ -68,6 +68,25 @@
   margin-top: 0;
 }
 
-.input {
-  margin-bottom: 10px;
+.input-box-map{
+  width: 50px;
+  height: 20px;
+}
+
+.option-box-map{
+  width: 50px;
+  height: 20px;
+}
+
+.map-style{
+  position: relative;
+  height: 500px;
+  width: 900px;
+  display: block;
+}
+
+.flex-container-map {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
