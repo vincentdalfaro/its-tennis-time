@@ -26,6 +26,14 @@
   box-sizing: border-box;
 }
 
+.map-header {
+  color: #ffffff;        
+  font-family: 'Roboto', sans-serif;  
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 17px;
+  text-decoration: underline;
+}
 
 .custom-button {
   background-color: #009688;
@@ -43,3 +51,44 @@
   background-color: #00796B;
 }
 
+.control-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 12px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  font-family: sans-serif;
+  z-index: 1;
+  max-height: 90%;
+  overflow-y: auto;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.control-panel h3 {
+  margin-top: 0;
+}
+
+.input-box-map{
+  width: 50px;
+  height: 20px;
+}
+
+.option-box-map{
+  width: 50px;
+  height: 20px;
+}
+
+.map-style{
+  position: relative;
+  height: 500px;
+  width: 900px;
+  display: block;
+}
+
+.flex-container-map {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
