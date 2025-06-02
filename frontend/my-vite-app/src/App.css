@@ -49,3 +49,25 @@
   background-color: #00796B;
 }
 
+.control-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 12px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  font-family: sans-serif;
+  z-index: 1;
+  max-height: 90%;
+  overflow-y: auto;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.control-panel h3 {
+  margin-top: 0;
+}
+
+.input {
+  margin-bottom: 10px;
+}

@@ -41,6 +41,30 @@ export default function MapComponent() {
     [data]
   );
 
+  const [settings, setSettings] = useState({
+    hello: true,
+    boxZoom: true,
+    dragRotate: true,
+    dragPan: true,
+    keyboard: true,
+    doubleClickZoom: true,
+    touchZoomRotate: true,
+    touchPitch: true,
+    minZoom: 0,
+    maxZoom: 20,
+    minPitch: 0,
+    maxPitch: 85
+  });
+
+  const updateSettings = useCallback(
+    (name, value) =>
+      setSettings(s => ({
+        ...s,
+        [name]: value
+      })),
+    []
+  );
+
   return (
     <div
       style={{
@@ -55,6 +79,7 @@ export default function MapComponent() {
         mapStyle="mapbox://styles/mapbox/light-v9"
         mapboxAccessToken={TOKEN} 
         minZoom = {11.3}
+        {...settings}
         style={{
           width: '100%',
           height: '100%',
@@ -63,7 +88,7 @@ export default function MapComponent() {
       >
         <NavigationControl style={{ position: 'absolute', top: 10, right: 10 }} />
         {pins}
-        <ControlPanel />
+        <ControlPanel settings={settings} onChange={updateSettings} />
       </Map>
     </div>
   );

@@ -33,9 +33,19 @@ function ControlPanel(props) {
   const renderSetting = (name, value) => {
     switch (typeof value) {
       case 'boolean':
-        return <Checkbox key={name} name={name} value={value} onChange={onChange} />;
+        return <Checkbox key={name} name={name} value={value} onChange={onChange} />
       case 'number':
-        return <NumericInput key={name} name={name} value={value} onChange={onChange} />;
+        return <div>
+      {/* <p>Synchronize two maps.</p> */}
+
+      <div style = {{marginTop: '20px'}}>
+        <label>Time: </label>
+        <select value={props.mode} onChange={onChange}>
+          <option value="side-by-side">Side by side</option>
+          <option value="split-screen">Split screen</option>
+        </select>
+      </div>
+            </div>
       default:
         return null;
     }
@@ -43,16 +53,8 @@ function ControlPanel(props) {
 
   return (
     <div className="control-panel">
-      <h3>Limit Map Interaction</h3>
+      <h3>Settings</h3>
       <p>Turn interactive features off/on.</p>
-      <div className="source-link">
-        <a
-          href="https://github.com/visgl/react-map-gl/tree/8.0-release/examples/mapbox/interaction"
-          target="_new"
-        >
-          View Code ↗
-        </a>
-      </div>
       <hr />
 
       {Object.keys(settings).map(name => renderSetting(name, settings[name]))}
