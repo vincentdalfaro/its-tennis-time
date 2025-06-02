@@ -42,8 +42,7 @@ export default function MapComponent() {
   );
 
   return (
-    <div className='map-style'
-    >
+    <div className='map-style'>
       <Map
         initialViewState={initialView}
         mapStyle="mapbox://styles/mapbox/light-v9"
@@ -55,7 +54,7 @@ export default function MapComponent() {
           display: 'block',
         }}
       >
-        <NavigationControl style={{ position: 'absolute', top: 10, right: 10 }} />
+        <NavigationControl  position="top-left" />
         {pins}
       </Map>
       <div className="control-panel">

@@ -25,7 +25,6 @@ export default function Sidebar({icon}) {
         </div>
       </div>
 
-      {/* Sidebar */}
       <div
         className="w3-sidebar w3-bar-block w3-border-right w3-white"
         style={{ display: isOpen ? "block" : "none", zIndex: 1 }}

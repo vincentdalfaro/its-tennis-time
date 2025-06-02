@@ -1,6 +1,12 @@
 import React, { useState, useCallback } from 'react';
 
-// Your reusable input components
+/*
+  Used for checkboxes in the control panel for a map
+
+  @param {string} name - the component to choose
+  @param {boolean} value - the value (true or false) of the checkbox
+  @param {string} label - the displayed text
+*/
 function Checkbox({ name, value, onChange, label }) {
   return (
       <div className="flex-container-map">
@@ -15,6 +21,13 @@ function Checkbox({ name, value, onChange, label }) {
   );
 }
 
+/*
+  Used for checkboxes in the control panel for a map
+
+  @param {string} name - the component to choose
+  @param {boolean} value - the value (true or false) of the checkbox
+  @param {string} label - the displayed text
+*/
 function NumericInput({ name, value, onChange, label }) {
   return (
     <div className="flex-container-map">
@@ -24,11 +37,19 @@ function NumericInput({ name, value, onChange, label }) {
         onChange={e => onChange(name, Number(e.target.value))}
         id={name}
       />
-      {/* <label htmlFor={name}>{label}</label> */}
+      <label htmlFor={name}>{label}</label>
     </div>
   );
 }
 
+/*
+  Used for checkboxes in the control panel for a map
+
+  @param {string} name - the component to choose
+  @param {boolean} value - the value (true or false) of the checkbox
+  @param {list} options - a list of the given options
+  @param {string} label - the displayed text on the input box
+*/
 function OptionInput({ name, value, onChange, options, label }) {
   return (
     <div className="flex-container-map">
@@ -48,18 +69,17 @@ function OptionInput({ name, value, onChange, options, label }) {
   );
 }
 
+/*
+  Used for the control panel for the map to show different customizables
+*/
 const initialSettings = {
-  checkbox1: {
+  pickleball: {
     component: Checkbox,
     label: 'Pickleball',
     value: false,
   },
-  // numeric1: {
-  //   component: NumericInput,
-  //   label: 'Number of items',
-  //   value: 5,
-  // },
-  option1: {
+
+  times: {
     component: OptionInput,
     label: 'Time',
     value: 'morning',
@@ -70,7 +90,12 @@ const initialSettings = {
 export default function ControlPanel() {
   const [settings, setSettings] = useState(initialSettings);
 
-  // Update function updates value inside each setting object
+  /*
+    A function to set the proper settings given initialSettings
+
+    @param {string} name - the name of the setting given in initializeSettings
+    @param {param} newValue - a value to set that setting to
+  */
   const updateSettings = useCallback((name, newValue) => {
     setSettings(s => ({
       ...s,

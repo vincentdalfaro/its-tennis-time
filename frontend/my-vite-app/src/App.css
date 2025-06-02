@@ -31,6 +31,8 @@
   font-family: 'Roboto', sans-serif;  
   font-size: 24px;
   font-weight: bold;
+  margin-left: 17px;
+  text-decoration: underline;
 }
 
 .custom-button {
@@ -52,7 +54,7 @@
 .control-panel {
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   margin: 12px;
   padding: 20px;
   background: rgba(255, 255, 255, 0.9);
