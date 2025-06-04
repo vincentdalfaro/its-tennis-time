@@ -6,6 +6,7 @@
   padding: .3rem;
   box-sizing: border-box;
   border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
 .box-cream {
@@ -63,7 +64,10 @@
   max-height: 90%;
   overflow-y: auto;
   border-radius: 4px;
+  width: 225px;
+  height: 500px;
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  font-size: 13px;
 }
 
 .control-panel h3 {
@@ -83,7 +87,7 @@
 .map-style{
   position: relative;
   height: 500px;
-  width: 900px;
+  width: 1000px;
   display: block;
 }
 
@@ -91,4 +95,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+hr {
+    display: block;
+    height: 1.5px;
+    border: 0;
+    border-top: 1px solid #000000;
+    margin: 1em 0;
+    padding: 0;
 }

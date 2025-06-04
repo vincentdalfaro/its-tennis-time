@@ -82,8 +82,15 @@ const initialSettings = {
   times: {
     component: OptionInput,
     label: 'Time',
-    value: 'morning',
+    value: '',
     options: ['morning', 'afternoon', 'night'],
+  },
+
+  days:{
+    component: OptionInput,
+    label: 'Day',
+    value: '',
+    options: ['hello', 'The next Day', 'the next day']
   },
 };
 
@@ -107,8 +114,9 @@ export default function ControlPanel() {
   }, []);
 
   return (
-    <div>
+    <div style = {{textAlign: "center"}}>
       <h3>Settings</h3>
+      <hr/>
       {Object.entries(settings).map(([key, setting]) => {
         const Component = setting.component;
         
