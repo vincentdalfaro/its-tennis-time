@@ -3,7 +3,8 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { fetchParkCoordinates } from '../api/api.jsx';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import Pin from './Pin.jsx';
-import ControlPanel from './Control-Panel.jsx';
+// import ControlPanel from './Control-Panel.jsx';
+import TopBar from './TopBar.jsx'
 
 /*
   Intial token and view to pick for the map
@@ -59,11 +60,14 @@ export default function MapComponent() {
       >
         <NavigationControl  position="top-left" />
         {pins}
-        <div className="control-panel">
-          <ControlPanel />
+        <div className = "top-bar">
+          <TopBar/>
         </div>
+
+        {/* <div className="control-panel">
+          <ControlPanel />
+        </div> */}
       </Map>
-      
 
     </div>
   );
