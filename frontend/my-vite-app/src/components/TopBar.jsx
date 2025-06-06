@@ -9,7 +9,7 @@ import React, { useState, useCallback } from "react";
 */
 function Checkbox({ name, value, onChange, label }) {
   function handleClick() {
-    onChange(name, !value);  // Toggle value in parent
+    onChange(name, !value);
   }
 
   return (
@@ -17,7 +17,7 @@ function Checkbox({ name, value, onChange, label }) {
       <button
         className={`map-button ${value ? 'clicked' : ''}`}
         onClick={handleClick}
-      >
+      > 
         {label}
       </button>
     </div>
@@ -69,6 +69,14 @@ function OptionInput({ name, value, onChange, options, label }) {
   );
 }
 
+function TextInput({ value }) {
+  return (
+    <div>
+      <span>{value}</span>
+    </div>
+  );
+}
+
 /*
   Used for the control panel for the map to show different customizables
 */
@@ -81,33 +89,31 @@ const initialSettings = {
 
   times: {
     component: OptionInput,
-    label: 'Time',
-    value: '',
+    label: '',
+    value: false,
     options: ['Morning', 'Afternoon', 'Night'],
   },
 
   days:{
     component: OptionInput,
-    label: 'day',
-    value: '',
+    label: '',
+    value: false,
     options: getNext7Days()
+  },
+
+   text: {
+    component: TextInput,
+    label: 'text',
+    value: "to",
   },
 
   days2:{
     component: OptionInput,
-    label: 'day',
-    value: '',
+    label: 'day-2',
+    value: "to",
     options: getNext7Days()
   },
 };
-
-function getSettingMessage(key, value) {
-  if (key === 'pickleball' && value) return 'Pickleball is enabled!';
-  if (key === 'times' && value) return `Selected time: ${value}`;
-  if ((key === 'days' || key === 'days2') && value) return `Selected day: ${value}`;
-  return '';
-}
-
 
 export default function TopBar() {
     const [settings, setSettings] = useState(initialSettings);
@@ -130,25 +136,22 @@ export default function TopBar() {
 
 
     return (
-        <div className="flex-container-map">
-                {Object.entries(settings).map(([key, setting]) => {
-                const Component = setting.component;
-                const message = getSettingMessage(key, setting.value);
-                
-                return (
-                    <div key={key} style={{ marginBottom: 16 }}>
-                    <Component
-                      name={key}
-                      value={setting.value}
-                      onChange={updateSettings}
-                      label={setting.label}
-                      options={setting.options}
-                    />
-                    {message && <p style={{ marginTop: 4, color: 'green' }}>{message}</p>}
-                  </div>
-                );
-            })}
+  <div className="flex-container-map">
+    {Object.entries(settings).map(([key, setting], index, arr) => {
+      const Component = setting.component;
+      return (
+        <div key={key} style={{ marginBottom: 16 }}>
+          <Component
+            name={key}
+            value={setting.value}
+            onChange={updateSettings}
+            label={setting.label}
+            options={setting.options}
+          />
         </div>
-    );
+      );
+    })}
+  </div>
+);
 
 }

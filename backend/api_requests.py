@@ -1,12 +1,17 @@
 from flask import jsonify
+import time
 
 def register_routes(app, collection, logger):
     logger.info("in api_requests")
 
-    # TODO Fix this, performes lng/lat/availableSlots
+    # Your tennis sportId
+    TENNIS_SPORT_ID = "bd745b6e-1dd6-43e2-a69f-06f094808a96"
+
     @app.route("/parks/coordinates")
     def get_coordinates():
-        results = collection.find({}, {"_id": 0, "lat": 1, "lng": 1, "courts.availableSlots":1})
+        start = time.time()
+
+        results = collection.find({}, {"_id": 0, "lat": 1, "lng": 1, "courts.availableSlots": 1, "courts.sports.sportId": 1})
         
         coords = []
         for doc in results:
@@ -15,20 +20,30 @@ def register_routes(app, collection, logger):
                 lat = float(doc["lat"])
                 lng = float(doc["lng"])
 
-                # Collect all slots from all courts
                 available_slots = []
+                is_tennis = False  # default
+
                 courts = doc.get("courts", [])
                 for court in courts:
+                    # Check for tennis sportId
+                    sports = court.get("sports", [])
+                    for sport in sports:
+                        if sport.get("sportId") == TENNIS_SPORT_ID:
+                            is_tennis = True
+                            break  # no need to keep checking
+
+                    # Collect slots
                     slots = court.get("availableSlots", [])
                     available_slots.extend(slots)
-
 
                 coords.append({
                     "lat": lat,
                     "lng": lng,
-                    "availableSlots": sorted(set(available_slots))  # de-dupe and sort if needed
+                    "availableSlots": sorted(set(available_slots)),
+                    "isTennis": is_tennis
                 })
+                logger.info(f"API call took {time.time() - start:.2f} seconds")
             except (ValueError, KeyError):
-                pass  # skip if missing or bad data
+                pass
 
         return jsonify(coords)
