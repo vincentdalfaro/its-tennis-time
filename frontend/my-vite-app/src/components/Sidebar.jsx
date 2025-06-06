@@ -10,6 +10,8 @@ export default function Sidebar({icon}) {
     setButtonIcon(prevIcon => prevIcon === "fas fa-bars" ? "fas fa-times" : "fas fa-bars");
   }
 
+  
+
   return (
     <div>
       <div className="w3-teal w-full">

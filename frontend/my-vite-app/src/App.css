@@ -27,6 +27,21 @@
   box-sizing: border-box;
 }
 
+.flex-home {
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+  padding: 0 1rem;
+  width: 99%;
+  box-sizing: border-box;
+}
+
+.flex-home-2 {
+  display: flex;
+  flex-direction: column;
+}
+
+
 .map-header {
   color: #ffffff;        
   font-family: 'Roboto', sans-serif;  
@@ -151,5 +166,4 @@ hr {
   cursor: pointer;
   width: 75px;
 }
-
 
