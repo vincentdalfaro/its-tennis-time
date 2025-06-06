@@ -70,6 +70,18 @@
   font-size: 13px;
 }
 
+.top-bar{
+  position: absolute;
+  top: 10px;      /* distance from top of map */
+  width: 95%;    /* or narrower width if you want */
+  display: flex;
+  justify-content: right; /* center children horizontally */
+  align-items: center;     /* center vertically */
+  pointer-events: auto;    /* so controls are clickable */
+  gap: 1rem;               /* spacing between controls */
+  z-index: 10; 
+}
+
 .control-panel h3 {
   margin-top: 0;
 }
@@ -95,6 +107,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 2rem;
 }
 
 hr {
@@ -105,3 +118,38 @@ hr {
     margin: 1em 0;
     padding: 0;
 }
+
+.check-button {
+  padding: 5px;
+  background-color: #ffffff;
+}
+
+.map-button{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  color: 04AA6D;
+  border: none;
+  cursor: pointer;
+  font-size: 12;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+  width: 75px;
+}
+
+.map-button.clicked{
+  background-color: #04AA6D;
+  color: white;
+}
+
+.custom-select {
+  background-color: #04AA6D;
+  color: white;
+  border: none;
+  padding: 2px;
+  border-radius: 4px;
+  font-size: 12;
+  cursor: pointer;
+  width: 75px;
+}
+
+

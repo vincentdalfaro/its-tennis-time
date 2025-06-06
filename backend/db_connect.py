@@ -6,7 +6,7 @@ import os
 
 def connect_to_db(logger):
     load_dotenv()
-
+    
     uri = os.getenv('MONGO_URI')
     client = MongoClient(uri, server_api=ServerApi('1'), tls=True, tlsCAFile=certifi.where())
 

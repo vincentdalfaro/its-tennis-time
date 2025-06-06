@@ -82,7 +82,7 @@ const initialSettings = {
   times: {
     component: OptionInput,
     label: 'Time',
-    value: '',
+    value: 'morning',
     options: ['morning', 'afternoon', 'night'],
   },
 
@@ -121,14 +121,16 @@ export default function ControlPanel() {
         const Component = setting.component;
         
         return (
-          <Component
-            key={key}
-            name={key}
-            value={setting.value}
-            onChange={updateSettings}
-            label={setting.label}
-            options={setting.options}
-          />
+          <div key={key}>
+            <Component
+              key={key}
+              name={key}
+              value={setting.value}
+              onChange={updateSettings}
+              label={setting.label}
+              options={setting.options}
+            />
+        </div>
         );
       })}
     </div>

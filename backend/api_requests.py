@@ -3,6 +3,7 @@ from flask import jsonify
 def register_routes(app, collection, logger):
     logger.info("in api_requests")
 
+    # TODO Fix this, performes lng/lat/availableSlots
     @app.route("/parks/coordinates")
     def get_coordinates():
         results = collection.find({}, {"_id": 0, "lat": 1, "lng": 1, "courts.availableSlots":1})
@@ -20,6 +21,7 @@ def register_routes(app, collection, logger):
                 for court in courts:
                     slots = court.get("availableSlots", [])
                     available_slots.extend(slots)
+
 
                 coords.append({
                     "lat": lat,
