@@ -19,9 +19,7 @@ export default function Home() {
         </div>
     </div>
    <div style={{ height: '2px', backgroundColor: 'black', marginTop: "10px", width: "700px", marginLeft: "15px" }}></div>
-    <div>
-      <text style = {{fontSize: 40, marginLeft: "160px", font: "Times New Roman"}}> Explore Visualizations</text>
-    </div>
+  
   </div>
 );
 }
