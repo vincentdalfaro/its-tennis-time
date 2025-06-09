@@ -3,7 +3,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { fetchParkCoordinates } from '../api/api.jsx';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import Pin from './pin.jsx';
-// import ControlPanel from './Control-Panel.jsx';
 import TopBar from './TopBar.jsx'
 
 /*
@@ -64,9 +63,6 @@ export default function MapComponent() {
           <TopBar/>
         </div>
 
-        {/* <div className="control-panel">
-          <ControlPanel />
-        </div> */}
       </Map>
 
     </div>

@@ -9,12 +9,6 @@ export default function DataViz() {
   return (
     <div> 
       <Sidebar icon = {logo}/>
-      <div className="box-green" style={{ marginTop: '55px' }}>
-        <h1 className = "map-header">Reservations</h1>
-        <div className='flex-container'>          
-          <MapComponent />
-        </div>
-      </div>
     </div>
     );
 }

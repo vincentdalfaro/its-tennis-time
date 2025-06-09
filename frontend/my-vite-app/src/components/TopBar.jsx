@@ -32,7 +32,6 @@ function getNext7Days() {
     const date = new Date(today);
     date.setDate(today.getDate() + i);
 
-    // const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
 
@@ -91,7 +90,7 @@ const initialSettings = {
     component: OptionInput,
     label: '',
     value: false,
-    options: ['Morning', 'Afternoon', 'Night'],
+    options: ['Morning', 'Afternoon', 'Evening'],
   },
 
   days:{
@@ -103,14 +102,14 @@ const initialSettings = {
 
    text: {
     component: TextInput,
-    label: 'text',
+    label: 'day',
     value: "to",
   },
 
   days2:{
     component: OptionInput,
     label: 'day-2',
-    value: "to",
+    value: "",
     options: getNext7Days()
   },
 };
@@ -136,22 +135,22 @@ export default function TopBar() {
 
 
     return (
-  <div className="flex-container-map">
-    {Object.entries(settings).map(([key, setting], index, arr) => {
-      const Component = setting.component;
-      return (
-        <div key={key} style={{ marginBottom: 16 }}>
-          <Component
-            name={key}
-            value={setting.value}
-            onChange={updateSettings}
-            label={setting.label}
-            options={setting.options}
-          />
-        </div>
-      );
-    })}
-  </div>
+      <div className="flex-container-map">
+        {Object.entries(settings).map(([key, setting], index, arr) => {
+          const Component = setting.component;
+          return (
+            <div key={key} style={{ marginBottom: 16 }}>
+              <Component
+                name={key}
+                value={setting.value}
+                onChange={updateSettings}
+                label={setting.label}
+                options={setting.options}
+              />
+            </div>
+          );
+        })}
+      </div>
 );
 
 }
