@@ -3,7 +3,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { fetchParkCoordinates } from '../api/api.jsx';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import Pin from './pin.jsx';
-import TopBar from './TopBar.jsx'
+import TopBar from './Topbar.jsx'
 
 /*
   Intial token and view to pick for the map
