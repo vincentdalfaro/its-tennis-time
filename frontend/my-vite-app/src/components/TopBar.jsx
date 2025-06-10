@@ -1,6 +1,5 @@
-import React, { useState, useCallback } from "react";
 import { Link } from 'react-router-dom';
-import logo from  '../assets/logo.png'
+import logo from  '../assets/logo-white.png'
 import world from '../assets/world.png'
 
 export default function TopBar() {
