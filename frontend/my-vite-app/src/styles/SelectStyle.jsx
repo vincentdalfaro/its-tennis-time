@@ -11,8 +11,8 @@ const SelectStyle = {
   fontSize: 15,
   borderRadius: 0,
   '&:hover': {
-    border: '2px solid white', // <-- override hover border too
-    boxShadow: 'none',         // <-- also on hover
+    border: '2px solid white',
+    boxShadow: 'none',   
   }
 }),
   menu: (provided) => ({

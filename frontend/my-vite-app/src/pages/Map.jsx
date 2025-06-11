@@ -3,35 +3,31 @@ import '../App.css';
 import Topbar from '../components/Topbar.jsx'
 import MyMap from '../components/MapComponent.jsx'
 
+
 export default function Map() {
-
   return (
-    <div> 
-      <Topbar/>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+      <Topbar />
 
-      <div style={{
-        width: '100%',
-        height: '2px',
-        backgroundColor: 'white'
-      }}></div>
+      {/* Horizontal Bar */}
+      <div className='horizontal-bar'/>
 
-      <div style={{
-          position: 'absolute',
-          width: '2px',
-          backgroundColor: 'white',
-          height: '100vh', 
-          marginLeft: "39.86%",
-          zIndex: 0
-        }}></div>
+      {/* Main content: full height */}
+      <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
 
-     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-        <div>
+        {/* Scrollable left column */}
+        <div style={{ width: '40%', overflowY: 'auto', padding: '1rem' }}>
           <h1 className='white-text'>Whoops</h1>
         </div>
 
-        <MyMap />
-      </div>
+        {/* Vertical Divider */}
+        <div className="vertical-bar"></div>
 
+        {/* Fixed map area */}
+        <div style={{ flex: 1 }}>
+          <MyMap />
+        </div>
+      </div>
     </div>
-    );
+  );
 }

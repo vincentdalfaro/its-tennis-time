@@ -1,3 +1,4 @@
+/* General Components */
 .white-text {
   color: white;
   font-family: 'Futura';
@@ -8,36 +9,6 @@
   color: lightgray;
   font-family: 'Futura';
   text-decoration: none;
-}
-
-.flex-container {
-  display: flex;
-  align-items: center;
-  padding: 0 1rem;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.flex-container-2 {
-  display: flex;
-  padding: 0 1rem;
-  width: 100%;
-  box-sizing: border-box;
-  align-items: center;
-}
-
-.flex-vertical {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-}
-
-.flex-vertical-2 {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: left;
 }
 
 .input, .button, .select {
@@ -62,28 +33,68 @@
   border: 2px solid white;
 }
 
-/* Focus state (already working) */
 .custom-select__control--is-focused {
   box-shadow: none !important;
   border-color: white !important;
   outline: none !important;
 }
 
-/* Hover state (fix selector) */
 .custom-select__control:hover {
   background-color: white;
   color: black;
   border: 2px solid white;
 }
 
-.horizontal-line{
+
+/* Home Page */
+.home-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  margin-top: 120px
+}
+
+.home-flex-2 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: left;
+}
+
+/* Top Bar */
+.flex-topbar {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.flex-topbar-2 {
+  align-content: flex-end;
+  display: flex;
+  padding: 0 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+/* Map */
+.horizontal-bar {
   width: 100%;
   height: 2px;
   background-color: white;
+  flex-shrink: 0;
 }
 
-.vertical-line{
-  width: 2px;
-  height: 100%;
+.vertical-bar {
+  width: 3px;
   background-color: white;
+  height: 100%;
+  z-index: 0;
 }

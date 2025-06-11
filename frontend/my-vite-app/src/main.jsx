@@ -12,7 +12,7 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/map" element={<Map />} />
+        <Route path="/map" element={<Map key={Date.now()} />} />
       </Routes>
     </Router>
   </StrictMode>

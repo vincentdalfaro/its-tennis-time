@@ -1,28 +1,38 @@
 import React from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import mapStyle from '../styles/MapStyle';
 
 const containerStyle = {
-  width: '60%',
-  height: '100vh'
+  width: '100%',
+  height: '100%'
 };
 
 const center = {
-  lat: 40.7128, // example: New York City
-  lng: -74.0060
+  lng: -122.45,
+  lat: 37.76,
 };
 
 function MyMap() {
+  
   return (
     <LoadScript googleMapsApiKey="AIzaSyBZ58k9XjJoAvDqPnltyNqR13i0ZIWWKcc">
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={12}
+        zoom={13}
+        options={{
+          styles: mapStyle,
+          scrollwheel: true,
+          disableDefaultUI: true,
+          gestureHandling: "greedy",
+           minZoom: 12,
+        }}
       >
-        <Marker position={center} />
       </GoogleMap>
     </LoadScript>
   );
 }
+
+    
 
 export default MyMap;
