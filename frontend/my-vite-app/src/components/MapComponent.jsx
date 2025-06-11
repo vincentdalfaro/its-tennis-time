@@ -7,6 +7,9 @@ const containerStyle = {
   height: '100%'
 };
 
+const MapKey = import.meta.env.VITE_MAP_KEY;
+console.log(MapKey)
+
 const center = {
   lng: -122.45,
   lat: 37.76,
@@ -15,7 +18,7 @@ const center = {
 function MyMap() {
   
   return (
-    <LoadScript googleMapsApiKey="AIzaSyBZ58k9XjJoAvDqPnltyNqR13i0ZIWWKcc">
+    <LoadScript googleMapsApiKey={MapKey}>
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
