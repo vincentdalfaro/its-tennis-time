@@ -1,7 +1,7 @@
 
 import '../App.css';
 import Topbar from '../components/Topbar.jsx'
-import MyMap from '../components/MyMap.jsx'
+import MyMap from '../components/MapComponent.jsx'
 
 export default function Map() {
 
@@ -20,13 +20,16 @@ export default function Map() {
           width: '2px',
           backgroundColor: 'white',
           height: '100vh', 
-          marginLeft: "500px",
+          marginLeft: "39.86%",
           zIndex: 0
         }}></div>
 
-      <div style = {{display: "flex", alignContent: "flex-start"}}>
-        <text style = {{color: "white"}}> Hello?</text>
-        <MyMap></MyMap>
+     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+        <div>
+          <h1 className='white-text'>Whoops</h1>
+        </div>
+
+        <MyMap />
       </div>
 
     </div>
