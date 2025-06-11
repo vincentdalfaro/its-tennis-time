@@ -1,19 +1,24 @@
 const SelectStyle = {
   control: (provided, state) => ({
-    ...provided,
-    backgroundColor: state.isFocused ? 'white' : 'transparent',
-    color: state.isFocused ? 'black' : 'white',
-    border: '2px solid white',
-    boxShadow: 'none',
-    outline: 'none',
-    width: 300,
-    minHeight: 20,
-    fontSize: 15,
-    borderRadius: 0,
-  }),
+  ...provided,
+  backgroundColor: state.isFocused ? 'white' : 'transparent',
+  color: state.isFocused ? 'black' : 'white',
+  border: '2px solid white',
+  boxShadow: 'none', // <-- important
+  outline: 'none',   // <-- good to include
+  width: 300,
+  minHeight: 20,
+  fontSize: 15,
+  borderRadius: 0,
+  '&:hover': {
+    border: '2px solid white', // <-- override hover border too
+    boxShadow: 'none',         // <-- also on hover
+  }
+}),
   menu: (provided) => ({
     ...provided,
     backgroundColor: 'white',
+    border: '2px solid white',
     width: 100,
     borderRadius: 0,
   }),
@@ -35,9 +40,9 @@ const SelectStyle = {
   }),
   multiValue: (provided) => ({
   ...provided,
-  color: '#666',           // default "x" color (gray)
+  color: '#000000',           // default "x" color (gray)
   cursor: 'pointer',
-  fontSize: '16px'
+  fontSize: "16px"
 })
 };
 
