@@ -8,7 +8,6 @@ const containerStyle = {
 };
 
 const MapKey = import.meta.env.VITE_MAP_KEY;
-console.log(MapKey)
 
 const center = {
   lng: -122.45,

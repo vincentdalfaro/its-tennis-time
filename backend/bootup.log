@@ -1,10 +1,13 @@
-2025-06-11 13:51:09,825 INFO Logger is enabled
-2025-06-11 13:51:10,380 INFO Successfully connected to MongoDB
-2025-06-11 13:51:10,380 INFO Requesting data from API
-2025-06-11 13:51:10,390 DEBUG Starting new HTTPS connection (1): api.rec.us:443
-2025-06-11 13:51:13,695 DEBUG https://api.rec.us:443 "GET /v1/locations/availability?publishedSites=true&organizationSlug=san-francisco-rec-park HTTP/1.1" 200 None
-2025-06-11 13:51:13,720 INFO Fetched 28 park items
-2025-06-11 13:51:15,184 INFO Successfully stored parks data in DB
-2025-06-11 13:51:15,187 INFO in api_requests
-2025-06-11 13:51:15,212 WARNING  * Debugger is active!
-2025-06-11 13:51:15,219 INFO  * Debugger PIN: 452-302-233
+2025-06-11 23:18:12,868 INFO Logger is enabled
+2025-06-11 23:18:13,412 INFO Successfully connected to MongoDB
+2025-06-11 23:18:13,460 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-11 23:18:13,460 INFO [33mPress CTRL+C to quit[0m
+2025-06-11 23:18:15,197 INFO 127.0.0.1 - - [11/Jun/2025 23:18:15] "OPTIONS /parks/coordinates HTTP/1.1" 200 -
+2025-06-11 23:18:15,198 INFO {'address': '', 'times': []}
+2025-06-11 23:18:15,199 INFO 127.0.0.1 - - [11/Jun/2025 23:18:15] "POST /parks/coordinates HTTP/1.1" 200 -
+2025-06-11 23:18:16,132 INFO {'address': '', 'times': []}
+2025-06-11 23:18:16,133 INFO 127.0.0.1 - - [11/Jun/2025 23:18:16] "POST /parks/coordinates HTTP/1.1" 200 -
+2025-06-11 23:18:32,033 INFO 127.0.0.1 - - [11/Jun/2025 23:18:32] "OPTIONS /parks/coordinates HTTP/1.1" 200 -
+2025-06-11 23:18:32,036 INFO {'address': 'hello', 'times': ['Morning', 'Afternoon']}
+2025-06-11 23:18:32,036 INFO 127.0.0.1 - - [11/Jun/2025 23:18:32] "POST /parks/coordinates HTTP/1.1" 200 -

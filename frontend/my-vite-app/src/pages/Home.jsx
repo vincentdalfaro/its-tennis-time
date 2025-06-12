@@ -6,6 +6,7 @@ import calender_white from '../assets/calender-white.png';
 import calender_black from '../assets/calender-black.png';
 import SelectStyle from '../styles/SelectStyle.jsx';
 import HoverButton from '../components/HoverButton.jsx';
+import { fetchParkCoordinates } from '../api/api.jsx';
 
 export default function Home() { 
 
@@ -16,7 +17,8 @@ export default function Home() {
   ];
   
   const [address, setAddress] = useState('');
-  const [dates, setDates] = useState([])
+  const [times, setTimes] = useState([])
+  const buttonRef = useRef(null);
 
 
   {/* Sets Address */}
@@ -25,9 +27,26 @@ export default function Home() {
   };
 
   {/* Sets Dates */}
-  const addDates = (selected) => {
-    setDates(selected);
+  const addTimes = (selected) => {
+    setTimes(selected);
   };
+
+  {/* Fetches data from address, dates, and times */}
+  const handleSearch = async () => {
+  try {
+    const filters = {
+      address: address,
+      times: times.map(d => d.value),
+    };
+
+    const response = await fetchParkCoordinates(filters);
+    console.log("✅ Coordinates received:", response);
+
+
+  } catch (error) {
+    console.error("❌ Error fetching coordinates:", error);
+  }
+};
 
 
   {/* Date Selector Icon */}
@@ -50,9 +69,12 @@ export default function Home() {
     <Topbar/>
     <div className = "home-flex">
 
-      <text class = "white-text" style={{ marginTop: "100px", fontSize: "30px"}}> Find a Court</text>
+      <div className="white-text" style={{ marginTop: "100px", fontSize: "30px" }}>
+        Find a Court
+      </div>
+      
       <div className='home-flex-2'>
-        
+    
         {/* Address Input */}
         <input
           type="text"
@@ -79,12 +101,12 @@ export default function Home() {
           className = "my-select"
           classNamePrefix="custom-select"
           placeholder="Time of Day"
-          value={dates}
-          onChange={addDates}
+          value={times}
+          onChange={addTimes}
         />
 
         {/* Submit Button */}
-        <button className = "button" style={{width: "100px"}} >
+        <button className="button" style={{ width: "100px" }} onClick={handleSearch}>
           Search
         </button>
           
