@@ -1,13 +1,5 @@
-2025-06-11 23:18:12,868 INFO Logger is enabled
-2025-06-11 23:18:13,412 INFO Successfully connected to MongoDB
-2025-06-11 23:18:13,460 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+2025-06-12 08:19:35,798 INFO Logger is enabled
+2025-06-12 08:19:36,347 INFO Successfully connected to MongoDB
+2025-06-12 08:19:36,386 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5000
-2025-06-11 23:18:13,460 INFO [33mPress CTRL+C to quit[0m
-2025-06-11 23:18:15,197 INFO 127.0.0.1 - - [11/Jun/2025 23:18:15] "OPTIONS /parks/coordinates HTTP/1.1" 200 -
-2025-06-11 23:18:15,198 INFO {'address': '', 'times': []}
-2025-06-11 23:18:15,199 INFO 127.0.0.1 - - [11/Jun/2025 23:18:15] "POST /parks/coordinates HTTP/1.1" 200 -
-2025-06-11 23:18:16,132 INFO {'address': '', 'times': []}
-2025-06-11 23:18:16,133 INFO 127.0.0.1 - - [11/Jun/2025 23:18:16] "POST /parks/coordinates HTTP/1.1" 200 -
-2025-06-11 23:18:32,033 INFO 127.0.0.1 - - [11/Jun/2025 23:18:32] "OPTIONS /parks/coordinates HTTP/1.1" 200 -
-2025-06-11 23:18:32,036 INFO {'address': 'hello', 'times': ['Morning', 'Afternoon']}
-2025-06-11 23:18:32,036 INFO 127.0.0.1 - - [11/Jun/2025 23:18:32] "POST /parks/coordinates HTTP/1.1" 200 -
+2025-06-12 08:19:36,386 INFO [33mPress CTRL+C to quit[0m

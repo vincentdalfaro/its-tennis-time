@@ -7,6 +7,7 @@ import calender_black from '../assets/calender-black.png';
 import SelectStyle from '../styles/SelectStyle.jsx';
 import HoverButton from '../components/HoverButton.jsx';
 import { fetchParkCoordinates } from '../api/api.jsx';
+import AutocompleteSearch from '../components/Autocomplete.jsx'
 
 export default function Home() { 
 
@@ -74,16 +75,9 @@ export default function Home() {
       </div>
       
       <div className='home-flex-2'>
-    
-        {/* Address Input */}
-        <input
-          type="text"
-          className="input"
-          style={{width: "300px"}}
-          onChange={handleChange}
-          placeholder = "Address"
-          value = {address}
-        />
+
+        {/* Autocomplete for address input */}
+        <AutocompleteSearch setAddress = {setAddress}/>
 
         {/* Date Button}*/}
         <HoverButton
@@ -106,7 +100,7 @@ export default function Home() {
         />
 
         {/* Submit Button */}
-        <button className="button" style={{ width: "100px" }} onClick={handleSearch}>
+        <button class = "button" style={{ width: "100px" }} onClick={handleSearch}>
           Search
         </button>
           

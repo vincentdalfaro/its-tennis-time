@@ -7,13 +7,11 @@ import About from './pages/About.jsx'
 import Map from './pages/Map.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/map" element={<Map key={Date.now()} />} />
-      </Routes>
-    </Router>
-  </StrictMode>
-)
+  <Router>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/map" element={<Map key={Date.now()} />} />
+    </Routes>
+  </Router>
+);
