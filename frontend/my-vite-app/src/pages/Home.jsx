@@ -5,9 +5,11 @@ import Select from 'react-select';
 import calender_white from '../assets/calender-white.png';
 import calender_black from '../assets/calender-black.png';
 import SelectStyle from '../styles/SelectStyle.jsx';
-import HoverButton from '../components/HoverButton.jsx';
+import DateButton from '../components/DateButton.jsx';
 import { fetchParkCoordinates } from '../api/api.jsx';
 import AutocompleteSearch from '../components/Autocomplete.jsx'
+import dayjs from 'dayjs';
+
 
 export default function Home() { 
 
@@ -20,6 +22,7 @@ export default function Home() {
   const [address, setAddress] = useState('');
   const [times, setTimes] = useState([])
   const buttonRef = useRef(null);
+  const [selectedDate, setSelectedDate] = useState(dayjs());
 
 
   {/* Sets Address */}
@@ -79,13 +82,12 @@ export default function Home() {
         {/* Autocomplete for address input */}
         <AutocompleteSearch setAddress = {setAddress}/>
 
-        {/* Date Button}*/}
-        <HoverButton
-          defaultImg={calender_white}
-          hoverImg={calender_black}
-        >
-          Date
-        </HoverButton>
+
+        <DateButton defaultImg={calender_white} 
+          hoverImg={calender_black} 
+          selectedDate={selectedDate}
+          onChange={(newDate) => setSelectedDate(newDate)} 
+        />
 
         {/* Time Select */}
         <Select
