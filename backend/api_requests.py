@@ -16,6 +16,7 @@ def register_routes(app, collection, logger):
         date_str = filters.get("date")
         times_requested = filters.get("times", [])  # e.g. ["Morning"]
 
+
         if not date_str or not times_requested:
             return jsonify({"error": "Missing date or times filter"}), 400
 
@@ -64,6 +65,5 @@ def register_routes(app, collection, logger):
                 park_copy["courts"] = matching_courts
                 park_copy["_id"] = str(park["_id"])
                 filtered_parks.append(park_copy)
-        logger.info(filtered_parks)
 
         return jsonify(filtered_parks)
