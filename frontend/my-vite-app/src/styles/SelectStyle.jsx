@@ -9,6 +9,7 @@ const SelectStyle = {
   width: 300,
   minHeight: 20,
   fontSize: 15,
+  fontFamily: "Futura",
   borderRadius: 0,
   '&:hover': {
     border: '2px solid white',
@@ -31,6 +32,7 @@ const SelectStyle = {
       : 'white',
     color: state.isSelected ? 'white' : 'black',
     fontSize: 15,
+    fontFamily: "Futura",
     padding: '12px 15px',
   }),
   singleValue: (provided, state) => ({
@@ -42,6 +44,7 @@ const SelectStyle = {
   ...provided,
   color: '#000000',           // default "x" color (gray)
   cursor: 'pointer',
+  fontFamily: 'Futura',
   fontSize: "16px"
 })
 };

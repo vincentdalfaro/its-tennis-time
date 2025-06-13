@@ -5,7 +5,11 @@ import Select from 'react-select';
 import calender_white from '../assets/calender-white.png';
 import calender_black from '../assets/calender-black.png';
 import SelectStyle from '../styles/SelectStyle.jsx';
-import HoverButton from '../components/HoverButton.jsx';
+import DateButton from '../components/DateButton.jsx';
+import AutocompleteSearch from '../components/Autocomplete.jsx'
+import dayjs from 'dayjs';
+import { Link } from 'react-router-dom';
+
 
 export default function Home() { 
 
@@ -16,18 +20,20 @@ export default function Home() {
   ];
   
   const [address, setAddress] = useState('');
-  const [dates, setDates] = useState([])
-
-
-  {/* Sets Address */}
-  const handleChange = (event) => {
-    setAddress(event.target.value);
-  };
+  const [times, setTimes] = useState([])
+  const buttonRef = useRef(null);
+  const [selectedDate, setSelectedDate] = useState(dayjs());
 
   {/* Sets Dates */}
-  const addDates = (selected) => {
-    setDates(selected);
+  const addTimes = (selected) => {
+    setTimes(selected);
   };
+
+const query = new URLSearchParams({
+  address: address,
+  date: selectedDate,
+  times: times.map(t => t.value).join(','),
+}).toString();
 
 
   {/* Date Selector Icon */}
@@ -46,30 +52,27 @@ export default function Home() {
   }, []);
 
   return (
-  <div>
+  <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+
     <Topbar/>
+
     <div className = "home-flex">
 
-      <text class = "white-text" style={{ marginTop: "100px", fontSize: "30px"}}> Find a Court</text>
+      <div className="white-text" style={{ marginTop: "100px", fontSize: "30px" }}>
+        Find a Court
+      </div>
+      
       <div className='home-flex-2'>
-        
-        {/* Address Input */}
-        <input
-          type="text"
-          className="input"
-          style={{width: "300px"}}
-          onChange={handleChange}
-          placeholder = "Address"
-          value = {address}
-        />
 
-        {/* Date Button}*/}
-        <HoverButton
-          defaultImg={calender_white}
-          hoverImg={calender_black}
-        >
-          Date
-        </HoverButton>
+        {/* Autocomplete for address input */}
+        <AutocompleteSearch setAddress = {setAddress}/>
+
+        {/* Date Selection */}
+        <DateButton defaultImg={calender_white} 
+          hoverImg={calender_black} 
+          selectedDate={selectedDate}
+          onChange={(newDate) => setSelectedDate(newDate)} 
+        />
 
         {/* Time Select */}
         <Select
@@ -79,14 +82,19 @@ export default function Home() {
           className = "my-select"
           classNamePrefix="custom-select"
           placeholder="Time of Day"
-          value={dates}
-          onChange={addDates}
+          value={times}
+          onChange={addTimes}
         />
 
         {/* Submit Button */}
-        <button className = "button" style={{width: "100px"}} >
+        <Link
+          to={`/map?${query}`}
+          className="button white-text"
+          style={{ width: '100px', fontFamily: 'Futura', fontSize: '16px', display: 'inline-block', textAlign: 'center', textDecoration: 'none' }}
+        >
           Search
-        </button>
+        </Link>
+        
           
       </div>
 
