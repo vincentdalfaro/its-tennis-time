@@ -6,6 +6,10 @@ html, body, #root {
   background-color: #000000;
 }
 
+.pac-container {
+  font-family: Futura, sans-serif;
+}
+
 @font-face {
      font-family: 'inter';
      src: url('./fonts/Inter.ttc') format('ttc'),

@@ -6,9 +6,9 @@ import calender_white from '../assets/calender-white.png';
 import calender_black from '../assets/calender-black.png';
 import SelectStyle from '../styles/SelectStyle.jsx';
 import DateButton from '../components/DateButton.jsx';
-import { fetchParkCoordinates } from '../api/api.jsx';
 import AutocompleteSearch from '../components/Autocomplete.jsx'
 import dayjs from 'dayjs';
+import { Link } from 'react-router-dom';
 
 
 export default function Home() { 
@@ -24,33 +24,16 @@ export default function Home() {
   const buttonRef = useRef(null);
   const [selectedDate, setSelectedDate] = useState(dayjs());
 
-
-  {/* Sets Address */}
-  const handleChange = (event) => {
-    setAddress(event.target.value);
-  };
-
   {/* Sets Dates */}
   const addTimes = (selected) => {
     setTimes(selected);
   };
 
-  {/* Fetches data from address, dates, and times */}
-  const handleSearch = async () => {
-  try {
-    const filters = {
-      address: address,
-      times: times.map(d => d.value),
-    };
-
-    const response = await fetchParkCoordinates(filters);
-    console.log("✅ Coordinates received:", response);
-
-
-  } catch (error) {
-    console.error("❌ Error fetching coordinates:", error);
-  }
-};
+const query = new URLSearchParams({
+  address: address,
+  date: selectedDate,
+  times: times.map(t => t.value).join(','),
+}).toString();
 
 
   {/* Date Selector Icon */}
@@ -69,8 +52,10 @@ export default function Home() {
   }, []);
 
   return (
-  <div>
+  <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+
     <Topbar/>
+
     <div className = "home-flex">
 
       <div className="white-text" style={{ marginTop: "100px", fontSize: "30px" }}>
@@ -82,7 +67,7 @@ export default function Home() {
         {/* Autocomplete for address input */}
         <AutocompleteSearch setAddress = {setAddress}/>
 
-
+        {/* Date Selection */}
         <DateButton defaultImg={calender_white} 
           hoverImg={calender_black} 
           selectedDate={selectedDate}
@@ -102,9 +87,14 @@ export default function Home() {
         />
 
         {/* Submit Button */}
-        <button class = "button" style={{ width: "100px" }} onClick={handleSearch}>
+        <Link
+          to={`/map?${query}`}
+          className="button white-text"
+          style={{ width: '100px', fontFamily: 'Futura', fontSize: '16px', display: 'inline-block', textAlign: 'center', textDecoration: 'none' }}
+        >
           Search
-        </button>
+        </Link>
+        
           
       </div>
 

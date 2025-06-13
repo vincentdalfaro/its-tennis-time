@@ -1,13 +1,10 @@
-import React from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { GoogleMap, Marker } from '@react-google-maps/api';
 import mapStyle from '../styles/MapStyle';
 
 const containerStyle = {
   width: '100%',
-  height: '100%'
+  height: '100%',
 };
-
-const MapKey = import.meta.env.VITE_MAP_KEY;
 
 const center = {
   lng: -122.45,
@@ -15,26 +12,22 @@ const center = {
 };
 
 function MyMap() {
-  
   return (
-    <LoadScript googleMapsApiKey={MapKey}>
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={13}
-        options={{
-          styles: mapStyle,
-          scrollwheel: true,
-          disableDefaultUI: true,
-          gestureHandling: "greedy",
-           minZoom: 12,
-        }}
-      >
-      </GoogleMap>
-    </LoadScript>
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={center}
+      zoom={13}
+      options={{
+        styles: mapStyle,
+        scrollwheel: true,
+        disableDefaultUI: true,
+        gestureHandling: 'greedy',
+        minZoom: 12,
+      }}
+    >
+      {/* You can add markers here */}
+    </GoogleMap>
   );
 }
-
-    
 
 export default MyMap;
