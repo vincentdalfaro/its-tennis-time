@@ -1,5 +1,5 @@
 import { GoogleMap, Marker } from '@react-google-maps/api';
-import mapStyle from '../styles/MapStyle';
+import mapStyle from './MapStyle';
 
 const containerStyle = {
   width: '100%',

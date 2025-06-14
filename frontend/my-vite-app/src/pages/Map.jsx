@@ -1,13 +1,14 @@
-
 import '../App.css';
-import Topbar from '../components/Topbar.jsx'
-import MyMap from '../components/MapComponent.jsx'
+import Topbar from '../components/Topbar.jsx';
+import MyMap from '../components/map/MapComponent.jsx';
 import { useSearchParams } from 'react-router-dom';
-import { useState, useEffect, useMemo, useRef} from "react";
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { fetchParkCoordinates } from '../api/api.jsx';
-
+import ParkToken from '../components/ParkToken.jsx';
+import PreferenceBar from '../components/PreferenceBar.jsx'
 
 export default function Map() {
+
   const [searchParams] = useSearchParams();
   const [data, setData] = useState();
 
@@ -17,18 +18,19 @@ export default function Map() {
   const date = searchParams.get('date') || defaultDate;
 
   const timesParam = searchParams.get('times');
-  const times = useMemo(() => timesParam ? timesParam.split(',') : ["Morning"], [timesParam]);
+  const times = useMemo(() => (timesParam ? timesParam.split(',') : ['Morning']), [timesParam]);
   const listItemRefs = useRef([]);
 
+  {/* Making a call to the API given choices */}
   useEffect(() => {
     const fetchData = async () => {
       try {
         const filters = { address, date, times };
         const response = await fetchParkCoordinates(filters);
         setData(response);
-        console.log(response)
+        console.log(response);
       } catch (error) {
-        console.error("❌ Error fetching coordinates:", error);
+        console.error('❌ Error fetching coordinates:', error);
       }
     };
 
@@ -42,60 +44,28 @@ export default function Map() {
       <Topbar />
 
       {/* Horizontal Bar */}
-      <div className='horizontal-bar'/>
+      <div className="horizontal-bar" />
 
       {/* Main content: full height */}
       <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
-
+          
         {/* Scrollable left column */}
-        <div style={{ width: '40%', overflowY: 'auto', padding: '1rem'}}>
+        <div style={{ width: '40%', overflowY: 'auto'}}>
+        <PreferenceBar/>   
 
-          {data?.map((place, index) => (
-            <div
+        {/* Each park represented by a token that shows relevant info*/}
+        {data?.length > 0 ? (
+          data.map((place, index) => (
+            <ParkToken
               key={place.locationId}
-              ref={el => (listItemRefs.current[index] = el)}
-              data-index={index}
-              className="place-item"
-              style = {{color: "white"}}
-            >
-              {place.name}
-              {place.courts && place.courts.length > 0 ? (
-      place.courts.map((court) => (
-        <div key={court.courtId} style={{ marginBottom: '1rem' }}>
-          <strong>Court ID:</strong> {court.courtId}
-          <div style={{ marginTop: '0.5rem' }}>
-            Available times:
-            {court.availableTimes && court.availableTimes.length > 0 ? (
-              court.availableTimes.map((timeStr, i) => {
-                const time = new Date(timeStr);
-                const formatted = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                return (
-                  <span
-                    key={i}
-                    style={{
-                      display: 'inline-block',
-                      marginRight: '0.5rem',
-                      padding: '0.25rem 0.5rem',
-                      backgroundColor: '#444',
-                      borderRadius: '4px',
-                      fontSize: '0.9rem',
-                    }}
-                  >
-                    {formatted}
-                  </span>
-                );
-              })
-            ) : (
-              <span>No available times</span>
-            )}
-          </div>
-        </div>
-      ))
-    ) : (
-      <p>No courts available</p>
-    )}
-            </div>
-          ))}
+              place={place}
+              index={index}
+              listItemRefs={listItemRefs}
+            />
+          ))
+        ) : (
+          <p>No courts available</p>
+        )}
         </div>
 
         {/* Vertical Divider */}

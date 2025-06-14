@@ -1,15 +1,15 @@
 import React, { useRef, useState, useEffect } from "react";
 import Calendar from "./Calendar";
+import calender_white from '../assets/calender-white.png';
+import calender_black from '../assets/calender-black.png';
 
 export default function DateButton({
-  defaultImg,
-  hoverImg,
-  width = "300px",
+  width,
   style = {},
   selectedDate,
   onChange,
 }) {
-  const [imgSrc, setImgSrc] = useState(defaultImg);
+  const [imgSrc, setImgSrc] = useState(calender_white);
   const [isClicked, setIsClicked] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -22,18 +22,18 @@ export default function DateButton({
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
         setCalendarOpen(false);
         setIsClicked(false);
-        setImgSrc(defaultImg);
+        setImgSrc(calender_white);
         setHovered(false);
       }
     }
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [defaultImg]);
+  }, [calender_white]);
 
   const handleClick = () => {
     setIsClicked(true);
-    setImgSrc(hoverImg);
+    setImgSrc(calender_black);
     setCalendarOpen((open) => !open);
   };
 
@@ -47,11 +47,11 @@ export default function DateButton({
         className="button"
         style={{ width: "100%", color: "#999999", ...style }}
         onMouseEnter={() => {
-          setImgSrc(hoverImg);
+          setImgSrc(calender_black);
           setHovered(true);
         }}
         onMouseLeave={() => {
-          if (!isClicked) setImgSrc(defaultImg);
+          if (!isClicked) setImgSrc(calender_white);
           setHovered(false);
         }}
         onClick={handleClick}
@@ -97,7 +97,7 @@ export default function DateButton({
               onChange(newDate); // pass updated date to parent
               setCalendarOpen(false);
               setIsClicked(false);
-              setImgSrc(defaultImg);
+              setImgSrc(calender_white);
             }}
           />
         </div>

@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Autocomplete } from '@react-google-maps/api';
 
-function AutocompleteSearch({ setAddress }) {
+function AutocompleteSearch({ setAddress, width, placeholder}) {
   const autocompleteRef = useRef(null);
 
   const handlePlaceChanged = () => {
@@ -19,9 +19,10 @@ function AutocompleteSearch({ setAddress }) {
       <input
         type="text"
         className="input"
-        style={{ width: '300px', fontFamily: 'Futura' }}
-        placeholder="Address"
+        style={{ width: width, fontFamily: 'Futura' }}
+        placeholder = {placeholder}
       />
+
     </Autocomplete>
   );
 }

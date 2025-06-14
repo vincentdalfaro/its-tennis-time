@@ -62,6 +62,15 @@
   align-items: left;
 }
 
+.submit-button {
+  width: 100px;
+  font-family: Futura;
+  font-size: 16px;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+}
+
 /* Top Bar */
 .flex-topbar {
   margin-top: 10px;
@@ -97,4 +106,24 @@
   background-color: white;
   height: 100%;
   z-index: 0;
+}
+
+/* Park Token*/
+
+.white-box {
+  border: 1.5px solid white;  
+  border-radius: 2px;
+  padding: 1px;    
+  color: white; 
+  height: 400px;         
+}
+
+.preference_box {
+  position: sticky;
+  top: 0;
+  padding: .5rem;
+  z-index: 10;
+  flex-wrap: wrap;
+  background-color: black;
+  gap: 10px
 }
