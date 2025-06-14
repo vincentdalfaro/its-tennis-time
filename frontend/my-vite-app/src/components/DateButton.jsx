@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import Calendar from "./Calendar";
 import calender_white from '../assets/calender-white.png';
 import calender_black from '../assets/calender-black.png';
+import dayjs from 'dayjs'
 
 export default function DateButton({
   width,
@@ -30,6 +31,8 @@ export default function DateButton({
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [calender_white]);
+
+  const date = dayjs(selectedDate);
 
   const handleClick = () => {
     setIsClicked(true);
@@ -71,7 +74,7 @@ export default function DateButton({
               transition: "color", // ✨ Smooth color fade
             }}
           >
-            {selectedDate.format("YYYY-MM-DD")}
+            {dayjs(date).format("YYYY-MM-DD")}
           </p>
         </div>
       </button>
@@ -92,7 +95,7 @@ export default function DateButton({
           }}
         >
           <Calendar
-            value={selectedDate}
+            value={date}
             onChange={(newDate) => {
               onChange(newDate); // pass updated date to parent
               setCalendarOpen(false);

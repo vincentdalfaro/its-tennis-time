@@ -14,7 +14,10 @@ export default function SelectStyle(width) {
       borderRadius: 0,
       '&:hover': {
         boxShadow: 'none',
-      }
+      },
+      '& input': {
+        caretColor: 'transparent',
+      },
     }),
     menu: (provided) => ({
       ...provided,
@@ -49,7 +52,7 @@ export default function SelectStyle(width) {
     }),
     multiValue: (provided) => ({
       ...provided,
-      color: '#000000',
+      color: 'white',
       cursor: 'pointer',
       fontFamily: 'Futura',
       fontSize: "16px"
