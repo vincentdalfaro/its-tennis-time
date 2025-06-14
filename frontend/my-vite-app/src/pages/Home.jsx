@@ -1,55 +1,40 @@
 import '../App.css';
-import { useState, useEffect, useRef} from "react";
+import { useState} from "react";
 import Topbar from '../components/Topbar.jsx'
 import Select from 'react-select';
-import calender_white from '../assets/calender-white.png';
-import calender_black from '../assets/calender-black.png';
-import SelectStyle from '../styles/SelectStyle.jsx';
+import SelectStyle from '../components/select/SelectStyle.jsx';
 import DateButton from '../components/DateButton.jsx';
 import AutocompleteSearch from '../components/Autocomplete.jsx'
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
+import CustomValueContainer from '../components/select/CustomValueContainer.jsx'
 
 
 export default function Home() { 
 
-  const options = [
-    { value: 'Morning', label: 'morning' },
-    { value: 'Afternoon', label: 'afternoon' },
-    { value: 'Evening', label: 'evening' },
+  {/* Different available time frames*/}
+  const timeSlots = [
+    { value: 'Morning', label: 'Morning' },
+    { value: 'Afternoon', label: 'Afternoon' },
+    { value: 'Evening', label: 'Evening' },
   ];
   
+  {/* Values */}
   const [address, setAddress] = useState('');
   const [times, setTimes] = useState([])
-  const buttonRef = useRef(null);
-  const [selectedDate, setSelectedDate] = useState(dayjs());
+  const [date, setDate] = useState(dayjs());
 
   {/* Sets Dates */}
   const addTimes = (selected) => {
     setTimes(selected);
   };
 
-const query = new URLSearchParams({
-  address: address,
-  date: selectedDate,
-  times: times.map(t => t.value).join(','),
-}).toString();
-
-
-  {/* Date Selector Icon */}
-  useEffect(() => {
-  const handleClickOutside = (event) => {
-    if (buttonRef.current && !buttonRef.current.contains(event.target)) {
-      setIsClicked(false);
-      setImgSrc(calender_white);
-    }
-  };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  {/* Creating a query for the URL */}
+  const query = new URLSearchParams({
+    address: address,
+    date: date,
+    times: times.map(t => t.value).join(','),
+  }).toString();
 
   return (
   <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
@@ -65,37 +50,41 @@ const query = new URLSearchParams({
       <div className='home-flex-2'>
 
         {/* Autocomplete for address input */}
-        <AutocompleteSearch setAddress = {setAddress}/>
+        <AutocompleteSearch 
+          setAddress = {setAddress} 
+          placeholder={"Address"}
+          width = "300px"
+        />
 
         {/* Date Selection */}
-        <DateButton defaultImg={calender_white} 
-          hoverImg={calender_black} 
-          selectedDate={selectedDate}
-          onChange={(newDate) => setSelectedDate(newDate)} 
+        <DateButton 
+          selectedDate={date}
+          width = "300px"
+          onChange={(newDate) => setDate(newDate)} 
         />
 
         {/* Time Select */}
         <Select
-          isMulti
-          styles={SelectStyle}
-          options={options}
-          className = "my-select"
-          classNamePrefix="custom-select"
-          placeholder="Time of Day"
-          value={times}
-          onChange={addTimes}
-        />
+            isMulti
+            styles={SelectStyle(300)}
+            options={timeSlots}
+            className = "my-select"
+            classNamePrefix="custom-select"
+            placeholder="Time"
+            value={times}
+            hideSelectedOptions={false}
+            components={{ ValueContainer: CustomValueContainer }}
+            onChange={addTimes}
+            />
 
         {/* Submit Button */}
         <Link
           to={`/map?${query}`}
-          className="button white-text"
-          style={{ width: '100px', fontFamily: 'Futura', fontSize: '16px', display: 'inline-block', textAlign: 'center', textDecoration: 'none' }}
+          className="button white-text submit-button"
         >
           Search
         </Link>
-        
-          
+  
       </div>
 
     </div>
