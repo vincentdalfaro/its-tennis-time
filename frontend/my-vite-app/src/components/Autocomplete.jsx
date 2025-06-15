@@ -12,6 +12,7 @@ function AutocompleteSearch({ setAddress, width, placeholder}) {
   };
 
   return (
+
     <Autocomplete
       onLoad={(ref) => (autocompleteRef.current = ref)}
       onPlaceChanged={handlePlaceChanged}
@@ -22,7 +23,6 @@ function AutocompleteSearch({ setAddress, width, placeholder}) {
         style={{ width: width, fontFamily: 'Futura' }}
         placeholder = {placeholder}
       />
-
     </Autocomplete>
   );
 }

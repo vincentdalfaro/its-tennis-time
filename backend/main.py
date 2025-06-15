@@ -1,9 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
-import db_store
-import db_connect
+from database import db_connect
+from database.api_requests import register_routes
 import enable_log
-from api_requests import register_routes
 
 def main():
     logger = enable_log.setup_logging()

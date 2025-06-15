@@ -10,24 +10,32 @@ import PreferenceBar from '../components/PreferenceBar.jsx'
 export default function Map() {
 
   const [searchParams] = useSearchParams();
-  const [data, setData] = useState();
+  const [searchresult, setResult] = useState();
 
-  const address = searchParams.get('address') || '1 Dr Carlton B Goodlett Pl, San Francisco, CA 94102';
+  {/* Date Chosen */}
+  const [address, setAddress] = useState(() => {
+    return searchParams.get('address') || '1 Dr Carlton B Goodlett Pl, San Francisco, CA 94102'
+  })
 
-  const defaultDate = new Date().toUTCString();
-  const date = searchParams.get('date') || defaultDate;
+  {/* Custom Date Chosen (stored as a string for DB query) */}
+  const [date, setDate] = useState(() => {
+    return searchParams.get('date') || new Date().toUTCString()
+  })
 
+  {/* Time Slots Chosen */}
   const timesParam = searchParams.get('times');
-  const times = useMemo(() => (timesParam ? timesParam.split(',') : ['Morning']), [timesParam]);
   const listItemRefs = useRef([]);
+  const [times, setTimes] = useState(() => {
+    return timesParam ? timesParam.split(',') : ['Morning'];
+  });
 
-  {/* Making a call to the API given choices */}
+  {/* Making a call to the API with given choices */}
   useEffect(() => {
     const fetchData = async () => {
       try {
         const filters = { address, date, times };
         const response = await fetchParkCoordinates(filters);
-        setData(response);
+        setResult(response);
         console.log(response);
       } catch (error) {
         console.error('❌ Error fetching coordinates:', error);
@@ -37,6 +45,11 @@ export default function Map() {
     if (address && date && times.length > 0) {
       fetchData();
     }
+
+    else if(times.length == 0){
+        setResult([])
+    }
+
   }, [address, date, times]);
 
   return (
@@ -51,21 +64,32 @@ export default function Map() {
           
         {/* Scrollable left column */}
         <div style={{ width: '40%', overflowY: 'auto'}}>
-        <PreferenceBar/>   
+        
+        {/* Preference Bar */}
+        <PreferenceBar 
+          address = {address} 
+          setAddress={setAddress} 
+          date = {date} 
+          setDate = {setDate} 
+          times = {times}
+          setTimes = {setTimes}
+        />   
 
-        {/* Each park represented by a token that shows relevant info*/}
-        {data?.length > 0 ? (
-          data.map((place, index) => (
-            <ParkToken
-              key={place.locationId}
-              place={place}
-              index={index}
-              listItemRefs={listItemRefs}
-            />
-          ))
-        ) : (
-          <p>No courts available</p>
-        )}
+        <div style = {{marginLeft: "10px", marginRight: "10px"}}>
+          {/* Each park represented by a token that shows relevant info*/}
+          {searchresult?.length > 0 ? (
+            searchresult.map((place, index) => (
+              <ParkToken
+                key={place.locationId}
+                place={place}
+                index={index}
+                listItemRefs={listItemRefs}
+              />
+            ))
+          ) : (
+            <p>No courts available</p>
+          )}
+        </div>
         </div>
 
         {/* Vertical Divider */}
@@ -73,7 +97,7 @@ export default function Map() {
 
         {/* Fixed map area */}
         <div style={{ flex: 1 }}>
-          <MyMap markers={Array.isArray(data) ? data : []} />
+          <MyMap markers={Array.isArray(searchresult) ? searchresult : []} />
         </div>
       </div>
     </div>

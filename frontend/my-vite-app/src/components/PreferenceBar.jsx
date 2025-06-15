@@ -7,57 +7,46 @@ import AutocompleteSearch from '../components/Autocomplete.jsx'
 import dayjs from 'dayjs';
 import CustomValueContainer from './select/CustomValueContainer.jsx'
 
-export default function () {
+export default function ({address, setAddress, date, setDate, times, setTimes}) {
 
     {/* Different available time frames*/}
     const timeSlots = [
-    { value: 'Morning', label: 'Morning' },
-    { value: 'Afternoon', label: 'Afternoon' },
-    { value: 'Evening', label: 'Evening' },
+        { value: 'Morning', label: 'Morning' },
+        { value: 'Afternoon', label: 'Afternoon' },
+        { value: 'Evening', label: 'Evening' },
     ];
     
-    {/* Values */}
-    const [address, setAddress] = useState('');
-    const [times, setTimes] = useState([])
-    const [date, setDate] = useState(dayjs());
-
-    {/* Sets Dates */}
-    const addTimes = (selected) => {
-    setTimes(selected);
-    };
-    
     return (
-       <div className = "preference_box" style={{display: "flex"}}>
+        <div className = "preference_box" style={{display: "flex"}}>
 
             {/* Autocomplete for address input */}
             <AutocompleteSearch 
-            setAddress = {setAddress} 
-            placeholder={"Address"}
-            width = "200px"
+                setAddress = {setAddress} 
+                placeholder={"Address"}
+                width = "200px"
             />
 
             {/* Date Selection */}
             <DateButton 
-            selectedDate={date}
-            width = "140px"
-            onChange={(newDate) => setDate(newDate)} 
+                selectedDate={date}
+                width = "140px"
+                onChange={(newDate) => setDate(dayjs(newDate).toDate().toUTCString())}
             />
             
             {/* Time Slot Selections*/}
             <Select
-            isMulti
-            styles={SelectStyle(300)}
-            options={timeSlots}
-            className = "my-select"
-            classNamePrefix="custom-select"
-            placeholder="Choose a time"
-            value={times}
-            hideSelectedOptions={false}
-            components={{ ValueContainer: CustomValueContainer }}
-            onChange={addTimes}
+                isMulti
+                styles={SelectStyle(300)}
+                options={timeSlots}
+                className = "my-select"
+                classNamePrefix="custom-select"
+                placeholder="Choose a time"
+                value={timeSlots.filter(slot => times.includes(slot.value))}
+                hideSelectedOptions={false}
+                components={{ ValueContainer: CustomValueContainer }}
+                onChange={(selected) => setTimes(selected.map(s => s.value))}
             />
-
-
+            
         </div>
     )
 }

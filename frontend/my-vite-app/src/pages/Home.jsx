@@ -65,17 +65,18 @@ export default function Home() {
 
         {/* Time Select */}
         <Select
-            isMulti
-            styles={SelectStyle(300)}
-            options={timeSlots}
-            className = "my-select"
-            classNamePrefix="custom-select"
-            placeholder="Time"
-            value={times}
-            hideSelectedOptions={false}
-            components={{ ValueContainer: CustomValueContainer }}
-            onChange={addTimes}
-            />
+          isMulti
+          styles={SelectStyle(300)}
+          options={timeSlots}
+          className = "my-select"
+          classNamePrefix="custom-select"
+          placeholder="Time"
+          value={timeSlots.filter(slot => times.includes(slot.value))}
+          hideSelectedOptions={false}
+          components={{ ValueContainer: CustomValueContainer }}
+          onChange={(selected) => setTimes(selected.map(s => s.value))}
+          closeMenuOnSelect={false}
+        />
 
         {/* Submit Button */}
         <Link
