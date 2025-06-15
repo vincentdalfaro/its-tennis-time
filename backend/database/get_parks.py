@@ -1,9 +1,9 @@
 import requests
 import enable_log
-import db_connect
+import backend.database.db_connect as db_connect
 from datetime import datetime, time
-import logging
 
+logger = enable_log.setup_logging()
 logger = enable_log.setup_logging()
 client = db_connect.connect_to_db(logger)
 db = client["itstennistime_db"]
@@ -25,7 +25,6 @@ def time_matches_slot(dt, slot):
     return dt.time() == start_time
 
 def validate_time(dt_str, location_id, court_id):
-    logger = logging.getLogger("slot_validation")
 
     try:
         dt = datetime.strptime(dt_str, "%Y-%m-%d %H:%M:%S")
@@ -64,15 +63,12 @@ def validate_time(dt_str, location_id, court_id):
         logger.info(f"No slots for day {day_of_week} for court {court_id}")
         return False
 
-    # Step 4: Check if the given time fits in any slot
     for slot in valid_slots_for_day:
         start = datetime.strptime(slot["startTimeLocal"], "%H:%M:%S").time()
         end = datetime.strptime(slot["endTimeLocal"], "%H:%M:%S").time()
         if check_time == start:
-            logger.info(f"[VALID SLOT] {dt}")
             return True
 
-    logger.info(f"[INVALID SLOT] {dt}")
     return False
 
 def parse_and_simplify(park):
@@ -114,7 +110,7 @@ def parse_and_simplify(park):
 
     return simplified_location
 
-def get_collection(client, logger):
+def filter_parks(client, logger):
     logger.info("Requesting data from API")
     URL = "https://api.rec.us/v1/locations/availability?publishedSites=true&organizationSlug=san-francisco-rec-park"
 
