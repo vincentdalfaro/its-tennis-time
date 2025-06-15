@@ -118,6 +118,9 @@
   height: 400px;         
 }
 
+
+
+
 .preference_box {
   position: sticky;
   top: 0;
@@ -126,4 +129,24 @@
   flex-wrap: wrap;
   background-color: black;
   gap: 10px
+}
+
+.pickle-false{
+  background-color: black;
+  color: white;
+  width: 100px;
+  font-family: Futura;
+  font-size: 16px;
+  text-align: center;
+  border: 2px solid white;
+}
+
+.pickle-true{
+  background-color: white;
+  color: black;
+  width: 100px;
+  font-family: Futura;
+  font-size: 16px;
+  text-align: center;
+  border: 2px solid white;
 }

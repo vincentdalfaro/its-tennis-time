@@ -29,11 +29,14 @@ export default function Map() {
     return timesParam ? timesParam.split(',') : ['Morning'];
   });
 
+  {/* Pickleball Enabler */}
+  const [pickleball, setPickleball] = useState(false);
+
   {/* Making a call to the API with given choices */}
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const filters = { address, date, times };
+        const filters = { address, date, times, pickleball };
         const response = await fetchParkCoordinates(filters);
         setResult(response);
         console.log(response);
@@ -50,7 +53,7 @@ export default function Map() {
         setResult([])
     }
 
-  }, [address, date, times]);
+  }, [address, date, times, pickleball]);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
@@ -73,6 +76,8 @@ export default function Map() {
           setDate = {setDate} 
           times = {times}
           setTimes = {setTimes}
+          pickleball = {pickleball}
+          setPickleball = {setPickleball}
         />   
 
         <div style = {{marginLeft: "10px", marginRight: "10px"}}>
