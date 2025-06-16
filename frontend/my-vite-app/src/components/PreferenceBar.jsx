@@ -7,7 +7,7 @@ import AutocompleteSearch from '../components/Autocomplete.jsx'
 import dayjs from 'dayjs';
 import CustomValueContainer from './select/CustomValueContainer.jsx'
 
-export default function ({address, setAddress, date, setDate, times, setTimes}) {
+export default function ({address, setAddress, date, setDate, times, setTimes, pickleball, setPickleball}) {
 
     {/* Different available time frames*/}
     const timeSlots = [
@@ -32,6 +32,14 @@ export default function ({address, setAddress, date, setDate, times, setTimes}) 
                 width = "140px"
                 onChange={(newDate) => setDate(dayjs(newDate).toDate().toUTCString())}
             />
+
+            <button 
+                className={pickleball ? 'pickle-true' : 'pickle-false'}
+                onClick={() => setPickleball(!pickleball)}
+            > 
+                Pickleball 
+
+            </button>
             
             {/* Time Slot Selections*/}
             <Select

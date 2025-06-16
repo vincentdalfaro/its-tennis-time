@@ -28,7 +28,7 @@ def filter_available_times(court, filter_date, times_requested):
 
             return filtered_times
 
-def filter_parks(parks, filter_date, times_requested):
+def filter_parks(parks, filter_date, times_requested, searchPickle):
     filtered_parks = []
     for park in parks:
         courts = park.get("courts", [])
@@ -57,6 +57,8 @@ def register_routes(app, collection, logger):
 
         date_str = filters.get("date")
         times_requested = filters.get("times", [])  # e.g. ["Morning"]
+        pickle_ball = filters.get("pickleball")
+        logger.info(pickle_ball)
 
 
         if not date_str or not times_requested:
@@ -71,7 +73,7 @@ def register_routes(app, collection, logger):
         parks = list(collection.find({}))
 
 
-        filtered_parks = filter_parks(parks, filter_date, times_requested)
+        filtered_parks = filter_parks(parks, filter_date, times_requested, pickle_ball)
 
 
         return jsonify(filtered_parks)
