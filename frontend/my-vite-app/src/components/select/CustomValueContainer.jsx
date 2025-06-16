@@ -1,47 +1,38 @@
 import { components } from 'react-select';
 
-
 const CustomValueContainer = ({ children, ...props }) => {
   const selected = props.getValue();
   const selectedLabels = selected.map(option => option.label).join(', ');
+
+  // children is usually [values (the pills), input]
   const [values, input] = children;
 
   return (
-    <components.ValueContainer {...props}>
+    <components.ValueContainer
+      {...props}
+      style={{ position: 'relative', paddingLeft: 6 }}
+    >
       {selected.length > 0 ? (
         <div
           style={{
-            paddingLeft: 6,
-            fontFamily: "Futura",
+            fontFamily: 'Futura',
             fontSize: 15,
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            maxWidth: "100%",
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            maxWidth: '100%',
             position: 'absolute',
-            pointerEvents: 'none',
+            pointerEvents: 'none',  // so input still works
           }}
         >
           {selectedLabels}
         </div>
       ) : (
-        // Render placeholder here explicitly if no selection
-        <div
-          style={{
-            paddingLeft: 6,
-            fontFamily: "Futura",
-            fontSize: 15,
-            color: '#aaa',
-          }}
-        >
-          {props.selectProps.placeholder}
-        </div>
+        values
       )}
-
       {input}
     </components.ValueContainer>
   );
 };
 
-
-export default CustomValueContainer
+export default CustomValueContainer;

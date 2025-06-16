@@ -1,5 +1,11 @@
 import requests
+import sys
+import os
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import get_parks
 import enable_log
+import db_connect
 import db_connect
 from datetime import datetime, time
 

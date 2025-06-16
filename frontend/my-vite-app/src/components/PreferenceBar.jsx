@@ -43,16 +43,16 @@ export default function ({address, setAddress, date, setDate, times, setTimes, p
             
             {/* Time Slot Selections*/}
             <Select
-                isMulti
-                styles={SelectStyle(300)}
-                options={timeSlots}
-                className = "my-select"
-                classNamePrefix="custom-select"
-                placeholder="Choose a time"
-                value={timeSlots.filter(slot => times.includes(slot.value))}
-                hideSelectedOptions={false}
-                components={{ ValueContainer: CustomValueContainer }}
-                onChange={(selected) => setTimes(selected.map(s => s.value))}
+            isMulti
+            styles={SelectStyle(300)}
+            options={timeSlots}
+            className="my-select"
+            classNamePrefix="custom-select"
+            placeholder="Choose a time"
+            value={timeSlots.filter(slot => times.includes(slot.value))}
+            hideSelectedOptions={false}
+            components={{ ValueContainer: CustomValueContainer }}
+            onChange={(selected) => setTimes(selected.map(s => s.value))}
             />
             
         </div>

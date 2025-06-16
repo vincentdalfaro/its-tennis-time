@@ -7,12 +7,10 @@ import dayjs from 'dayjs';
 export default function DateButton({ width, selectedDate, onChange }) {
   const [isHovered, setIsHovered] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
-  const [hasSelectedDate, setHasSelectedDate] = useState(false);
   const wrapperRef = useRef(null);
 
   const date = dayjs(selectedDate);
   const isActive = isHovered || calendarOpen;
-
 
   const imgSrc = isActive ? calendarBlack : calendarWhite;
 
@@ -41,8 +39,8 @@ export default function DateButton({ width, selectedDate, onChange }) {
       style={{ position: "relative", display: "inline-block", width }}
     >
       <button
-        className="button"
-        style={{ width: "100%", color: "#999" }}
+        className={`button button-calendar ${calendarOpen ? 'calendar-open' : ''}`}
+        style={{ width: "100%"}}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={handleToggle}
@@ -53,9 +51,7 @@ export default function DateButton({ width, selectedDate, onChange }) {
             alt="calendar icon"
             style={{ width: "20px", marginRight: "5px" }}
           />
-          <p className={isActive ? "calendar-text" : "calendar-text-white"}>
             {date.format("YYYY-MM-DD")}
-          </p>
         </div>
       </button>
 
@@ -65,7 +61,6 @@ export default function DateButton({ width, selectedDate, onChange }) {
             value={date}
             onChange={(newDate) => {
               onChange(newDate);
-              setHasSelectedDate(true);
               closeCalendar();
             }}
           />
