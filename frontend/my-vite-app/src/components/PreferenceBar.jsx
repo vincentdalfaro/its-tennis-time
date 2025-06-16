@@ -26,6 +26,13 @@ export default function ({address, setAddress, date, setDate, times, setTimes, p
                 width = "200px"
             />
 
+            {/* Date Selection */}
+            <DateButton 
+                selectedDate={date}
+                width = "140px"
+                onChange={(newDate) => setDate(dayjs(newDate).toDate().toUTCString())}
+            />
+
             <button 
                 className={pickleball ? 'pickle-true' : 'pickle-false'}
                 onClick={() => setPickleball(!pickleball)}
@@ -33,13 +40,6 @@ export default function ({address, setAddress, date, setDate, times, setTimes, p
                 Pickleball 
 
             </button>
-
-            {/* Date Selection */}
-            <DateButton 
-                selectedDate={date}
-                width = "140px"
-                onChange={(newDate) => setDate(dayjs(newDate).toDate().toUTCString())}
-            />
             
             {/* Time Slot Selections*/}
             <Select

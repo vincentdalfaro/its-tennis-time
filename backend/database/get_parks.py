@@ -1,9 +1,8 @@
 import requests
 import enable_log
-import backend.database.db_connect as db_connect
+import db_connect
 from datetime import datetime, time
 
-logger = enable_log.setup_logging()
 logger = enable_log.setup_logging()
 client = db_connect.connect_to_db(logger)
 db = client["itstennistime_db"]

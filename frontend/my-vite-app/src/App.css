@@ -33,6 +33,7 @@
   border: 2px solid white;
 }
 
+/* Select */
 .custom-select__control--is-focused {
   box-shadow: none !important;
   border-color: white !important;
@@ -45,6 +46,35 @@
   border: 2px solid white;
 }
 
+/* Calendar */
+.calendar-style {
+  position: absolute;
+  z-index: 20;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  margin-top: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transform: scale(.95);
+  transform-origin: top left;
+}
+
+.calendar-text{
+  margin: 0;
+  margin-left: 10px;
+  color: black;
+  transition: color;
+  font-family: Futura;
+  text-decoration: none;
+}
+
+.calendar-text-white{
+  color: white;
+  margin: 0;
+  margin-left: 10px;
+  transition: color;
+  font-family: Futura;
+  text-decoration: none;
+}
 
 /* Home Page */
 .home-flex {
@@ -109,7 +139,6 @@
 }
 
 /* Park Token*/
-
 .white-box {
   border: 1.5px solid white;  
   border-radius: 2px;
@@ -119,8 +148,7 @@
 }
 
 
-
-
+/* Preference Bar */
 .preference_box {
   position: sticky;
   top: 0;
