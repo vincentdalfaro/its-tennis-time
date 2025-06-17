@@ -44,9 +44,10 @@ export default function ({address, setAddress, date, setDate, times, setTimes, p
             {/* Time Slot Selections*/}
             <Select
                 isMulti
+                closeMenuOnSelect={false}
                 styles={SelectStyle(300)}
                 options={timeSlots}
-                className = "my-select"
+                className="my-select"
                 classNamePrefix="custom-select"
                 placeholder="Choose a time"
                 value={timeSlots.filter(slot => times.includes(slot.value))}

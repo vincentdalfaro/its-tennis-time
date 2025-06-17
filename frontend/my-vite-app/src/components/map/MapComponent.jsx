@@ -12,7 +12,7 @@ const center = {
 };
 
 function MyMap({markers}) {
-  console.log(markers)
+  
   return (
     <GoogleMap
       mapContainerStyle={containerStyle}
@@ -30,11 +30,7 @@ function MyMap({markers}) {
       <Marker
         key={marker.locationId}
         position={{ lat: parseFloat(marker.lat), lng: parseFloat(marker.lng) }}
-        icon={{
-          // url: '/pin.svg',
-          scaledSize: new window.google.maps.Size(60)
-          //i === activeIndex ? 60 : 30, i === activeIndex ? 60 : 30
-        }}
+
       />
     ))}
     </GoogleMap>

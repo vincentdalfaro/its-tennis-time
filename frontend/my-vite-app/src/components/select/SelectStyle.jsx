@@ -1,4 +1,4 @@
-export default function SelectStyle(width) {
+export default function SelectStyle(width, hide = false) {
   return {
     control: (provided, state) => ({
       ...provided,
@@ -12,6 +12,7 @@ export default function SelectStyle(width) {
       height: 35,
       fontFamily: "Futura",
       borderRadius: 0,
+      display: hide ? 'none' : 'flex',
       '&:hover': {
         boxShadow: 'none',
       },
@@ -36,7 +37,7 @@ export default function SelectStyle(width) {
       color: state.isSelected
       ? 'white' 
       : state.isFocused
-      ? 'white'    // <-- text color on hover
+      ? 'black'    // <-- text color on hover
       : 'black',
       fontSize: 15,
       fontFamily: "Futura",

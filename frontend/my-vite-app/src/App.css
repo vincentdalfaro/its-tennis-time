@@ -20,6 +20,7 @@
   text-align: left;
   padding: 5px 10px;
   color: white;
+  font-family: 'Futura';
 }
 
 .input:hover,
@@ -33,17 +34,23 @@
   border: 2px solid white;
 }
 
-/* Select */
-.custom-select__control--is-focused {
-  box-shadow: none !important;
-  border-color: white !important;
-  outline: none !important;
+
+/* Calendar/Date Chooser */
+.button-calendar {
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-size: 20px 20px;
+  background-image: url('/calendar-white.png');
+  color: white;
+  background-color: transparent;
 }
 
-.custom-select__control:hover {
+.button-calendar:hover,
+.button-calendar:focus,
+.button-calendar.calendar-open {
+  background-image: url('/calendar-black.png');
   background-color: white;
   color: black;
-  border: 2px solid white;
 }
 
 /* Calendar */
@@ -74,6 +81,18 @@
   transition: color;
   font-family: Futura;
   text-decoration: none;
+}
+/* Select */
+.custom-select__control--is-focused {
+  box-shadow: none !important;
+  border-color: white !important;
+  outline: none !important;
+}
+
+.custom-select__control:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid white;
 }
 
 /* Home Page */
