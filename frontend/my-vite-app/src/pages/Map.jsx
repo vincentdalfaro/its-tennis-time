@@ -6,6 +6,7 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { fetchParkCoordinates } from '../api/api.jsx';
 import ParkToken from '../components/ParkToken.jsx';
 import PreferenceBar from '../components/PreferenceBar.jsx'
+import dayjs from 'dayjs'
 
 export default function Map() {
 
@@ -17,10 +18,9 @@ export default function Map() {
     return searchParams.get('address') || '1 Dr Carlton B Goodlett Pl, San Francisco, CA 94102'
   })
 
-  {/* Custom Date Chosen (stored as a string for DB query) */}
   const [date, setDate] = useState(() => {
-    return searchParams.get('date') || new Date().toUTCString()
-  })
+    return searchParams.get('date') || dayjs().startOf('day').toDate().toUTCString();
+  });
 
   {/* Time Slots Chosen */}
   const timesParam = searchParams.get('times');

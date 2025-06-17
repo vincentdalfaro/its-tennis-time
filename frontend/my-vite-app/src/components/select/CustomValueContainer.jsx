@@ -22,7 +22,7 @@ const CustomValueContainer = ({ children, ...props }) => {
             textOverflow: 'ellipsis',
             maxWidth: '100%',
             position: 'absolute',
-            pointerEvents: 'none',  // so input still works
+            pointerEvents: 'none', 
           }}
         >
           {selectedLabels}

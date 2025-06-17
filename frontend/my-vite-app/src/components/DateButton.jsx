@@ -9,7 +9,7 @@ export default function DateButton({ width, selectedDate, onChange }) {
   const [calendarOpen, setCalendarOpen] = useState(false);
   const wrapperRef = useRef(null);
 
-  const date = dayjs(selectedDate);
+  selectedDate = dayjs(selectedDate);
   const isActive = isHovered || calendarOpen;
 
   const imgSrc = isActive ? calendarBlack : calendarWhite;
@@ -51,14 +51,14 @@ export default function DateButton({ width, selectedDate, onChange }) {
             alt="calendar icon"
             style={{ width: "20px", marginRight: "5px" }}
           />
-            {date.format("YYYY-MM-DD")}
+            {selectedDate.format("YYYY-MM-DD")}
         </div>
       </button>
 
       {calendarOpen && (
         <div className="calendar-style">
           <Calendar
-            value={date}
+            value={selectedDate}
             onChange={(newDate) => {
               onChange(newDate);
               closeCalendar();
