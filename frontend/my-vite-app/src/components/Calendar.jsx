@@ -1,6 +1,10 @@
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
+import dayjs from "dayjs"
+
+const today = dayjs();
+const sevenDaysFromNow = today.add(6, 'day');
 
 export default function Calendar({ value, onChange }) {
   return (
@@ -16,6 +20,13 @@ export default function Calendar({ value, onChange }) {
         <DateCalendar
         value={value}
         onChange={onChange}
+        shouldDisableDate={(date) => {
+          return (
+            date.isBefore(today, 'day') ||
+            date.isAfter(sevenDaysFromNow, 'day')
+          );
+        }}
+        showDaysOutsideCurrentMonth
         sx={{
             fontFamily: 'Futura, Arial, sans-serif',
 

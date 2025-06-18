@@ -24,17 +24,11 @@ export default function Home() {
   const [times, setTimes] = useState([])
   const [date, setDate] = useState(dayjs());
 
-
-  {/* Sets Dates */}
-  const addTimes = (selected) => {
-    setTimes(selected);
-  };
-
   {/* Creating a query for the URL */}
   const query = new URLSearchParams({
     address: address,
     date: date,
-    times: times.map(t => t.value).join(','),
+    times: times.join(','),
   }).toString();
 
   return (

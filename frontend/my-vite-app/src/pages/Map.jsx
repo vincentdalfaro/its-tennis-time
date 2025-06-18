@@ -13,6 +13,7 @@ export default function Map() {
   const [searchParams] = useSearchParams();
   const [searchresult, setResult] = useState();
 
+
   {/* Date Chosen */}
   const [address, setAddress] = useState(() => {
     return searchParams.get('address') || '1 Dr Carlton B Goodlett Pl, San Francisco, CA 94102'

@@ -63,6 +63,7 @@ def register_routes(app, collection, logger):
         date_str = filters.get("date")
         times_requested = filters.get("times", [])  # e.g. ["Morning"]
         pickleball = filters.get("pickleball")
+        address = filters.get("address")
         logger.info(date_str)
 
         if not date_str or not times_requested:
