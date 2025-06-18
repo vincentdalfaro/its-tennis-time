@@ -95,6 +95,20 @@
   border: 2px solid white;
 }
 
+.custom-value-style{
+  font-family: Futura, sans-serif;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: default;
+  user-select: text;
+  display: flex;
+  align-items: center;
+  line-height: 20px;
+  height: 100%;
+}
+
 /* Home Page */
 .home-flex {
   display: flex;
@@ -199,7 +213,6 @@
 }
 
 /* Address */
-
 .clear-button {
   position: absolute;
   right: 6px;

@@ -1,10 +1,11 @@
 import '../App.css';
 import Select from 'react-select';
 import SelectStyle from './select/SelectStyle.jsx';
-import DateButton from './DateButton.jsx';
+import DateButton from './calendar/DateButton.jsx';
 import AutocompleteSearch from '../components/Autocomplete.jsx'
 import dayjs from 'dayjs';
 import CustomValueContainer from './select/CustomValueContainer.jsx'
+import CustomClearIndicator from './select/CustomClear.jsx';
 
 export default function ({address, setAddress, date, setDate, times, setTimes, pickleball, setPickleball}) {
 
@@ -33,6 +34,7 @@ export default function ({address, setAddress, date, setDate, times, setTimes, p
                 onChange={(date) => setDate(dayjs.utc(date).toDate().toUTCString())}
             />
 
+            {/* Pickleball Selection */}
             <button 
                 className={pickleball ? 'pickle-true' : 'pickle-false'}
                 onClick={() => setPickleball(!pickleball)}
@@ -52,7 +54,10 @@ export default function ({address, setAddress, date, setDate, times, setTimes, p
                 placeholder="Choose a time"
                 value={timeSlots.filter(slot => times.includes(slot.value))}
                 hideSelectedOptions={false}
-                components={{ ValueContainer: CustomValueContainer }}
+                components={{ 
+                    ValueContainer: CustomValueContainer,
+                    ClearIndicator: CustomClearIndicator
+                }}
                 onChange={(selected) => setTimes(selected.map(s => s.value))}
             />
             

@@ -6,6 +6,13 @@ function AutocompleteSearch({ setAddress, width, placeholder, address }) {
   const [inputValue, setInputValue] = useState(address || '');
   const [isFocused, setIsFocused] = useState(false);
 
+  {/* Sync Address */}
+  const syncAddress = (value) => {
+    setInputValue(value);
+    setAddress(value);
+  };
+
+  {/* Different Helper Functions to handle behavior */}
   useEffect(() => {
     if (!isFocused && inputValue !== address) {
       setInputValue(address || '');
@@ -15,8 +22,7 @@ function AutocompleteSearch({ setAddress, width, placeholder, address }) {
   const handlePlaceChanged = () => {
     const place = autocompleteRef.current.getPlace();
     if (place && place.formatted_address) {
-      setAddress(place.formatted_address);
-      setInputValue(place.formatted_address);
+      syncAddress(place.formatted_address);
     }
   };
 
@@ -36,8 +42,7 @@ function AutocompleteSearch({ setAddress, width, placeholder, address }) {
   };
 
   const clearInput = () => {
-    setInputValue('');
-    setAddress('');
+    syncAddress('');
     if (autocompleteRef.current) {
       const input = autocompleteRef.current?.getInputElement?.() || null;
       if (input) input.focus();
@@ -50,6 +55,7 @@ function AutocompleteSearch({ setAddress, width, placeholder, address }) {
         onLoad={(ref) => (autocompleteRef.current = ref)}
         onPlaceChanged={handlePlaceChanged}
       >
+        {/* Custom input button for address*/}
         <input
           type="text"
           className="input"
@@ -62,14 +68,14 @@ function AutocompleteSearch({ setAddress, width, placeholder, address }) {
         />
       </Autocomplete>
 
+      {/* Custom clear input*/}
       {inputValue && (
         <button
           onClick={clearInput}
           aria-label="Clear input"
           title="Clear"
-          class = ""
           type="button"
-          className = "clear-button"
+          className="clear-button"
         >
           &#x2715;
         </button>
