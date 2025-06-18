@@ -8,10 +8,7 @@ const CustomValueContainer = ({ children, ...props }) => {
   const [values, input] = children;
 
   return (
-    <components.ValueContainer
-      {...props}
-      style={{ position: 'relative', paddingLeft: 6 }}
-    >
+    <components.ValueContainer {...props} style={{ position: 'relative', paddingLeft: 6 }}>
       {selected.length > 0 ? (
         <div
           style={{
@@ -21,8 +18,9 @@ const CustomValueContainer = ({ children, ...props }) => {
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             maxWidth: '100%',
-            position: 'absolute',
-            pointerEvents: 'none', 
+            position: 'relative',
+            cursor: 'default',
+            userSelect: 'text', 
           }}
         >
           {selectedLabels}

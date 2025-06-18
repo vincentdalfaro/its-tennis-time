@@ -23,6 +23,7 @@ export default function Map() {
     return searchParams.get('date') || dayjs().startOf('day').toDate().toUTCString();
   });
 
+    
   {/* Time Slots Chosen */}
   const timesParam = searchParams.get('times');
   const listItemRefs = useRef([]);

@@ -1,15 +1,19 @@
 import React, { useRef, useState, useEffect } from "react";
-import Calendar from "./Calendar";
+import Calendar from "./Calendar.jsx";
 import calendarWhite from '../assets/calendar-white.png';
 import calendarBlack from '../assets/calendar-black.png';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 
-export default function DateButton({ width, selectedDate, onChange }) {
+dayjs.extend(utc);
+
+export default function DateButton({ width, date, onChange }) {
   const [isHovered, setIsHovered] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
   const wrapperRef = useRef(null);
 
-  selectedDate = dayjs(selectedDate);
+  
+  date = dayjs.utc(date);
   const isActive = isHovered || calendarOpen;
 
   const imgSrc = isActive ? calendarBlack : calendarWhite;
@@ -51,16 +55,16 @@ export default function DateButton({ width, selectedDate, onChange }) {
             alt="calendar icon"
             style={{ width: "20px", marginRight: "5px" }}
           />
-            {selectedDate.format("YYYY-MM-DD")}
+            {date.format("YYYY-MM-DD")}
         </div>
       </button>
 
       {calendarOpen && (
         <div className="calendar-style">
           <Calendar
-            value={selectedDate}
-            onChange={(newDate) => {
-              onChange(newDate);
+            value={date}
+            onChange={(date) => {
+              onChange(date);
               closeCalendar();
             }}
           />

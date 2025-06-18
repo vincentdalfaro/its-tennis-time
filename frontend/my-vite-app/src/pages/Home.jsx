@@ -48,6 +48,7 @@ export default function Home() {
         <AutocompleteSearch 
           setAddress = {setAddress} 
           placeholder={"Address"}
+          address={address}
           width = "300px"
         />
 

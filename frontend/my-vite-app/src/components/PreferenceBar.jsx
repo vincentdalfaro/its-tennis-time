@@ -1,5 +1,4 @@
 import '../App.css';
-import { useState} from "react";
 import Select from 'react-select';
 import SelectStyle from './select/SelectStyle.jsx';
 import DateButton from './DateButton.jsx';
@@ -24,13 +23,14 @@ export default function ({address, setAddress, date, setDate, times, setTimes, p
                 setAddress = {setAddress} 
                 placeholder={"Address"}
                 address = {address}
+                value = {address}
             />
 
             {/* Date Selection */}
             <DateButton 
-                selectedDate={date}
-                width = "140px"
-                onChange={(newDate) => setDate(dayjs(newDate).toDate().toUTCString())}
+                date={date} // assuming date is ISO string or UTC string
+                width="140px"
+                onChange={(date) => setDate(dayjs.utc(date).toDate().toUTCString())}
             />
 
             <button 

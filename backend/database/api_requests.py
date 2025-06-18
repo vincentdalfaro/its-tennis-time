@@ -1,5 +1,11 @@
 from flask import request, jsonify
 from datetime import datetime, time
+import os
+import requests
+from dotenv import load_dotenv
+
+load_dotenv()
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 TIME_RANGES = {
     "Morning": (time(6,0), time(11,59)),
@@ -28,7 +34,41 @@ def filter_available_times(court, filter_date, times_requested):
 
     return filtered_times
 
-def filter_parks(parks, filter_date, times_requested, searchPickle, logger):
+def find_distances_for_all_parks(parks, address, logger):
+    # Collect all park lat,lng as a single string separated by |
+    destinations = "|".join([f"{park['lat']},{park['lng']}" for park in parks])
+
+    params = {
+        "origins": address,
+        "destinations": destinations,
+        "units": "imperial",
+        "key": GOOGLE_API_KEY,
+    }
+
+    url = "https://maps.googleapis.com/maps/api/distancematrix/json"
+
+    response = requests.get(url, params=params)
+    data = response.json()
+
+    if data.get("status") != "OK":
+        logger.error(f"Distance Matrix API error: {data.get('error_message')}")
+        return []
+
+    distances = []
+    elements = data["rows"][0]["elements"]
+    for element in elements:
+        if element.get("status") == "OK":
+            distances.append({
+                "distance_text": element["distance"]["text"],
+                "distance_value": element["distance"]["value"],
+                "duration_text": element["duration"]["text"],
+            })
+        else:
+            distances.append(None)
+    return distances
+
+
+def filter_parks(parks, filter_date, times_requested, searchPickle, logger, address):
     filtered_parks = []
     for park in parks:
         courts = park.get("courts", [])
@@ -47,12 +87,19 @@ def filter_parks(parks, filter_date, times_requested, searchPickle, logger):
 
         if matching_courts:
             park_copy = park.copy()
+
             park_copy["courts"] = matching_courts
             park_copy["_id"] = str(park["_id"])
             filtered_parks.append(park_copy)
 
-    return filtered_parks  # <-- Don't jsonify here
+    distances = find_distances_for_all_parks(filtered_parks, address, logger)
 
+
+    # Attach distances back to parks
+    for park, distance in zip(filtered_parks, distances):
+        park["distance"] = distance
+
+    return filtered_parks  
 
 def register_routes(app, collection, logger):
 
@@ -64,7 +111,6 @@ def register_routes(app, collection, logger):
         times_requested = filters.get("times", [])  # e.g. ["Morning"]
         pickleball = filters.get("pickleball")
         address = filters.get("address")
-        logger.info(date_str)
 
         if not date_str or not times_requested:
             return jsonify({"error": "Missing date or times filter"}), 400
@@ -78,7 +124,6 @@ def register_routes(app, collection, logger):
         parks = list(collection.find({}))
 
 
-        filtered_parks = filter_parks(parks, filter_date, times_requested, pickleball, logger)
-
+        filtered_parks = filter_parks(parks, filter_date, times_requested, pickleball, logger, address)
 
         return jsonify(filtered_parks)
