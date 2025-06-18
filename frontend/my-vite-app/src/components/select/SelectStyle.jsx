@@ -7,6 +7,7 @@ export default function SelectStyle(width, hide = false) {
       border: '2px solid white',
       boxShadow: 'none',
       outline: 'none',
+      closeMenuOnSelect:'false',
       width: width,        
       minHeight: 36.5,
       height: 35,

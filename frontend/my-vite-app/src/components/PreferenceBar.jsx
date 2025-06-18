@@ -2,7 +2,7 @@ import '../App.css';
 import { useState} from "react";
 import Select from 'react-select';
 import SelectStyle from './select/SelectStyle.jsx';
-import DateButton from '../components/DateButton.jsx';
+import DateButton from './DateButton.jsx';
 import AutocompleteSearch from '../components/Autocomplete.jsx'
 import dayjs from 'dayjs';
 import CustomValueContainer from './select/CustomValueContainer.jsx'
@@ -15,7 +15,7 @@ export default function ({address, setAddress, date, setDate, times, setTimes, p
         { value: 'Afternoon', label: 'Afternoon' },
         { value: 'Evening', label: 'Evening' },
     ];
-    
+
     return (
         <div className = "preference_box" style={{display: "flex"}}>
 
@@ -23,7 +23,7 @@ export default function ({address, setAddress, date, setDate, times, setTimes, p
             <AutocompleteSearch 
                 setAddress = {setAddress} 
                 placeholder={"Address"}
-                width = "200px"
+                address = {address}
             />
 
             {/* Date Selection */}
