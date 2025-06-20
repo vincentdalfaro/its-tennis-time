@@ -11,8 +11,10 @@ const center = {
   lat: 37.76,
 };
 
-function MyMap({markers}) {
-  
+function MyMap({markers, addressCoords}) {
+
+  console.log(addressCoords)
+
   return (
     <GoogleMap
       mapContainerStyle={containerStyle}
@@ -30,9 +32,16 @@ function MyMap({markers}) {
       <Marker
         key={marker.locationId}
         position={{ lat: parseFloat(marker.lat), lng: parseFloat(marker.lng) }}
+      /> 
+     ))}
 
+    {addressCoords?.lat && addressCoords?.lng && (
+      <Marker
+        position={{ lat: addressCoords.lat, lng: addressCoords.lng }}
+        icon = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
       />
-    ))}
+    )}
+
     </GoogleMap>
   );
 }

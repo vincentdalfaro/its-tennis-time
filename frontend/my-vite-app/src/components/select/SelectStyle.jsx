@@ -7,9 +7,7 @@ export default function SelectStyle(width, hide = false) {
       border: '2px solid white',
       boxShadow: 'none',
       outline: 'none',
-      closeMenuOnSelect:'false',
       width: width,        
-      minHeight: 36.5,
       height: 35,
       fontFamily: "Futura",
       borderRadius: 0,
@@ -57,13 +55,12 @@ export default function SelectStyle(width, hide = false) {
       color: 'white',
       cursor: 'pointer',
       fontFamily: 'Futura',
-      fontSize: "16px"
+      fontSize: '16px',
     }),
+
     valueContainer: (provided) => ({
       ...provided,
-      padding: '0px 6px',
-      height: '100%',
-      paddingBottom: '2px',
+      padding: '0 6px',
     }),
   };
 }

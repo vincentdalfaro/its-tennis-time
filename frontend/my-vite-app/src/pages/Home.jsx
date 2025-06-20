@@ -3,7 +3,7 @@ import { useState} from "react";
 import Topbar from '../components/Topbar.jsx'
 import Select from 'react-select';
 import SelectStyle from '../components/select/SelectStyle.jsx';
-import DateButton from '../components/DateButton.jsx';
+import DateButton from '../components/calendar/DateButton.jsx';
 import AutocompleteSearch from '../components/Autocomplete.jsx'
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
@@ -48,6 +48,7 @@ export default function Home() {
         <AutocompleteSearch 
           setAddress = {setAddress} 
           placeholder={"Address"}
+          address={address}
           width = "300px"
         />
 
