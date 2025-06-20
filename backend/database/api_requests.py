@@ -35,6 +35,7 @@ def register_routes(app, collection, logger):
 
         filtered_parks = filter_parks(parks, filter_date, times_requested, pickleball, logger, address)
 
+
         return jsonify(filtered_parks)
 
     @app.route("/geocode", methods=["POST"])

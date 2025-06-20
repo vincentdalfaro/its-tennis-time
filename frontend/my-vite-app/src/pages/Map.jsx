@@ -25,7 +25,6 @@ export default function Map() {
   const [date, setDate] = useState(() => {
     return searchParams.get('date') || dayjs().startOf('day').toDate().toUTCString();
   });
-
     
   {/* Given Time Slots */}
   const timesParam = searchParams.get('times');
@@ -36,6 +35,15 @@ export default function Map() {
 
   {/* Pickleball Enabler */}
   const [pickleball, setPickleball] = useState(false);
+
+  {/* Map Icon Sizes on focus*/}
+  const [visibleIndex, setVisibleIndex] = useState(null);
+  const handleScroll = (e) => {
+    const scrollTop = e.target.scrollTop;
+    const itemHeight = 450;
+    const index = Math.floor(scrollTop / itemHeight);
+    setVisibleIndex(index);
+  };
 
   {/* Given address, returns the coordinates */}
   useEffect(() => {
@@ -64,7 +72,7 @@ export default function Map() {
         const filters = { address, date, times, pickleball };
         const response = await fetchParkCoordinates(filters);
         setResult(response);
-        console.log(response);
+
       } catch (error) {
         console.error('❌ Error fetching coordinates:', error);
       }
@@ -72,13 +80,28 @@ export default function Map() {
 
     if (address && date && times.length > 0) {
       fetchData();
+    } else if (times.length === 0) {
+      setResult([]);
     }
-
-    else if(times.length == 0){
-        setResult([])
-    }
-
   }, [address, date, times, pickleball]);
+
+  {/* Helper Function to sort based on distance from address to park*/}
+  const getFilteredSearchResults = () => {
+    if (!searchresult || searchresult.length === 0) return [];
+
+    const allHaveDistance = searchresult.every(
+      (p) => p.distance?.distance_value != null
+    );
+
+    const sorted = allHaveDistance
+      ? [...searchresult].sort(
+          (a, b) => a.distance.distance_value - b.distance.distance_value
+        )
+      : searchresult;
+
+    return sorted;
+  };
+
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
@@ -91,7 +114,7 @@ export default function Map() {
       <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
           
         {/* Scrollable left column */}
-        <div style={{ width: '40%', overflowY: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none',}}>
+        <div style={{ width: '40%', overflowY: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none'}} onScroll={handleScroll}>
         
           {/* Preference Bar */}
           <PreferenceBar 
@@ -105,31 +128,20 @@ export default function Map() {
             setPickleball = {setPickleball}
           />   
 
-          {/* Renders Parks Information depending on an address or not*/}
-          <div style = {{marginLeft: "10px", marginRight: "10px"}}>
+          {/* For every park create a token and then sort based off distance*/}
+          <div style={{ marginLeft: "10px", marginRight: "10px" }}>
             {searchresult?.length > 0 ? (
-            searchresult.every(p => p.distance?.distance_value != null)
-              ? [...searchresult]
-                  .sort((a, b) => a.distance.distance_value - b.distance.distance_value)
-                  .map((place, index) => (
-                    <ParkToken
-                      key={place.locationId}
-                      place={place}
-                      index={index}
-                      listItemRefs={listItemRefs}
-                    />
-                  ))
-              : searchresult.map((place, index) => (
-                  <ParkToken
-                    key={place.locationId}
-                    place={place}
-                    index={index}
-                    listItemRefs={listItemRefs}
-                  />
-                ))
-          ) : (
-            <p>No courts available</p>
-          )}
+              getFilteredSearchResults().map((place, index) => (
+                <ParkToken
+                  key={place.locationId}
+                  place={place}
+                  index={index}
+                  listItemRefs={listItemRefs}
+                />
+              ))
+            ) : (
+              <p>No courts available</p>
+            )}
           </div>
         </div>
 
@@ -138,7 +150,11 @@ export default function Map() {
 
         {/* Fixed map area */}
         <div style={{ flex: 1 }}>
-          <MyMap markers={Array.isArray(searchresult) ? searchresult : []} addressCoords={addressCoords || {}} />
+          <MyMap 
+            markers={getFilteredSearchResults()} 
+            addressCoords={addressCoords || {}}
+            visibleIndex = {visibleIndex} 
+          />
         </div>
       </div>
     </div>

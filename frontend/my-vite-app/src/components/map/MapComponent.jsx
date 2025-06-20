@@ -11,9 +11,7 @@ const center = {
   lat: 37.76,
 };
 
-function MyMap({markers, addressCoords}) {
-
-  console.log(addressCoords)
+function MyMap({markers, addressCoords, visibleIndex}) {
 
   return (
     <GoogleMap
@@ -32,6 +30,13 @@ function MyMap({markers, addressCoords}) {
       <Marker
         key={marker.locationId}
         position={{ lat: parseFloat(marker.lat), lng: parseFloat(marker.lng) }}
+        icon={{
+          url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+          scaledSize: new window.google.maps.Size(
+            visibleIndex === i ? 60 : 30,
+            visibleIndex === i ? 60 : 30
+          )
+        }}
       /> 
      ))}
 
