@@ -47,6 +47,7 @@ def geocode_address(address):
     else:
         raise ValueError(f"Geocoding failed: {data.get('error_message')}")
 
+
 def find_distances_for_all_parks(parks, address, logger):
     destinations = "|".join([f"{park['lat']},{park['lng']}" for park in parks])
     params = {

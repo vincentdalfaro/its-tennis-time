@@ -1,7 +1,7 @@
 /* General Components */
 .white-text {
   color: white;
-  font-family: 'Futura';
+  font-family: Futura;
   text-decoration: none;
 }
 
@@ -177,9 +177,45 @@
   border-radius: 2px;
   padding: 1px;    
   color: white; 
-  height: 400px;         
+  height: 400px; 
+  display: flex;              /* <-- make it flex */
+  flex-direction: column;        
 }
 
+.reservation-button {
+  font-family: Futura;
+  background-color: white;
+  color: black;
+  width: 120px;
+  height: 50px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.reservation-button:hover{
+  cursor: grab;
+}
+
+.time-flex {
+  display: grid;
+  grid-auto-flow: column;            
+  grid-template-rows: repeat(2, 50px); 
+  row-gap: 5px;
+  overflow-x: auto;                   
+  overflow-y: hidden;                  
+  max-height: 145px;                  
+  width: max-content;                 
+  padding: 0 5px;
+  box-sizing: border-box;
+  place-items: end;
+  margin-bottom: 5px;
+}
+
+.scroll-wrapper{
+  overflow-x: auto;
+  max-width: 100%;
+  margin-top: auto;
+}
 
 /* Preference Bar */
 .preference_box {
@@ -227,3 +263,4 @@
   color: #888;
   user-select: none;
 }
+
