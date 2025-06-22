@@ -3,11 +3,9 @@ import sys
 import os
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import get_parks
 import enable_log
-import db_connect
-import db_connect
-from datetime import datetime, time
+from database import db_connect
+from datetime import datetime
 
 logger = enable_log.setup_logging()
 client = db_connect.connect_to_db(logger)
@@ -86,11 +84,21 @@ def parse_and_simplify(park):
 
     simplified_courts = []
 
+    reservable_pickle = 0
+    reservable_tennis = 0
+
     for court in courts:
         court_id = court.get("id")
 
+        is_bookable = court.get("isInstantBookable")
+
         sports = court.get("sports", [])
         sport_id = sports[0].get("sportId") if sports else None
+
+        if sport_id == "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa" and is_bookable:
+            reservable_pickle+=1
+        elif sport_id == "bd745b6e-1dd6-43e2-a69f-06f094808a96" and is_bookable:
+            reservable_tennis+=1
 
         available_times = court.get("availableSlots", [])
 
@@ -110,7 +118,9 @@ def parse_and_simplify(park):
         "name": location.get("name"),
         "lat": location.get("lat"),
         "lng": location.get("lng"),
-        "courts": simplified_courts
+        "courts": simplified_courts,
+        "reservable_pickle": reservable_pickle,
+        "reservable_tennis": reservable_tennis,
     }
 
     return simplified_location

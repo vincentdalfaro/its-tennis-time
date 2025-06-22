@@ -1,16 +1,15 @@
 import dayjs from "dayjs";
-import { useState } from "react";
+import tennisCourt from "../assets/tennis-court.png"
+import icon from "../assets/icon.png"
 
 
+function ParkToken({ place, index, listItemRefs, pickleball }) {
 
-
-function ParkToken({ place, index, listItemRefs }) {
-
-    const allTimes = (place.courts || [])
+    const allTimes = Array.from(new Set(
+  (place.courts || [])
     .flatMap(court => court.availableTimes)
-    .filter(Boolean) // remove nulls/undefined if any
-    .sort((a, b) => a.localeCompare(b)); // assuming times are in "HH:MM" format
-
+    .filter(Boolean) // remove nulls/undefined
+)).sort((a, b) => a.localeCompare(b));
 
     function handleClick() {
         const url = `https://www.rec.us/locations/` + place["locationId"];
@@ -40,8 +39,18 @@ function ParkToken({ place, index, listItemRefs }) {
             </div>
 
             <div className="white-box" style = {{fontSize: "20px"}}> 
-                <div className="white-text" style = {{marginLeft:"20px", marginRight: "20px", marginTop:"80px"}}>
+                <div className="white-text" style = {{marginLeft:"20px", marginRight: "20px", display: "flex", alignItems: "center"}}>
+
+                    <img src={icon} 
+                        style={{height: "20px", width: "auto", marginRight: "5px"}}/>
                     
+                    {place["neighborhood"]}
+                    <img src={tennisCourt} 
+                        style={{height: "20px", width: "auto", marginLeft: "50px", marginRight: "5px"}}/>
+                        {place.numCourts}
+
+                        {pickleball ? place["reservable_pickle"] : place["reservable_tennis"]}
+
                 </div>
 
                 <div className="scroll-wrapper">    

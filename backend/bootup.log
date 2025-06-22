@@ -1,5 +1,39 @@
-2025-06-20 10:15:00,778 INFO Logger is enabled
-2025-06-20 10:15:01,317 INFO Successfully connected to MongoDB
-2025-06-20 10:15:01,363 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+2025-06-21 21:43:41,621 INFO Logger is enabled
+2025-06-21 21:43:42,123 INFO Successfully connected to MongoDB
+2025-06-21 21:43:42,174 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:8000
-2025-06-20 10:15:01,363 INFO [33mPress CTRL+C to quit[0m
+2025-06-21 21:43:42,174 INFO [33mPress CTRL+C to quit[0m
+2025-06-21 21:43:48,789 INFO 127.0.0.1 - - [21/Jun/2025 21:43:48] "OPTIONS /parks HTTP/1.1" 200 -
+2025-06-21 21:43:48,790 INFO 127.0.0.1 - - [21/Jun/2025 21:43:48] "OPTIONS /geocode HTTP/1.1" 200 -
+2025-06-21 21:43:48,791 INFO 127.0.0.1 - - [21/Jun/2025 21:43:48] "OPTIONS /geocode HTTP/1.1" 200 -
+2025-06-21 21:43:48,792 INFO 127.0.0.1 - - [21/Jun/2025 21:43:48] "OPTIONS /parks HTTP/1.1" 200 -
+2025-06-21 21:43:48,806 DEBUG Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-06-21 21:43:48,808 DEBUG Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-06-21 21:43:48,874 DEBUG https://maps.googleapis.com:443 "GET /maps/api/geocode/json?address=1+Dr+Carlton+B+Goodlett+Pl%2C+San+Francisco%2C+CA+94102&key=AIzaSyBMzgDapBifIff9Np80ZHzodgpxcEsOoTc HTTP/1.1" 200 3745
+2025-06-21 21:43:48,875 INFO 127.0.0.1 - - [21/Jun/2025 21:43:48] "POST /geocode HTTP/1.1" 200 -
+2025-06-21 21:43:48,876 DEBUG https://maps.googleapis.com:443 "GET /maps/api/geocode/json?address=1+Dr+Carlton+B+Goodlett+Pl%2C+San+Francisco%2C+CA+94102&key=AIzaSyBMzgDapBifIff9Np80ZHzodgpxcEsOoTc HTTP/1.1" 200 3745
+2025-06-21 21:43:48,877 INFO 127.0.0.1 - - [21/Jun/2025 21:43:48] "POST /geocode HTTP/1.1" 200 -
+2025-06-21 21:43:48,903 DEBUG Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-06-21 21:43:48,960 DEBUG https://maps.googleapis.com:443 "GET /maps/api/distancematrix/json?origins=1+Dr+Carlton+B+Goodlett+Pl%2C+San+Francisco%2C+CA+94102&destinations=&units=imperial&key=AIzaSyBMzgDapBifIff9Np80ZHzodgpxcEsOoTc HTTP/1.1" 200 112
+2025-06-21 21:43:48,961 ERROR Distance Matrix API error: None
+2025-06-21 21:43:48,961 INFO 127.0.0.1 - - [21/Jun/2025 21:43:48] "POST /parks HTTP/1.1" 200 -
+2025-06-21 21:43:49,146 DEBUG Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-06-21 21:43:49,200 DEBUG https://maps.googleapis.com:443 "GET /maps/api/distancematrix/json?origins=1+Dr+Carlton+B+Goodlett+Pl%2C+San+Francisco%2C+CA+94102&destinations=&units=imperial&key=AIzaSyBMzgDapBifIff9Np80ZHzodgpxcEsOoTc HTTP/1.1" 200 112
+2025-06-21 21:43:49,200 ERROR Distance Matrix API error: None
+2025-06-21 21:43:49,202 INFO 127.0.0.1 - - [21/Jun/2025 21:43:49] "POST /parks HTTP/1.1" 200 -
+2025-06-21 21:43:56,050 INFO 127.0.0.1 - - [21/Jun/2025 21:43:56] "OPTIONS /parks HTTP/1.1" 200 -
+2025-06-21 21:43:56,153 DEBUG Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-06-21 21:43:56,223 DEBUG https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=37.7144459,-122.4305872&key=AIzaSyBMzgDapBifIff9Np80ZHzodgpxcEsOoTc HTTP/1.1" 200 25114
+2025-06-21 21:43:56,236 DEBUG Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-06-21 21:43:56,306 DEBUG https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=37.7191051,-122.4122043&key=AIzaSyBMzgDapBifIff9Np80ZHzodgpxcEsOoTc HTTP/1.1" 200 23942
+2025-06-21 21:43:56,317 DEBUG Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-06-21 21:43:56,393 DEBUG https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=37.7158129,-122.457577&key=AIzaSyBMzgDapBifIff9Np80ZHzodgpxcEsOoTc HTTP/1.1" 200 32647
+2025-06-21 21:43:56,424 DEBUG Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-06-21 21:43:56,503 DEBUG https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=37.8022867,-122.4333295&key=AIzaSyBMzgDapBifIff9Np80ZHzodgpxcEsOoTc HTTP/1.1" 200 31317
+2025-06-21 21:43:56,520 DEBUG Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-06-21 21:43:56,597 DEBUG https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=37.7342435,-122.4216848&key=AIzaSyBMzgDapBifIff9Np80ZHzodgpxcEsOoTc HTTP/1.1" 200 30505
+2025-06-21 21:43:56,615 DEBUG Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-06-21 21:43:56,687 DEBUG https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=37.7575481,-122.4865051&key=AIzaSyBMzgDapBifIff9Np80ZHzodgpxcEsOoTc HTTP/1.1" 200 31486
+2025-06-21 21:43:56,700 DEBUG Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-06-21 21:43:56,824 DEBUG https://maps.googleapis.com:443 "GET /maps/api/distancematrix/json?origins=1+Dr+Carlton+B+Goodlett+Pl%2C+San+Francisco%2C+CA+94102&destinations=37.7144459%2C-122.4305872%7C37.7191051%2C-122.4122043%7C37.7158129%2C-122.457577%7C37.8022867%2C-122.4333295%7C37.7342435%2C-122.4216848%7C37.7575481%2C-122.4865051&units=imperial&key=AIzaSyBMzgDapBifIff9Np80ZHzodgpxcEsOoTc HTTP/1.1" 200 2627
+2025-06-21 21:43:56,826 INFO 127.0.0.1 - - [21/Jun/2025 21:43:56] "POST /parks HTTP/1.1" 200 -

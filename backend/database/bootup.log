@@ -1,0 +1,9 @@
+2025-06-21 17:21:50,497 INFO Logger is enabled
+2025-06-21 17:21:51,189 INFO Successfully connected to MongoDB
+2025-06-21 17:21:51,190 INFO Logger is enabled
+2025-06-21 17:21:51,818 INFO Successfully connected to MongoDB
+2025-06-21 17:21:51,818 INFO Requesting data from API
+2025-06-21 17:21:51,826 DEBUG Starting new HTTPS connection (1): api.rec.us:443
+2025-06-21 17:21:56,155 DEBUG https://api.rec.us:443 "GET /v1/locations/availability?publishedSites=true&organizationSlug=san-francisco-rec-park HTTP/1.1" 200 None
+2025-06-21 17:21:56,185 INFO Fetched 28 park items
+2025-06-21 17:22:04,037 INFO Successfully stored parks data in DB

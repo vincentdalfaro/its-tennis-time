@@ -72,6 +72,7 @@ export default function Map() {
         const filters = { address, date, times, pickleball };
         const response = await fetchParkCoordinates(filters);
         setResult(response);
+        console.log(response)
 
       } catch (error) {
         console.error('❌ Error fetching coordinates:', error);
@@ -114,7 +115,7 @@ export default function Map() {
       <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
           
         {/* Scrollable left column */}
-        <div style={{ width: '40%', overflowY: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none'}} onScroll={handleScroll}>
+        <div style={{ width: '32%', overflowY: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none'}} onScroll={handleScroll}>
         
           {/* Preference Bar */}
           <PreferenceBar 
@@ -137,6 +138,7 @@ export default function Map() {
                   place={place}
                   index={index}
                   listItemRefs={listItemRefs}
+                  pickleball={pickleball}
                 />
               ))
             ) : (

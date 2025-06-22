@@ -19,14 +19,6 @@ export default function ({address, setAddress, date, setDate, times, setTimes, p
     return (
         <div className = "preference_box" style={{display: "flex"}}>
 
-            {/* Autocomplete for address input */}
-            <AutocompleteSearch 
-                setAddress = {setAddress} 
-                placeholder={"Address"}
-                address = {address}
-                value = {address}
-            />
-
             {/* Date Selection */}
             <DateButton 
                 date={date} // assuming date is ISO string or UTC string
@@ -34,14 +26,14 @@ export default function ({address, setAddress, date, setDate, times, setTimes, p
                 onChange={(date) => setDate(dayjs.utc(date).toDate().toUTCString())}
             />
 
-            {/* Pickleball Selection */}
-            <button 
-                className={pickleball ? 'pickle-true' : 'pickle-false'}
-                onClick={() => setPickleball(!pickleball)}
-            > 
-                Pickleball 
 
-            </button>
+            {/* Autocomplete for address input */}
+            <AutocompleteSearch 
+                setAddress = {setAddress} 
+                placeholder={"Address"}
+                address = {address}
+                value = {address}
+            />
             
             {/* Time Slot Selections*/}
             <Select
@@ -60,6 +52,15 @@ export default function ({address, setAddress, date, setDate, times, setTimes, p
                 }}
                 onChange={(selected) => setTimes(selected.map(s => s.value))}
             />
+
+            {/* Pickleball Selection */}
+            <button 
+                className={pickleball ? 'pickle-true' : 'pickle-false'}
+                onClick={() => setPickleball(!pickleball)}
+            > 
+                Pickleball 
+
+            </button>
             
         </div>
     )

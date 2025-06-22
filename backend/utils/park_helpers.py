@@ -79,6 +79,23 @@ def find_distances_for_all_parks(parks, address, logger):
 
     return distances
 
+def get_neighborhood(lat, lng, api_key, logger):
+    url = f"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&key={api_key}"
+
+    response = requests.get(url)
+    data = response.json()
+
+    if data.get("status") != "OK":
+        print("Error:", data.get("status"))
+        return None
+
+    for result in data.get("results", []):
+        for component in result.get("address_components", []):
+            if "neighborhood" in component.get("types", []):
+                return component.get("long_name")
+
+    return None
+
 def filter_parks(parks, filter_date, times_requested, searchPickle, logger, address):
     filtered_parks = []
 
@@ -87,6 +104,7 @@ def filter_parks(parks, filter_date, times_requested, searchPickle, logger, addr
         matching_courts = []
 
         for court in courts:
+
             filtered_times = filter_available_times(court, filter_date, times_requested)
             if filtered_times and searchPickle:
                 if court.get('sportId') == "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa":
@@ -94,15 +112,22 @@ def filter_parks(parks, filter_date, times_requested, searchPickle, logger, addr
                     court_copy["availableTimes"] = filtered_times
                     matching_courts.append(court_copy)
             elif filtered_times and not searchPickle:
-                court_copy = court.copy()
-                court_copy["availableTimes"] = filtered_times
-                matching_courts.append(court_copy)
+                if court.get('sportId') == "bd745b6e-1dd6-43e2-a69f-06f094808a96":
+                    court_copy = court.copy()
+                    court_copy["availableTimes"] = filtered_times
+                    matching_courts.append(court_copy)
+
+        
 
         if matching_courts:
             park_copy = park.copy()
             park_copy["courts"] = matching_courts
             park_copy["_id"] = str(park["_id"])
+            park_copy["reservable_pickle"] =  park.get("reservable_pickle")
+            park_copy["reservable_tennis"] = park.get("reservable_tennis")
+            park_copy["neighborhood"] =  get_neighborhood(park["lat"], park["lng"], "AIzaSyBMzgDapBifIff9Np80ZHzodgpxcEsOoTc", logger)
             filtered_parks.append(park_copy)
+
 
     distances = find_distances_for_all_parks(filtered_parks, address, logger)
     for park, distance in zip(filtered_parks, distances):
