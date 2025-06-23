@@ -79,23 +79,6 @@ def find_distances_for_all_parks(parks, address, logger):
 
     return distances
 
-def get_neighborhood(lat, lng, api_key, logger):
-    url = f"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&key={api_key}"
-
-    response = requests.get(url)
-    data = response.json()
-
-    if data.get("status") != "OK":
-        print("Error:", data.get("status"))
-        return None
-
-    for result in data.get("results", []):
-        for component in result.get("address_components", []):
-            if "neighborhood" in component.get("types", []):
-                return component.get("long_name")
-
-    return None
-
 def filter_parks(parks, filter_date, times_requested, searchPickle, logger, address):
     filtered_parks = []
 
@@ -125,7 +108,7 @@ def filter_parks(parks, filter_date, times_requested, searchPickle, logger, addr
             park_copy["_id"] = str(park["_id"])
             park_copy["reservable_pickle"] =  park.get("reservable_pickle")
             park_copy["reservable_tennis"] = park.get("reservable_tennis")
-            park_copy["neighborhood"] =  get_neighborhood(park["lat"], park["lng"], "AIzaSyBMzgDapBifIff9Np80ZHzodgpxcEsOoTc", logger)
+            park_copy["neighborhood"] = park.get("neighborhood")
             filtered_parks.append(park_copy)
 
 

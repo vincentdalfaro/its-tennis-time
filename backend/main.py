@@ -5,7 +5,7 @@ from database.api_requests import register_routes
 import enable_log
 
 def main():
-    logger = enable_log.setup_logging()
+    logger = enable_log.setup_logging("main")
 
     client = db_connect.connect_to_db(logger)
     db = client["itstennistime_db"]

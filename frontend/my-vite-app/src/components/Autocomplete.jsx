@@ -50,7 +50,7 @@ function AutocompleteSearch({ setAddress, width, placeholder, address }) {
   };
 
   return (
-    <div style={{ position: 'relative', display: 'inline-block', width }}>
+    <div style={{ position: 'relative', display: 'inline-block'}}>
       <Autocomplete
         onLoad={(ref) => (autocompleteRef.current = ref)}
         onPlaceChanged={handlePlaceChanged}
@@ -59,7 +59,7 @@ function AutocompleteSearch({ setAddress, width, placeholder, address }) {
         <input
           type="text"
           className="input"
-          style={{ width: '100%', fontFamily: 'Futura', paddingRight: '24px' }}
+          style={{ width: width, fontFamily: 'Futura', paddingRight: '24px' }}
           placeholder={placeholder}
           value={inputValue}
           onChange={handleInputChange}

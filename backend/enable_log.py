@@ -1,8 +1,8 @@
 import logging
 
-def setup_logging():
+def setup_logging(log_name):
     logging.basicConfig(
-        filename="bootup.log",
+        filename= log_name + ".log",
         format='%(asctime)s %(levelname)s %(message)s',
         filemode='w'
     )
