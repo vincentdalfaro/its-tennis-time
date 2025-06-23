@@ -1,5 +1,6 @@
 import { GoogleMap, Marker } from '@react-google-maps/api';
 import mapStyle from './MapStyle';
+import mapIcon from '../../assets/map-icon.png'
 
 const containerStyle = {
   width: '100%',
@@ -7,8 +8,8 @@ const containerStyle = {
 };
 
 const center = {
-  lng: -122.45,
-  lat: 37.76,
+  lng: -122.43,
+  lat: 37.756,
 };
 
 function MyMap({markers, addressCoords, visibleIndex}) {
@@ -17,7 +18,7 @@ function MyMap({markers, addressCoords, visibleIndex}) {
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={13}
+      zoom={12.8}
       options={{
         styles: mapStyle,
         scrollwheel: true,

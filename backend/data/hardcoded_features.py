@@ -78,5 +78,37 @@ park_features = {
     "5a0b8fa6-11db-433e-9314-bafb956d8622": {
         "lights": False,
         "restrooms": True,
+    },
+    "032e605f-6065-4794-9675-b1bbebe18159": {
+        "lights": True,
+        "restrooms": True,
+    },
+    "c2f20478-83d8-48c9-af3d-065d7ba22d60": {
+        "lights": False,
+        "restrooms": True,
+    },
+    "95f7e887-5096-463b-834a-09d67889557e": {
+        "lights": False,
+        "restrooms": True,
+    },
+    "ad9e28e1-2d02-4fb5-b31d-b75f63841814": {
+        "lights": False,
+        "restrooms": True,
+    },
+    "1a5a0d4b-ef5d-44ab-a8ab-a13f39dcdc7d": {
+        "lights": False,
+        "restrooms": True,
+    },
+    "25eafd72-ca31-4df7-8850-79c05edf3796": {
+        "lights": False,
+        "restrooms": True,
+    },
+    "fe61cfdb-abf7-4f52-8ce4-45feb58f10b7": {
+        "lights": False,
+        "restrooms": True,
+    },
+    "2a18ef67-333c-4d9c-a86c-e0709f07f5c3": {
+        "lights": True,
+        "restrooms": True,
     }
 }

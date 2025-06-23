@@ -5,8 +5,10 @@ import dayjs from "dayjs";
 
 {/* font, converting to a dayjs variable for Calendar, and Calendar window*/}
 const FONT_FAMILY = 'Futura, Arial, sans-serif';
-const today = dayjs();
-const maxDate = today.add(6, 'day');
+const today = dayjs().startOf('day');
+const maxDate = today.add(7, 'day');
+
+console.log(today)
 
 export default function Calendar({ value, onChange }) {
   return (

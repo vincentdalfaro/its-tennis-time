@@ -109,6 +109,8 @@ def filter_parks(parks, filter_date, times_requested, searchPickle, logger, addr
             park_copy["reservable_pickle"] =  park.get("reservable_pickle")
             park_copy["reservable_tennis"] = park.get("reservable_tennis")
             park_copy["neighborhood"] = park.get("neighborhood")
+            park_copy["lights"] = park.get("lights")
+            park_copy["restrooms"] =  park.get("restrooms")
             filtered_parks.append(park_copy)
 
 

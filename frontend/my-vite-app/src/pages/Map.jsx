@@ -7,6 +7,7 @@ import { fetchParkCoordinates, fetchAddressCoordinates } from '../api/api.jsx';
 import ParkToken from '../components/ParkToken.jsx';
 import PreferenceBar from '../components/PreferenceBar.jsx'
 import dayjs from 'dayjs'
+import hour from 'dayjs'
 
 export default function Map() {
 
@@ -14,23 +15,39 @@ export default function Map() {
   const [searchParams] = useSearchParams();
   const [searchresult, setResult] = useState();
   
+  {/* Logic for default date/times */}
+  let defaultTimes = ['Morning'];
+  let defaultDate = dayjs().startOf('day');
+
+  if (hour >= 6 && hour < 12) {
+    defaultTimes = ['Morning'];
+    defaultDate = now.startOf('day');
+  } else if (hour >= 12 && hour < 18) {
+    defaultTimes = ['Afternoon'];
+    defaultDate = now.startOf('day');
+  } else if (hour >= 18 && hour <= 20) {
+    defaultTimes = ['Evening'];
+    defaultDate = now.startOf('day');
+  } else if (hour > 20) {
+    defaultTimes = ['Morning'];
+    defaultDate = now.add(1, 'day').startOf('day');
+  }
 
   {/* Given Address */}
   const [addressCoords, setAddressCoords] = useState(null);
   const [address, setAddress] = useState(() => {
-    return searchParams.get('address') || '1 Dr Carlton B Goodlett Pl, San Francisco, CA 94102'
+    return searchParams.get('address') || ""
   })
 
   {/* Given Date */}
   const [date, setDate] = useState(() => {
-    return searchParams.get('date') || dayjs().startOf('day').toDate().toUTCString();
+    return searchParams.get('date') || defaultDate.toDate().toUTCString();
   });
     
   {/* Given Time Slots */}
   const timesParam = searchParams.get('times');
-  const listItemRefs = useRef([]);
   const [times, setTimes] = useState(() => {
-    return timesParam ? timesParam.split(',') : ['Morning'];
+    return timesParam ? timesParam.split(',') : defaultTimes;
   });
 
   {/* Pickleball Enabler */}
@@ -79,7 +96,7 @@ export default function Map() {
       }
     };
 
-    if (address && date && times.length > 0) {
+    if (date && times.length > 0) {
       fetchData();
     } else if (times.length === 0) {
       setResult([]);
@@ -90,17 +107,18 @@ export default function Map() {
   const getFilteredSearchResults = () => {
     if (!searchresult || searchresult.length === 0) return [];
 
+    // Don't sort if no address is given
+    if (!address) return searchresult;
+
     const allHaveDistance = searchresult.every(
       (p) => p.distance?.distance_value != null
     );
 
-    const sorted = allHaveDistance
-      ? [...searchresult].sort(
-          (a, b) => a.distance.distance_value - b.distance.distance_value
-        )
-      : searchresult;
+    if (!allHaveDistance) return searchresult;
 
-    return sorted;
+    return [...searchresult].sort(
+      (a, b) => a.distance.distance_value - b.distance.distance_value
+    );
   };
 
 
@@ -115,7 +133,7 @@ export default function Map() {
       <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
           
         {/* Scrollable left column */}
-        <div style={{ width: '32%', overflowY: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none'}} onScroll={handleScroll}>
+        <div style={{ width: '29%', overflowY: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none'}} onScroll={handleScroll}>
         
           {/* Preference Bar */}
           <PreferenceBar 
@@ -137,12 +155,14 @@ export default function Map() {
                   key={place.locationId}
                   place={place}
                   index={index}
-                  listItemRefs={listItemRefs}
                   pickleball={pickleball}
+                  address={address}
                 />
               ))
             ) : (
-              <p>No courts available</p>
+              <div style = {{color: "white", fontSize: "35px", fontFamily: "Futura", marginLeft: "30px", marginTop: "200px"}}>
+                  No Courts Available
+              </div>
             )}
           </div>
         </div>

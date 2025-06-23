@@ -6,9 +6,6 @@ import AutocompleteSearch from '../components/Autocomplete.jsx'
 import dayjs from 'dayjs';
 import CustomValueContainer from './select/CustomValueContainer.jsx'
 import CustomClearIndicator from './select/CustomClear.jsx';
-import settingsIcon from '../assets/settings-icon.png'
-import xButton from '../assets/x-button.png'
-import { useState } from 'react';
 
 export default function ({address, setAddress, date, setDate, times, setTimes, pickleball, setPickleball}) {
 
@@ -18,12 +15,6 @@ export default function ({address, setAddress, date, setDate, times, setTimes, p
         { value: 'Afternoon', label: 'Afternoon' },
         { value: 'Evening', label: 'Evening' },
     ];
-
-    const [clicked, setClicked] = useState(true)
-
-    function isClicked(){
-        setClicked(prev => !prev);
-    }
 
     return (
         <div className = "preference_box" style={{display: "flex"}}>
@@ -35,11 +26,20 @@ export default function ({address, setAddress, date, setDate, times, setTimes, p
                 onChange={(date) => setDate(dayjs.utc(date).toDate().toUTCString())}
             />
 
+            {/* Autocomplete for address input */}
+            <AutocompleteSearch 
+                setAddress = {setAddress} 
+                placeholder={"Address"}
+                address = {address}
+                value = {address}
+                width = {"243px"}
+            />
+
              {/* Time Slot Selections*/}
             <Select
                 isMulti
                 closeMenuOnSelect={false}
-                styles={SelectStyle(285)}
+                styles={SelectStyle(282)}
                 options={timeSlots}
                 className="my-select"
                 classNamePrefix="custom-select"
@@ -53,16 +53,6 @@ export default function ({address, setAddress, date, setDate, times, setTimes, p
                 onChange={(selected) => setTimes(selected.map(s => s.value))}
             />
 
-
-            {/* Autocomplete for address input */}
-            <AutocompleteSearch 
-                setAddress = {setAddress} 
-                placeholder={"Address"}
-                address = {address}
-                value = {address}
-                width = {"275px"}
-            />
-
             {/* Pickleball Selection */}
             <button 
                 className={pickleball ? 'pickle-true' : 'pickle-false'}
@@ -70,19 +60,7 @@ export default function ({address, setAddress, date, setDate, times, setTimes, p
             > 
                 Pickleball 
 
-            </button>
-
-            {!clicked && 
-                <div style =  {{'color': "white"}}>This only shows if isVisible is true</div>
-            
-            }
-            
-            <button style = {{background: "transparent", border: "none", marginLeft: "1px"}} onClick = {isClicked}>
-                {clicked ? 
-                <img src={settingsIcon} style = {{width:"25px"}}/>: 
-                <img src = {xButton} style = {{width: "20px", borderLeft: "5px solid black"}}/>}
-            </button>
-            
+            </button>   
 
         </div>
     )
