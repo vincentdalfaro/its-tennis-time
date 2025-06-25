@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import logo from  '../assets/logo-white.png'
-import world from '../assets/world.png'
+import logo from  '../assets//icons-white/logo-white.png'
+import world from '../assets/icons-white/world.png'
 
 export default function TopBar() {
     return (

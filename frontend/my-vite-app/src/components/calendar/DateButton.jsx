@@ -1,6 +1,6 @@
 import Calendar from "./Calendar.jsx";
-import calendarWhite from '../../assets/calendar-white.png';
-import calendarBlack from '../../assets/calendar-black.png';
+import calendarWhite from '../../assets/icons-white/calendar-white.png';
+import calendarBlack from '../../assets/icons-black/calendar-black.png';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import { useState, useRef, useEffect } from "react";

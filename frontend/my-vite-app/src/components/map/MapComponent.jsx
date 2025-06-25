@@ -1,6 +1,7 @@
 import { GoogleMap, Marker } from '@react-google-maps/api';
 import mapStyle from './MapStyle';
-import mapIcon from '../../assets/map-icon.png'
+import mapPin from "../../assets/icons-white/map-pin.png"
+import mapPinRed from "../../assets/map-pin-red.png"
 
 const containerStyle = {
   width: '100%',
@@ -32,7 +33,7 @@ function MyMap({markers, addressCoords, visibleIndex}) {
         key={marker.locationId}
         position={{ lat: parseFloat(marker.lat), lng: parseFloat(marker.lng) }}
         icon={{
-          url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+          url: mapPin,
           scaledSize: new window.google.maps.Size(
             visibleIndex === i ? 60 : 30,
             visibleIndex === i ? 60 : 30
@@ -44,7 +45,10 @@ function MyMap({markers, addressCoords, visibleIndex}) {
     {addressCoords?.lat && addressCoords?.lng && (
       <Marker
         position={{ lat: addressCoords.lat, lng: addressCoords.lng }}
-        icon = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+        icon = {{
+          url: mapPinRed,
+          scaledSize: new window.google.maps.Size(40, 40),
+        }}
       />
     )}
 

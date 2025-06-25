@@ -4,21 +4,15 @@ html, body, #root {
   height: 100%;
   width: 100%;
   background-color: #000000;
-}
-
-.pac-container {
   font-family: Futura, sans-serif;
 }
 
-@font-face {
-     font-family: 'inter';
-     src: url('./fonts/Inter.ttc') format('ttc'),
-          url('./fonts/InterVariable-Italic.ttf') format('ttf'),
-          url('./fontsInterVariable.ttf') format('ttf');
-     font-weight: normal;
-     font-style: normal;
-   }
+h1 {
+  font-family: Futura, sans-serif;
+}
 
-body {
-  font-family: 'YourFontName', sans-serif;
+
+/* Used for google Maps Autocomplete*/
+.pac-container {
+  font-family: Futura, sans-serif;
 }

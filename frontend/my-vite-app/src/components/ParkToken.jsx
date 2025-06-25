@@ -1,10 +1,13 @@
 import dayjs from "dayjs";
-import tennisCourt from "../assets/tennis-court.png"
-import icon from "../assets/icon.png"
-import toiletIcon from "../assets/toiletIcon.png"
-import lightsIcon from "../assets/lights.png"
+import tennisCourt from "../assets/icons-white/tennis-court.png"
+import icon from "../assets/icons-white/neighborhood.png"
+import toiletIcon from "../assets/icons-white/toilet.png"
+import lightsIcon from "../assets/icons-white/lights.png"
+import TimeButtons from "./TimeButtons.jsx"
 
 function ParkToken({ place, index, pickleball, address }) {
+
+    
 
     const allTimes = Array.from(new Set(
     (place.courts || [])
@@ -14,7 +17,6 @@ function ParkToken({ place, index, pickleball, address }) {
 
     function handleClick() {
         const url = `https://www.rec.us/locations/` + place["locationId"];
-        console.log(url)
         window.open(url, '_blank');
     }
 
@@ -62,23 +64,10 @@ function ParkToken({ place, index, pickleball, address }) {
                             src={lightsIcon} 
                             style={{ height: "20px", width: "auto", marginLeft: "15px"}} />
                     }
-
                 </div>
 
-                <div className="scroll-wrapper">    
-                    <div className="time-flex">
-                    {allTimes.map((time, i) => (
-                        <button
-                        key={i}
-                        onClick = {handleClick}
-                        className="reservation-button"
-                        style={allTimes.length === 1 ? { gridRowStart: 2 } : {}}
-                        >
-                        {dayjs(time).format('h:mm A')}
-                        </button>
-                    ))}
-                    </div>
-                </div>
+                <TimeButtons allTimes={allTimes} handleClick = {handleClick}/>
+                
             </div>
         </div>
   );
