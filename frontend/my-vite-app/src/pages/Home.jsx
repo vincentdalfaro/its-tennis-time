@@ -13,7 +13,7 @@ import useTheme from "../components/ThemeObserver.jsx";
 export default function Home() { 
 
   const theme = useTheme()
-  const isDark = theme === 'dark'
+
 
   {/* Different available time frames*/}
   const timeSlots = [
