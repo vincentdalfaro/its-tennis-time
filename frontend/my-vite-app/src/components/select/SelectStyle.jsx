@@ -38,20 +38,24 @@ export default function SelectStyle({ width, hide = false, theme }) {
       width: 100,
       borderRadius: 0,
     }),
-
+    placeholder: (provided) => ({
+      ...provided,
+      color: isDark ? '#888' : '#ccc',      
+      opacity: 1,                           
+    }),
     option: (provided, state) => ({
       ...provided,
       backgroundColor: state.isSelected
         ? (isDark ? '#fff' : '#000')
         : state.isFocused
-        ? (isDark ? '#fff' : '#f0f0f0')
+        ? (isDark ? '#636363' : '#636363')
         : isDark
-        ? '#222'
+        ? '#000'
         : '#fff',
       color: state.isSelected
-        ? '#fff'
+        ? (isDark ? "#000" : '#fff')
         : state.isFocused
-        ? '#000'
+        ? (isDark ? '#000' : '#fff')
         : isDark
         ? '#fff'
         : '#000',
@@ -62,6 +66,13 @@ export default function SelectStyle({ width, hide = false, theme }) {
           ? (isDark ? '#000' : '#ddd')
           : (isDark ? '#636363' : '#f0f0f0'),
       },
+    }),
+    menuList: (provided) => ({
+      ...provided,
+      paddingTop: 0,
+      paddingBottom: 0,
+      marginTop: 0,
+      marginBottom: 0,
     }),
 
     singleValue: (provided, state) => ({

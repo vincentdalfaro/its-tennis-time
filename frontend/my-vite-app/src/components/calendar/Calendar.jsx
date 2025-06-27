@@ -9,16 +9,17 @@ const today = dayjs().startOf('day');
 const maxDate = today.add(7, 'day');
 
 export default function Calendar({ value, onChange }) {
-  const theme = useTheme();             // ✅ call the hook
-  const isDark = theme === 'dark';      // ✅ use theme dynamically
+  const theme = useTheme();
+  const isDark = theme === 'dark';
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <div
         style={{
           transformOrigin: 'top left',
-          backgroundColor: isDark ? '#222' : '#f0f0f0',
+          backgroundColor: isDark ? '#fff' : '#000',  // white bg for dark mode, black bg for light mode
           borderRadius: '8px',
+          padding: 8,
         }}
       >
         <DateCalendar
@@ -30,26 +31,46 @@ export default function Calendar({ value, onChange }) {
           showDaysOutsideCurrentMonth
           sx={{
             fontFamily: FONT_FAMILY,
-            color: isDark ? '#eee' : '#222',
+
+            color: isDark ? '#000' : '#fff',  // Main text color
+
             '& .MuiPickersCalendarHeader-label': {
               fontFamily: FONT_FAMILY,
-              color: isDark ? '#eee' : '#222',
+              color: isDark ? '#000' : '#fff',
             },
+
             '& .MuiPickersCalendar-weekDayLabel': {
               fontFamily: FONT_FAMILY,
-              color: isDark ? '#aaa' : '#666',
+              color: isDark ? '#555' : '#ccc', // lighter grey for weekday labels in light mode
             },
+
+            '& .MuiPickersCalendarHeader-switchViewButton, & .MuiPickersArrowSwitcher-button': {
+              color: isDark ? '#000' : '#fff', // nav buttons white in light mode
+            },
+
             '& .MuiPickersDay-root': {
               fontFamily: FONT_FAMILY,
-              color: isDark ? '#ddd' : '#444',
+              color: isDark ? '#222' : '#eee', // day numbers white-ish in light mode
             },
+
             '& .MuiPickersDay-root.Mui-selected': {
-              backgroundColor: isDark ? '#eee' : 'black',
-              color: isDark ? 'black' : 'white',
+              backgroundColor: isDark ? '#000' : '#fff',
+              color: isDark ? '#fff' : '#000',
               fontFamily: FONT_FAMILY,
               '&:hover, &:focus': {
-                backgroundColor: isDark ? '#ddd' : 'black',
+                backgroundColor: isDark ? '#222' : '#eee',
               },
+            },
+
+            '& .MuiPickersDay-root.Mui-disabled': {
+              color: isDark ? '#888' : '#555', // disabled days lighter gray in light mode
+              opacity: 1,
+              pointerEvents: 'none',
+            },
+
+            '& input::placeholder': {
+              color: isDark ? '#bbb' : '#aaa',
+              opacity: 1,
             },
           }}
         />

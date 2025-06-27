@@ -39,7 +39,7 @@ input::placeholder {
   border-radius: 8px;
   margin-top: 6px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  transform: scale(.93);
+  transform: scale(.90);
   transform-origin: top left;
 }
 
@@ -205,7 +205,10 @@ input::placeholder {
 }
 
 /* Custom Value Container*/
-
-.select-color{
+.select-color-open{
   color: var(--bg-color)
+}
+
+.select-color-close{
+  color: var(--text-color)
 }

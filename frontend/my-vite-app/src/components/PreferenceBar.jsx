@@ -1,13 +1,18 @@
 import '../App.css';
 import Select from 'react-select';
+import { useMemo } from 'react';
 import SelectStyle from './select/SelectStyle.jsx';
 import DateButton from './calendar/DateButton.jsx';
 import AutocompleteSearch from '../components/Autocomplete.jsx'
 import dayjs from 'dayjs';
 import CustomValueContainer from './select/CustomValueContainer.jsx'
 import CustomClearIndicator from './select/CustomClear.jsx';
+import useTheme from "../components/ThemeObserver.jsx";
 
 export default function ({address, setAddress, date, setDate, times, setTimes, pickleball, setPickleball}) {
+
+    const theme = useTheme()
+    const selectStyles = useMemo(() => SelectStyle({ width: 282 , theme }), [theme]);
 
     {/* Different available time frames*/}
     const timeSlots = [
@@ -39,7 +44,7 @@ export default function ({address, setAddress, date, setDate, times, setTimes, p
             <Select
                 isMulti
                 closeMenuOnSelect={false}
-                styles={SelectStyle(282)}
+                styles={selectStyles}
                 options={timeSlots}
                 className="my-select"
                 classNamePrefix="custom-select"
