@@ -1,5 +1,5 @@
 import '../App.css';
-import Topbar from '../components/Topbar.jsx';
+import Topbar from '../components/Top-bar.jsx';
 import MyMap from '../components/map/MapComponent.jsx';
 import { useSearchParams } from 'react-router-dom';
 import { useState, useEffect, useMemo, useRef } from 'react';
