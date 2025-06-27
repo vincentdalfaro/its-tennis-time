@@ -8,7 +8,6 @@ import lightsIconWhite from "../assets/icons-white/lights-white.png"
 import lightsIconBlack from "../assets/icons-black/lights-black.png"
 import TimeButtons from "./TimeButtons.jsx"
 import useTheme from "./ThemeObserver.jsx";
-import test from "../assets/test.jpg"
 
 function ParkToken({ place, index, pickleball, address }) {
 
