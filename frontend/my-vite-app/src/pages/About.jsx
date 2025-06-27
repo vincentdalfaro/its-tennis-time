@@ -15,7 +15,7 @@ export default function About() {
         <div style={{ overflowY: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none',}}>
           <div className="white-text" style = {{marginLeft:"100px", marginTop:"150px", marginRight: "500px", fontSize: "20px"}}>
                     This project was first created to provide a tool to help give thorough details regarding tennis courts in San Francisco. 
-                    The current reservation system is through a private San Francisco based company: Rec.us, with a partnership with the San Francisco Park’s Department. 
+                    The current reservation system is through a private, San Francisco based company: Rec.us, with a partnership with the San Francisco Park’s Department. 
                     While Rec.us does maintain a reservation system, it lacks information and a way to elegantly navigate the information that is provided. 
                     This project exists to do just that. Built as a proper tool, I intend to offer it to the community it was geared to and continually 
                     develop it with consideration. 

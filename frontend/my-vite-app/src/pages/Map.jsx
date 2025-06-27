@@ -7,8 +7,6 @@ import { fetchParkCoordinates, fetchAddressCoordinates } from '../api/api.jsx';
 import ParkToken from '../components/ParkToken.jsx';
 import PreferenceBar from '../components/PreferenceBar.jsx'
 import dayjs from 'dayjs'
-import hour from 'dayjs'
-
 export default function Map() {
 
   {/* API Calls */}
@@ -18,17 +16,19 @@ export default function Map() {
   {/* Logic for default date/times */}
   let defaultTimes = ['Morning'];
   let defaultDate = dayjs().startOf('day');
+  const now = dayjs();
+  const currentHour = now.hour();
 
-  if (hour >= 6 && hour < 12) {
+  if (currentHour >= 6 && currentHour < 12) {
     defaultTimes = ['Morning'];
     defaultDate = now.startOf('day');
-  } else if (hour >= 12 && hour < 18) {
+  } else if (currentHour >= 12 && currentHour < 18) {
     defaultTimes = ['Afternoon'];
     defaultDate = now.startOf('day');
-  } else if (hour >= 18 && hour <= 20) {
+  } else if (currentHour >= 18 && currentHour <= 20) {
     defaultTimes = ['Evening'];
     defaultDate = now.startOf('day');
-  } else if (hour > 20) {
+  } else if (currentHour > 20 || currentHour < 6) {
     defaultTimes = ['Morning'];
     defaultDate = now.add(1, 'day').startOf('day');
   }

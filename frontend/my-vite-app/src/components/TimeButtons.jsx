@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import dayjs from 'dayjs';
-import downCaret from '../assets/icons-white/down-arrow.png'
-import upCaret from '../assets/icons-white/up-arrow.png'
+import downCaretWhite from '../assets/icons-white/down-caret-white.png'
+import upCaretWhite from '../assets/icons-white/up-caret-white.png'
+import downCaretBlack from '../assets/icons-black/down-caret-black.png'
+import upCaretBlack from '../assets/icons-black/up-caret-black.png'
 
-export default function TimeButtons({ allTimes, handleClick}) {
+export default function TimeButtons({ allTimes, handleClick, theme}) {
   const [expanded, setExpanded] = useState(false);
-
+  const isDark = theme === 'dark'
   const visibleTimes = expanded ? allTimes : allTimes.slice(0, 3);
 
   return (
@@ -26,14 +28,14 @@ export default function TimeButtons({ allTimes, handleClick}) {
       {/* Down Caret to expand */}
       {!expanded && allTimes.length > 3 && (
         <button onClick={() => setExpanded(true)} className="expand-button">
-          <img src = {downCaret} style = {{width: "15px"}}/>
+          <img src = {isDark ? downCaretWhite: downCaretBlack} style = {{width: "15px"}}/>
         </button>
       )}
 
       {/* Up Caret to Minimize*/}
       {expanded && (
         <button onClick={() => setExpanded(false)} className="expand-button">
-          <img src = {upCaret} style = {{width: "15px"}}/>
+          <img src = {isDark ? upCaretWhite: upCaretBlack} style = {{width: "15px"}}/>
         </button>
       )}
 

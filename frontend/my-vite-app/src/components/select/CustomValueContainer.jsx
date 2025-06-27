@@ -16,6 +16,7 @@ const CustomValueContainer = ({ children, ...props }) => {
         alignItems: 'center',     
         overflow: 'hidden',
       }}
+      className='select-color'
     >
       {selected.length > 0 ? (
         <div

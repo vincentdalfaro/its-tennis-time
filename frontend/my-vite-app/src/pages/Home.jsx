@@ -1,5 +1,5 @@
 import '../App.css';
-import { useState} from "react";
+import { useState, useMemo} from "react";
 import Topbar from '../components/Topbar.jsx'
 import Select from 'react-select';
 import SelectStyle from '../components/select/SelectStyle.jsx';
@@ -8,9 +8,12 @@ import AutocompleteSearch from '../components/Autocomplete.jsx'
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 import CustomValueContainer from '../components/select/CustomValueContainer.jsx'
-
+import useTheme from "../components/ThemeObserver.jsx";
 
 export default function Home() { 
+
+  const theme = useTheme()
+  const isDark = theme === 'dark'
 
   {/* Different available time frames*/}
   const timeSlots = [
@@ -31,6 +34,7 @@ export default function Home() {
     times: times.join(','),
   }).toString();
 
+  const selectStyles = useMemo(() => SelectStyle({ width: 300, theme }), [theme]);
   return (
   <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
 
@@ -59,10 +63,11 @@ export default function Home() {
           onChange={(newDate) => setDate(newDate)} 
         />
 
+
         {/* Time Select */}
         <Select
           isMulti
-          styles={SelectStyle(300)}
+          styles={selectStyles}
           options={timeSlots}
           className = "my-select"
           classNamePrefix="custom-select"

@@ -59,7 +59,7 @@ function AutocompleteSearch({ setAddress, width, placeholder, address }) {
         <input
           type="text"
           className="input"
-          style={{ width: width, fontFamily: 'Futura', paddingRight: '24px' }}
+          style={{ width: width, paddingRight: '24px' }}
           placeholder={placeholder}
           value={inputValue}
           onChange={handleInputChange}

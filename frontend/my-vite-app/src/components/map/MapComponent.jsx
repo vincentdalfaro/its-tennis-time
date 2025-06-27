@@ -1,7 +1,10 @@
 import { GoogleMap, Marker } from '@react-google-maps/api';
-import mapStyle from './MapStyle';
-import mapPin from "../../assets/icons-white/map-pin.png"
+import mapStyleDark from './MapStyleDark.jsx';
+import mapStyleLight from "./MapStyleLight.jsx"
+import mapPinWhite from "../../assets/icons-white/map-pin-white.png"
+import mapPinBlack from "../../assets/icons-black/map-pin-black.png"
 import mapPinRed from "../../assets/map-pin-red.png"
+import useTheme from "../ThemeObserver.jsx";
 
 const containerStyle = {
   width: '100%',
@@ -15,13 +18,16 @@ const center = {
 
 function MyMap({markers, addressCoords, visibleIndex}) {
 
+  const theme = useTheme()
+const isDark = theme === 'dark'
+
   return (
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
       zoom={12.8}
       options={{
-        styles: mapStyle,
+        styles: (isDark ? mapStyleDark: mapStyleLight),
         scrollwheel: true,
         disableDefaultUI: true,
         gestureHandling: 'greedy',
@@ -33,7 +39,7 @@ function MyMap({markers, addressCoords, visibleIndex}) {
         key={marker.locationId}
         position={{ lat: parseFloat(marker.lat), lng: parseFloat(marker.lng) }}
         icon={{
-          url: mapPin,
+          url: isDark ? mapPinWhite: mapPinBlack,
           scaledSize: new window.google.maps.Size(
             visibleIndex === i ? 60 : 30,
             visibleIndex === i ? 60 : 30

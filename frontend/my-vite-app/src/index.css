@@ -1,18 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+:root {
+  --bg-color: white;
+  --text-color: black;
+  --font-family: 'Rubik', sans-serif;
+  --placeholder-color: #ccc;
+}
+
+[data-theme='dark'] {
+  --bg-color: black;
+  --text-color: white;
+  --placeholder-color: #888;
+}
+
 html, body, #root {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  background-color: #000000;
-  font-family: Futura, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-family);
 }
 
-h1 {
-  font-family: Futura, sans-serif;
-}
-
-
-/* Used for google Maps Autocomplete*/
-.pac-container {
-  font-family: Futura, sans-serif;
+h1, .pac-container {
+  font-family: var(--font-family);
 }
