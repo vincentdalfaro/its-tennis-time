@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+:root {
+  --bg-color: white;
+  --text-color: black;
+  --font-family: 'Rubik', sans-serif;
+  --placeholder-color: #ccc;
+}
+
+[data-theme='dark'] {
+  --bg-color: black;
+  --text-color: white;
+  --placeholder-color: #888;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-family);
+}
+
+h1, .pac-container {
+  font-family: var(--font-family);
+}
+
+.custom-select__control,
+.custom-select__menu,
+.custom-select__option,
+.custom-select__single-value,
+.custom-select__multi-value,
+.custom-select__value-container {
+  transition: none !important;
+  animation: none !important;
+}

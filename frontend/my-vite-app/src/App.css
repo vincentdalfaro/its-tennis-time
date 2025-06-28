@@ -1,0 +1,223 @@
+/* General Components */
+
+
+.input, .button{
+  border: 2px solid var(--text-color);
+  background-color: var(--bg-color);
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 10;
+  text-align: left;
+  padding: 5px 10px;
+  color: var(--text-color);
+}
+
+.input:hover,
+.input:focus,
+.button:hover,
+.button:focus{
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  outline: none;
+  box-shadow: none;
+  border: 2px solid var(--text-color);
+}
+
+input::placeholder {
+  color: var(--placeholder-color);
+}
+
+/* Calendar */
+.calendar-style {
+  position: absolute;
+  z-index: 20;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border-radius: 8px;
+  margin-top: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transform: scale(.90);
+  transform-origin: top left;
+}
+
+/* Home Page */
+.home-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  margin-top: 120px
+}
+
+.home-flex-2 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: left;
+}
+
+.submit-button {
+  width: 100px;
+  font-size: 16px;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Top Bar */
+.flex-topbar {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.flex-topbar-2 {
+  align-content: flex-end;
+  display: flex;
+  padding: 0 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.theme-button{
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: none;
+}
+
+.link-headers a {
+  color: var(--button-text);
+  text-decoration: none;
+}
+
+/* Map */
+.horizontal-bar {
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-color);
+  flex-shrink: 0;
+}
+
+.vertical-bar {
+  width: 3px;
+  background-color: var(--text-color);
+  height: 100%;
+  z-index: 0;
+}
+
+.map-heading {
+  color: var(--text-color);
+  font-size: 35px;
+  margin-left: 30px;
+  margin-top: 200px;
+}
+
+/* Park Token*/
+.white-box {
+  border: 1.5px solid var(--text-color);  
+  border-radius: 2px;
+  padding: 1px;    
+  color: (var(--text-color)); 
+  height: 400px; 
+  display: flex;           
+  flex-direction: column;        
+}
+
+.reservation-button {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  width: 110px;
+  height: 45px;
+  border-radius: 20px;
+  cursor: pointer;
+  border: none; 
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+.reservation-button:hover{
+  cursor: grab;
+}
+
+.times-scroll{
+  overflow-x: auto;
+  white-space: nowrap;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.times-expand{
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.expand-button{
+  color:white;
+  background: transparent;
+  border: none;
+  font-size: 25px;
+}
+
+.expand-button:hover{
+  cursor: grab;
+}
+
+/* Preference Bar */
+.preference_box {
+  position: sticky;
+  top: 0;
+  padding: .5rem;
+  z-index: 10;
+  flex-wrap: wrap;
+  background-color: var(--bg-color);
+  gap: 10px
+}
+
+.pickle-false{
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  width: 100px;
+  font-size: 16px;
+  text-align: center;
+  border: 2px solid var(--text-color);
+}
+
+.pickle-true{
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  width: 100px;
+  font-size: 16px;
+  text-align: center;
+  border: 2px solid var(--text-color);
+}
+
+/* Address */
+.clear-button {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+  line-height: 1;
+  color: #888;
+  user-select: none;
+}
+
+/* Custom Value Container*/
+.select-color-open{
+  color: var(--bg-color)
+}
+
+.select-color-close{
+  color: var(--text-color)
+}
