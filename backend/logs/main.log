@@ -1,4 +1,14 @@
-2025-06-27 17:45:26,823 INFO Logger is enabled
-2025-06-27 17:45:27,411 INFO Successfully connected to MongoDB
-2025-06-27 17:45:27,450 WARNING  * Debugger is active!
-2025-06-27 17:45:27,459 INFO  * Debugger PIN: 452-302-233
+2025-06-27 18:01:34,637 INFO Logger is enabled
+2025-06-27 18:01:36,676 INFO Successfully connected to MongoDB
+2025-06-27 18:01:36,716 WARNING  * Debugger is active!
+2025-06-27 18:01:36,724 INFO  * Debugger PIN: 452-302-233
+2025-06-27 18:01:50,105 INFO 127.0.0.1 - - [27/Jun/2025 18:01:50] "OPTIONS /parks HTTP/1.1" 200 -
+2025-06-27 18:01:50,107 INFO 127.0.0.1 - - [27/Jun/2025 18:01:50] "OPTIONS /parks HTTP/1.1" 200 -
+2025-06-27 18:01:52,259 DEBUG Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-06-27 18:01:55,149 DEBUG https://maps.googleapis.com:443 "GET /maps/api/distancematrix/json?origins=&destinations=37.7144459%2C-122.4305872%7C37.76100510000001%2C-122.4271707%7C37.73982111374698%2C-122.4418615808698%7C37.7158129%2C-122.457577%7C37.7561451%2C-122.3974365&units=imperial&key=AIzaSyBMzgDapBifIff9Np80ZHzodgpxcEsOoTc HTTP/1.1" 200 112
+2025-06-27 18:01:55,151 ERROR Distance Matrix API error: None
+2025-06-27 18:01:55,152 INFO 127.0.0.1 - - [27/Jun/2025 18:01:55] "POST /parks HTTP/1.1" 200 -
+2025-06-27 18:01:56,232 DEBUG Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-06-27 18:01:56,445 DEBUG https://maps.googleapis.com:443 "GET /maps/api/distancematrix/json?origins=&destinations=37.7144459%2C-122.4305872%7C37.76100510000001%2C-122.4271707%7C37.73982111374698%2C-122.4418615808698%7C37.7158129%2C-122.457577%7C37.7561451%2C-122.3974365&units=imperial&key=AIzaSyBMzgDapBifIff9Np80ZHzodgpxcEsOoTc HTTP/1.1" 200 112
+2025-06-27 18:01:56,446 ERROR Distance Matrix API error: None
+2025-06-27 18:01:56,447 INFO 127.0.0.1 - - [27/Jun/2025 18:01:56] "POST /parks HTTP/1.1" 200 -
