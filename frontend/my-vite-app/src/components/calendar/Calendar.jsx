@@ -64,7 +64,7 @@ export default function Calendar({ value, onChange }) {
             },
 
             '& .MuiPickersDay-root.Mui-disabled': {
-              color: isDark ? '#888' : '#999', // disabled days lighter gray in light mode
+              color: isDark ? '#888' : '#888', // disabled days lighter gray in light mode
               opacity: 5,
               pointerEvents: 'none',
             },
