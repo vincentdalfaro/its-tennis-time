@@ -10,57 +10,73 @@ import CustomClearIndicator from '../select/CustomClear.jsx';
 import useTheme from "../ThemeObserver.jsx";
 import {timeSlots} from "../../constants/TimeSlots.jsx"
 
-export default function ({address, setAddress, date, setDate, times, setTimes, pickleball, setPickleball}) {
+import useWindowWidth from './useWindowWidth.jsx'; // or inline it above
 
-    const theme = useTheme()
-    const selectStyles = useMemo(() => SelectStyle({ width: 282 , theme }), [theme]);
+export default function ({
+  address, 
+  setAddress, 
+  date, 
+  setDate, 
+  times, 
+  setTimes, 
+  pickleball, 
+  setPickleball
+}) {
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth < 768;
 
-    return (
-        <div className = "preference_box" style={{display: "flex"}}>
+  const theme = useTheme();
+  const selectStyles = useMemo(() => 
+    SelectStyle({ width: isMobile ? "10px" : "200px", height: 40, theme }), 
+    [theme]
+);
 
-            {/* Date Selection */}
-            <DateButton 
-                date={date} // assuming date is ISO string or UTC string
-                width="140px"
-                onChange={(date) => setDate(dayjs.utc(date).toDate().toUTCString())}
-            />
+  return (
+    <div className="preference_box sizer" style={{ display: "flex", flexWrap: "wrap" }}>
+      <DateButton 
+        date={date}
+        width={isMobile ? "100%" : "200px"}
+        onChange={(date) => setDate(dayjs.utc(date).toDate().toUTCString())}
+      />
 
-            {/* Autocomplete for address input */}
-            <AutocompleteSearch 
-                setAddress = {setAddress} 
-                placeholder={"Address"}
-                address = {address}
-                value = {address}
-                width = {"243px"}
-            />
+      <AutocompleteSearch 
+        setAddress={setAddress}
+        placeholder={"Address"}
+        address={address}
+        value={address}
+        width={isMobile ? "100%" : "200px"}
+      />
 
-             {/* Time Slot Selections*/}
-            <Select
-                isMulti
-                closeMenuOnSelect={false}
-                styles={selectStyles}
-                options={timeSlots}
-                className="my-select"
-                classNamePrefix="custom-select"
-                placeholder="Choose a time"
-                value={timeSlots.filter(slot => times.includes(slot.value))}
-                hideSelectedOptions={false}
-                components={{ 
-                    ValueContainer: CustomValueContainer,
-                    ClearIndicator: CustomClearIndicator
-                }}
-                onChange={(selected) => setTimes(selected.map(s => s.value))}
-            />
+     <Select
+        isMulti
+        closeMenuOnSelect={false}
+        styles={selectStyles}
+        options={timeSlots}
+        className="my-select"
+        classNamePrefix="custom-select"
+        placeholder="Choose a time"
+        value={timeSlots.filter(slot => times.includes(slot.value))}
+        hideSelectedOptions={false}
+        components={{ 
+            ValueContainer: CustomValueContainer,
+            ClearIndicator: CustomClearIndicator
+        }}
 
-            {/* Pickleball Selection */}
-            <button 
-                className={pickleball ? 'pickle-true' : 'pickle-false'}
-                onClick={() => setPickleball(!pickleball)}
-            > 
-                Pickleball 
+    onChange={(selected) => setTimes(selected.map(s => s.value))}
+    />
 
-            </button>   
+      <button 
+        className={pickleball ? 'pickle-true' : 'pickle-false'}
+        style={{
+          width: isMobile ? "100%" : "200px",
+          height: isMobile ? "60px" : "39px",
+          fontSize: isMobile ? "20px": "15px",
 
-        </div>
-    )
+        }}
+        onClick={() => setPickleball(!pickleball)}
+      >
+        Pickleball
+      </button>
+    </div>
+  );
 }

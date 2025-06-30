@@ -1,6 +1,4 @@
-export default function SelectStyle({ width, hide = false, theme }) {  
-  console.log("select")
-
+export default function SelectStyle({ width = 282, height = 35, hide = false, theme }) {  
   const isDark = theme === 'dark';
   
   return {
@@ -15,8 +13,8 @@ export default function SelectStyle({ width, hide = false, theme }) {
       border: `2px solid ${isDark ? '#fff' : '#000'}`,
       boxShadow: 'none',
       outline: 'none',
-      width,
-      height: 35,
+      width,          // <-- use passed width
+      height,         // <-- use passed height
       borderRadius: 0,
       display: hide ? 'none' : 'flex',
       '&:hover': {
@@ -32,9 +30,10 @@ export default function SelectStyle({ width, hide = false, theme }) {
       ...provided,
       backgroundColor: isDark ? '#222' : '#fff',
       border: `2px solid ${isDark ? '#fff' : '#000'}`,
-      width: 100,
+      width,
       borderRadius: 0,
     }),
+
     placeholder: (provided) => ({
       ...provided,
       color: isDark ? '#888' : '#ccc',      

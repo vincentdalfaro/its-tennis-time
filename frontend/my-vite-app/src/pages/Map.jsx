@@ -131,24 +131,22 @@ export default function Map() {
       <div className="horizontal-bar" />
 
       {/* Main content: full height */}
-      <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
-          
-        {/* Scrollable left column */}
-        <div style={{ width: '29%', overflowY: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none'}} onScroll={handleScroll}>
+      <div className="map-page-flex" style={{ flex: 1, overflow: 'hidden' }}>
         
-          {/* Preference Bar */}
+        {/* Scrollable left column */}
+        <div className="map-info" onScroll={handleScroll}>
+
           <PreferenceBar 
-            address = {address} 
+            address={address} 
             setAddress={setAddress} 
-            date = {date} 
-            setDate = {setDate} 
-            times = {times}
-            setTimes = {setTimes}
-            pickleball = {pickleball}
-            setPickleball = {setPickleball}
+            date={date} 
+            setDate={setDate} 
+            times={times}
+            setTimes={setTimes}
+            pickleball={pickleball}
+            setPickleball={setPickleball}
           />   
 
-          {/* For every park create a token and then sort based off distance*/}
           <div style={{ marginLeft: "10px", marginRight: "10px" }}>
             {searchresult?.length > 0 ? (
               getFilteredSearchResults().map((place, index) => (
@@ -161,7 +159,7 @@ export default function Map() {
                 />
               ))
             ) : (
-              <div className = "map-heading">
+              <div className="map-heading">
                   No Courts Available
               </div>
             )}
@@ -172,14 +170,15 @@ export default function Map() {
         <div className="vertical-bar"></div>
 
         {/* Fixed map area */}
-        <div style={{ flex: 1 }}>
+        <div className="map-container" style={{ flex: 1 }}>
           <MyMap 
             markers={getFilteredSearchResults()} 
             addressCoords={addressCoords || {}}
-            visibleIndex = {visibleIndex} 
+            visibleIndex={visibleIndex} 
           />
         </div>
       </div>
     </div>
+
   );
 }
