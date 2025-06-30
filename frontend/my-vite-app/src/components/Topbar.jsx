@@ -33,10 +33,10 @@ export default function TopBar() {
       <img src={logo} style={{ width: '40px', marginLeft: '20px' }} />
 
       <div className="flex-topbar-2 link-headers">
-        <span className="white-text" style={{ fontSize: '27px', marginLeft: '0px' }}>Tennis Time</span>
-        <Link to="/" style={{ fontSize: '16px', marginLeft: '130px' }}>Home</Link>
-        <Link to="/map" style={{ fontSize: '16px', marginLeft: '30px' }}>Map</Link>
-        <Link to="/about" style={{ fontSize: '16px', marginLeft: '30px' }}>About</Link>
+        <span className="name-header">Tennis Time</span>
+        <Link to="/" style={{ fontSize: '16px', marginLeft: '10%' }}>Home</Link>
+        <Link to="/map" style={{ fontSize: '16px', marginLeft: '20px' }}>Map</Link>
+        <Link to="/about" style={{ fontSize: '16px', marginLeft: '20px' }}>About</Link>
       </div>
 
       <button class = "theme-button">

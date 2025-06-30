@@ -1,3 +1,4 @@
+// CustomValueContainer.jsx
 import { components } from 'react-select';
 
 const CustomValueContainer = ({ children, ...props }) => {
@@ -13,21 +14,26 @@ const CustomValueContainer = ({ children, ...props }) => {
       style={{
         position: 'relative',
         paddingLeft: 6,
-        display: 'flex',         
-        alignItems: 'center',     
+        display: 'flex',
+        alignItems: 'center',
         overflow: 'hidden',
       }}
-      className={isOpen ? 'select-color-open': 'select-color-close'}
+      className={isOpen ? 'select-color-open' : 'select-color-close'}
     >
+      {/* Your styled value preview */}
       {selected.length > 0 ? (
-        <div
-          className = "custom-value-style"
-        >
+        <div>
           {selectedLabels}
         </div>
       ) : (
         values
       )}
+
+      {/* Visually hidden, but still keeps keyboard/touch logic */}
+      <div style={{ display: 'none' }}>
+        {values}
+      </div>
+
       {input}
     </components.ValueContainer>
   );
