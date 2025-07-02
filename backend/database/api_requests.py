@@ -12,6 +12,10 @@ def register_routes(app, collection, logger):
 
     @app.route("/parks", methods=["POST"])
     def get_parks():
+
+        if request.method == "OPTIONS":
+            return '', 204
+
         filters = request.get_json() or {}
 
         date_str = filters.get("date")
