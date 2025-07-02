@@ -11,7 +11,7 @@ import useTheme from "../ThemeObserver.jsx";
 import { timeSlots } from "../../constants/TimeSlots.jsx";
 import useWindowWidth from './UseWindowWidth.jsx';
 
-export default function ({
+export default function PreferenceBar({
   address, 
   setAddress, 
   date, 
@@ -21,33 +21,54 @@ export default function ({
   pickleball, 
   setPickleball
 }) {
-  // Determine if user is on mobile
   const windowWidth = useWindowWidth();
-  const isMobile = windowWidth < 900;
-
-  // Theme + Custom styles for react-select
+  const isMobile = windowWidth < 465;
   const theme = useTheme();
-  const selectStyles = useMemo(() => 
-    SelectStyle({ width: "275px", height: 30, theme }), 
+
+  const mobileWidth = "100%";
+  const desktopWidths = {
+    date: "150px",
+    address: "215px",
+    select: "275px",
+    pickleball: "90px"
+  };
+
+  const selectStyles = useMemo(() =>
+    SelectStyle({ width: isMobile ? mobileWidth : desktopWidths.select, height: 30, theme }),
     [theme, isMobile]
   );
 
-  // Render UI
   return (
-    <div className="preference_box">
-
+    <div
+      className="preference_box"
+      style={{
+        display: 'flex',
+        flexDirection: isMobile ? 'column' : 'row',
+        alignItems: 'flex-start',
+        gap: isMobile ? '10px' : '15px',
+        flexWrap: 'wrap',
+        width: isMobile ? '100%' : 'auto',
+      }}
+    >
       {/* Mobile Header */}
       {isMobile && (
-        <div style={{ fontSize: "25px" }}>
+        <div style={{ fontSize: "25px", width: "100%" }}>
           Settings
-          <div style={{ height: "2px", width: "215px", backgroundColor: "var(--text-color)", marginTop: "4px" }} />
+          <div
+            style={{
+              height: "2px",
+              width: mobileWidth,
+              backgroundColor: "var(--text-color)",
+              marginTop: "4px"
+            }}
+          />
         </div>
       )}
 
-       {/* Date Picker */}
+      {/* Date Picker */}
       <DateButton 
         date={date}
-        width={"160px"}
+        width={isMobile ? mobileWidth : desktopWidths.date}
         onChange={(date) => setDate(dayjs.utc(date).toDate().toUTCString())}
       />
 
@@ -57,32 +78,34 @@ export default function ({
         placeholder={"Address"}
         address={address}
         value={address}
-        width={"215px"}
+        width={isMobile ? mobileWidth : desktopWidths.address}
       />
 
       {/* Time Selector */}
-      <Select
-        isMulti
-        closeMenuOnSelect={false}
-        styles={selectStyles}
-        options={timeSlots}
-        className="my-select"
-        classNamePrefix="custom-select"
-        placeholder="Choose a time"
-        value={timeSlots.filter(slot => times.includes(slot.value))}
-        hideSelectedOptions={false}
-        components={{ 
-          ValueContainer: CustomValueContainer,
-          ClearIndicator: CustomClearIndicator
-        }}
-        onChange={(selected) => setTimes(selected.map(s => s.value))}
-      />
+      <div style={{ width: isMobile ? mobileWidth : desktopWidths.select }}>
+        <Select
+          isMulti
+          closeMenuOnSelect={false}
+          styles={selectStyles}
+          options={timeSlots}
+          className="my-select"
+          classNamePrefix="custom-select"
+          placeholder="Choose a time"
+          value={timeSlots.filter(slot => times.includes(slot.value))}
+          hideSelectedOptions={false}
+          components={{ 
+            ValueContainer: CustomValueContainer,
+            ClearIndicator: CustomClearIndicator
+          }}
+          onChange={(selected) => setTimes(selected.map(s => s.value))}
+        />
+      </div>
 
       {/* Pickleball Toggle Button */}
       <button 
         className={pickleball ? 'pickle-true' : 'pickle-false'}
         style={{
-          width: "100px",
+          width: isMobile ? mobileWidth : desktopWidths.pickleball,
           height: isMobile ? "40px" : "38px",
           fontSize: "15px"
         }}
@@ -90,7 +113,6 @@ export default function ({
       >
         Pickleball
       </button>
-
     </div>
   );
 }
