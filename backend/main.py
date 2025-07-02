@@ -14,20 +14,21 @@ def main():
 
     app = Flask(__name__)
 
-    # Enable CORS only for localhost frontend origin for testing:
+    origins_list = ["http://localhost:5173"]
+    print(f"CORS origins: {origins_list}")
     CORS(
         app,
-        origins=["http://localhost:5173"],
+        origins=origins_list,
         methods=["GET", "POST", "OPTIONS"],
         allow_headers=["Content-Type", "Authorization"],
         supports_credentials=True
     )
 
-    # Register routes AFTER applying CORS middleware
     register_routes(app, collection, logger)
 
-    port = int(os.environ.get("PORT", 8000))  # Render provides PORT env var
+    port = int(os.environ.get("PORT", 8000))
     app.run(host="0.0.0.0", port=port, debug=True)
+
 
 if __name__ == "__main__":
     main()
