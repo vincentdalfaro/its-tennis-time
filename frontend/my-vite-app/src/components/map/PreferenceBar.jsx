@@ -28,7 +28,7 @@ export default function ({
   // Theme + Custom styles for react-select
   const theme = useTheme();
   const selectStyles = useMemo(() => 
-    SelectStyle({ width: isMobile ? "215px" : "275px", height: 30, theme }), 
+    SelectStyle({ width: "275px", height: 30, theme }), 
     [theme, isMobile]
   );
 
@@ -43,6 +43,22 @@ export default function ({
           <div style={{ height: "2px", width: "215px", backgroundColor: "var(--text-color)", marginTop: "4px" }} />
         </div>
       )}
+
+       {/* Date Picker */}
+      <DateButton 
+        date={date}
+        width={"160px"}
+        onChange={(date) => setDate(dayjs.utc(date).toDate().toUTCString())}
+      />
+
+      {/* Address Input */}
+      <AutocompleteSearch 
+        setAddress={setAddress}
+        placeholder={"Address"}
+        address={address}
+        value={address}
+        width={"215px"}
+      />
 
       {/* Time Selector */}
       <Select
@@ -66,7 +82,7 @@ export default function ({
       <button 
         className={pickleball ? 'pickle-true' : 'pickle-false'}
         style={{
-          width: isMobile ? "215px" : "100px",
+          width: "100px",
           height: isMobile ? "40px" : "38px",
           fontSize: "15px"
         }}
@@ -75,21 +91,6 @@ export default function ({
         Pickleball
       </button>
 
-      {/* Address Input */}
-      <AutocompleteSearch 
-        setAddress={setAddress}
-        placeholder={"Address"}
-        address={address}
-        value={address}
-        width={isMobile ? "215px" : "215px"}
-      />
-
-      {/* Date Picker */}
-      <DateButton 
-        date={date}
-        width={isMobile ? "215px" : "160px"}
-        onChange={(date) => setDate(dayjs.utc(date).toDate().toUTCString())}
-      />
     </div>
   );
 }
