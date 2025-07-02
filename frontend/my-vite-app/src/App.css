@@ -64,7 +64,6 @@ input::placeholder {
 
 /* Top Bar */
 .flex-topbar {
-  margin-bottom: 10px;
   display: flex;
   align-items: center;
   padding: 0 1rem;
@@ -124,14 +123,16 @@ input::placeholder {
 
 /* Scrollable left column */
 .map-info {
-  flex: none;        /* disables flex-grow/shrink */
-  width: 40%;
+  display: flex;
+  flex-direction: column;
+  width: 400px; /* or your desired fixed width */
+  overflow-y: scroll;
 }
 
 /* Vertical divider */
 .vertical-bar {
   width: 2px;
-  background-color: #ccc;
+  background-color: var(--text-color);
 }
 
 /* Map container */
@@ -145,7 +146,7 @@ input::placeholder {
   border: 1.5px solid var(--text-color);  
   border-radius: 2px;
   padding: 1px;    
-  color: (var(--text-color)); 
+  color: var(--text-color); /* removed unnecessary parentheses */
   height: 400px; 
   display: flex;           
   flex-direction: column;        
@@ -194,6 +195,8 @@ input::placeholder {
 .preference_box {
   position: sticky;
   top: 0;
+  display: flex;
+  flex-wrap: wrap;
   padding: .5rem;
   z-index: 10;
   flex-wrap: wrap;
@@ -249,6 +252,10 @@ input::placeholder {
   color: var(--bg-color);
 }
 
+.vertical-bar-mobile{
+  display: none;
+}
+
 /* Mobile Adjustments */
 @media (max-width: 600px) {
   .name-header {
@@ -256,45 +263,80 @@ input::placeholder {
   }
 }
 
-/* --- Responsive switch: stack vertically on small screens --- */
-@media (max-width: 768px) {
+.horizontal-bar-mobile{
+  display: none;
+}
+
+.vertical-bar-mobile{
+  display: none;
+}
+
+
+/* Mobile and small screen adjustments*/
+@media (max-width: 900px) {
+
+  /* Stacks the map/info in a column*/
   .map-page-flex {
     flex-direction: column;
   }
 
-  /* Map goes on top */
+  /* Fixed map size on top*/
   .map-container {
-    order: 1;
-    height: 200px; /* or any height you want */
-    flex: none; /* disable flex-grow on mobile */
+    order: 0;
+    flex: none;
+    height: 400px;
+    min-height: 400px;
   }
 
-  /* Scrollable bar below map */
+  /* Map */
+  .horizontal-bar-mobile {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-color);
+    order: 1
+  }
+
+  .vertical-bar-mobile{
+    width: 100%;
+    width: 2px;
+    background-color: var(--text-color);
+    display: block;
+  }
+  /* */
   .map-info {
+    display: flex;
+    flex-direction: row; 
+    height: 300px;       
     order: 2;
-    height: 300px; /* fixed height for scroll */
-    flex: display;
+    width: 100%;
+  }
+
+  .preference-bar-wrapper {
+    width: 230px;
+    overflow-y: auto;  
+  }
+
+  .parktokens-wrapper {
+    flex: 1;
     overflow-y: auto;
   }
 
-  /* Hide vertical divider and optionally add horizontal bar at bottom */
-  .vertical-bar {
-    display: none;
-  }
+  .preference_box {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-wrap: wrap;
+  padding: .5rem;
+  z-index: 10;
+  flex-wrap: wrap;
+  background-color: var(--bg-color);
+  gap: 15px
+}
+
 
   .sizer {
-      font-size: 20px;
-      padding: 10px 16px;
-    }
-  
-  /* Optional: add horizontal divider below map on mobile */
-  .map-page-flex::after {
-    content: "";
-    display: block;
-    height: 2px;
-    background-color: #ccc;
-    margin: 0 0 10px 0;
-    order: 3;
-
+    font-size: 18px;
+    padding: 10px 16px;
   }
 }

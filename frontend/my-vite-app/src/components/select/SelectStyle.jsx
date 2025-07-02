@@ -1,4 +1,4 @@
-export default function SelectStyle({ width = 282, height = 35, hide = false, theme }) {  
+export default function SelectStyle({ width = 1000, height = 35, hide = false, theme }) {  
   const isDark = theme === 'dark';
   
   return {

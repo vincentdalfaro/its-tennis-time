@@ -135,19 +135,23 @@ export default function Map() {
         
         {/* Scrollable left column */}
         <div className="map-info" onScroll={handleScroll}>
+  
+          <div className="preference-bar-wrapper">
+            <PreferenceBar 
+              address={address} 
+              setAddress={setAddress} 
+              date={date} 
+              setDate={setDate} 
+              times={times}
+              setTimes={setTimes}
+              pickleball={pickleball}
+              setPickleball={setPickleball}
+            />   
+          </div>
 
-          <PreferenceBar 
-            address={address} 
-            setAddress={setAddress} 
-            date={date} 
-            setDate={setDate} 
-            times={times}
-            setTimes={setTimes}
-            pickleball={pickleball}
-            setPickleball={setPickleball}
-          />   
+          <div className='vertical-bar-mobile'/>
 
-          <div style={{ marginLeft: "10px", marginRight: "10px" }}>
+          <div className="parktokens-wrapper" style={{ marginLeft: "10px", marginRight: "10px" }}>
             {searchresult?.length > 0 ? (
               getFilteredSearchResults().map((place, index) => (
                 <ParkToken
@@ -164,10 +168,13 @@ export default function Map() {
               </div>
             )}
           </div>
-        </div>
+
+      </div>
+
 
         {/* Vertical Divider */}
         <div className="vertical-bar"></div>
+        <div className='horizontal-bar-mobile'/>
 
         {/* Fixed map area */}
         <div className="map-container" style={{ flex: 1 }}>

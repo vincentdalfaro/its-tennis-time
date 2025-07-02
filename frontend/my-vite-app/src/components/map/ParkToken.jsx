@@ -29,7 +29,6 @@ function ParkToken({ place, index, pickleball, address }) {
     return (
         <div>
             <div
-                className="white-text"
                 style={{
                     fontSize: "50px",
                     display: "flex",
@@ -49,7 +48,7 @@ function ParkToken({ place, index, pickleball, address }) {
                 </div>
 
             <div className="white-box" style = {{fontSize: "18px"}}> 
-                <div className="white-text" style = {{marginLeft:"20px", marginRight: "20px", display: "flex", alignItems: "center"}}>
+                <div style = {{marginLeft:"20px", marginRight: "20px", display: "flex", alignItems: "center"}}>
 
                     <img src={isDark ? neighborhoodIconWhite: neighborhoodIconBlack} 
                         style={{height: "20px", width: "auto", marginRight: "5px"}}/>
