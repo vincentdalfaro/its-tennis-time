@@ -50,38 +50,35 @@ function AutocompleteSearch({ setAddress, width, placeholder, address }) {
   };
 
   return (
-    <div style={{ position: 'relative', display: 'inline-block'}}>
-      <Autocomplete
-        onLoad={(ref) => (autocompleteRef.current = ref)}
-        onPlaceChanged={handlePlaceChanged}
-      >
-        {/* Custom input button for address*/}
-        <input
-          type="text"
-          className="input"
-          style={{ width: width, paddingRight: '24px' }}
-          placeholder={placeholder}
-          value={inputValue}
-          onChange={handleInputChange}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-        />
-      </Autocomplete>
+  <div style={{ position: 'relative', display: 'inline-block', width: width || '100%' }}>
+    <Autocomplete
+      onLoad={(ref) => (autocompleteRef.current = ref)}
+      onPlaceChanged={handlePlaceChanged}
+    >
+      <input
+        type="text"
+        className="input"
+        style={{ width: '100%', paddingRight: '24px' }} // <-- 100% here!
+        placeholder={placeholder}
+        value={inputValue}
+        onChange={handleInputChange}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
+      />
+    </Autocomplete>
 
-      {/* Custom clear input*/}
-      {inputValue && (
-        <button
-          onClick={clearInput}
-          aria-label="Clear input"
-          title="Clear"
-          type="button"
-          className="clear-button"
-        >
-          &#x2715;
-        </button>
-      )}
-    </div>
-  );
-}
+    {inputValue && (
+      <button
+        onClick={clearInput}
+        aria-label="Clear input"
+        title="Clear"
+        type="button"
+        className="clear-button"
+      >
+        &#x2715;
+      </button>
+    )}
+  </div>
+);}
 
 export default AutocompleteSearch;

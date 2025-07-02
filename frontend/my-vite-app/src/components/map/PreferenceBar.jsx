@@ -50,20 +50,6 @@ export default function PreferenceBar({
         width: isMobile ? '100%' : 'auto',
       }}
     >
-      {/* Mobile Header */}
-      {isMobile && (
-        <div style={{ fontSize: "25px", width: "100%" }}>
-          Settings
-          <div
-            style={{
-              height: "2px",
-              width: mobileWidth,
-              backgroundColor: "var(--text-color)",
-              marginTop: "4px"
-            }}
-          />
-        </div>
-      )}
 
       {/* Date Picker */}
       <DateButton 
@@ -73,13 +59,15 @@ export default function PreferenceBar({
       />
 
       {/* Address Input */}
-      <AutocompleteSearch 
-        setAddress={setAddress}
-        placeholder={"Address"}
-        address={address}
-        value={address}
-        width={isMobile ? mobileWidth : desktopWidths.address}
-      />
+      <div style={{ width: isMobile ? '100%' : desktopWidths.address }}>
+        <AutocompleteSearch
+            setAddress={setAddress}
+            placeholder={"Address"}
+            address={address}
+            value={address}
+            width="100%"  // force full width inside container
+        />
+        </div>
 
       {/* Time Selector */}
       <div style={{ width: isMobile ? mobileWidth : desktopWidths.select }}>

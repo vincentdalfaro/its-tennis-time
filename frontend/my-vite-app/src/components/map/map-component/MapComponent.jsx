@@ -12,7 +12,7 @@ const containerStyle = {
 };
 
 const center = {
-  lng: -122.43,
+  lng: -122.45,
   lat: 37.756,
 };
 
@@ -25,7 +25,7 @@ const isDark = theme === 'dark'
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={12.8}
+      zoom={11}
       options={{
         styles: (isDark ? mapStyleDark: mapStyleLight),
         scrollwheel: true,
