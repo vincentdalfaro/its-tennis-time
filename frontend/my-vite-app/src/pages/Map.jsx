@@ -2,68 +2,42 @@ import '../App.css';
 import Topbar from '../components/Topbar.jsx';
 import MyMap from '../components/map/map-component/MapComponent.jsx';
 import { useSearchParams } from 'react-router-dom';
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { fetchParkCoordinates, fetchAddressCoordinates } from '../api/api.jsx';
 import ParkToken from '../components/map/ParkToken.jsx';
-import PreferenceBar from '../components/map/PreferenceBar.jsx'
-import dayjs from 'dayjs'
+import PreferenceBar from '../components/map/PreferenceBar.jsx';
+import dayjs from 'dayjs';
 
 export default function Map() {
-
-  {/* API Calls */}
+  // Query Params & State Initialization
   const [searchParams] = useSearchParams();
   const [searchresult, setResult] = useState();
-  
-  {/* Logic for default date/times */}
-  let defaultTimes = ['Morning'];
-  let defaultDate = dayjs().startOf('day');
+  const [address, setAddress] = useState(() => searchParams.get('address') || "");
+  const [addressCoords, setAddressCoords] = useState(null);
+
+  // Default Date and Time Slot
   const now = dayjs();
   const currentHour = now.hour();
+  let defaultTimes = ['Morning'];
+  let defaultDate = now.startOf('day');
 
-  if (currentHour >= 6 && currentHour < 12) {
-    defaultTimes = ['Morning'];
-    defaultDate = now.startOf('day');
-  } else if (currentHour >= 12 && currentHour < 18) {
-    defaultTimes = ['Afternoon'];
-    defaultDate = now.startOf('day');
-  } else if (currentHour >= 18 && currentHour <= 20) {
-    defaultTimes = ['Evening'];
-    defaultDate = now.startOf('day');
-  } else if (currentHour > 20 || currentHour < 6) {
-    defaultTimes = ['Morning'];
-    defaultDate = now.add(1, 'day').startOf('day');
-  }
+  if (currentHour >= 12 && currentHour < 18) defaultTimes = ['Afternoon'];
+  else if (currentHour >= 18 && currentHour <= 20) defaultTimes = ['Evening'];
+  else if (currentHour > 20 || currentHour < 6) defaultDate = now.add(1, 'day').startOf('day');
 
-  {/* Given Address */}
-  const [addressCoords, setAddressCoords] = useState(null);
-  const [address, setAddress] = useState(() => {
-    return searchParams.get('address') || ""
-  })
+  const [date, setDate] = useState(() =>
+    searchParams.get('date') || defaultDate.toDate().toUTCString()
+  );
 
-  {/* Given Date */}
-  const [date, setDate] = useState(() => {
-    return searchParams.get('date') || defaultDate.toDate().toUTCString();
-  });
-    
-  {/* Given Time Slots */}
-  const timesParam = searchParams.get('times');
   const [times, setTimes] = useState(() => {
+    const timesParam = searchParams.get('times');
     return timesParam ? timesParam.split(',') : defaultTimes;
   });
 
-  {/* Pickleball Enabler */}
   const [pickleball, setPickleball] = useState(false);
-
-  {/* Map Icon Sizes on focus*/}
   const [visibleIndex, setVisibleIndex] = useState(null);
-  const handleScroll = (e) => {
-    const scrollTop = e.target.scrollTop;
-    const itemHeight = 450;
-    const index = Math.floor(scrollTop / itemHeight);
-    setVisibleIndex(index);
-  };
 
-  {/* Given address, returns the coordinates */}
+  // Fetch Coordinates from Address
   useEffect(() => {
     const fetchCoords = async () => {
       try {
@@ -73,7 +47,6 @@ export default function Map() {
         }
         const location = await fetchAddressCoordinates({ address });
         setAddressCoords(location);
-
       } catch (error) {
         console.error('❌ Error fetching address coordinates:', error);
         setAddressCoords(null);
@@ -83,38 +56,38 @@ export default function Map() {
     fetchCoords();
   }, [address]);
 
-  {/* Making a call to the API with given choices */}
+  // Fetch Parks based on Filters
   useEffect(() => {
     const fetchData = async () => {
       try {
         const filters = { address, date, times, pickleball };
         const response = await fetchParkCoordinates(filters);
         setResult(response);
-        console.log(response)
-
+        console.log(response);
       } catch (error) {
         console.error('❌ Error fetching coordinates:', error);
       }
     };
 
-    if (date && times.length > 0) {
-      fetchData();
-    } else if (times.length === 0) {
-      setResult([]);
-    }
+    if (date && times.length > 0) fetchData();
+    else if (times.length === 0) setResult([]);
   }, [address, date, times, pickleball]);
 
-  {/* Helper Function to sort based on distance from address to park*/}
+  // Scroll Handler for Map Focus
+  const handleScroll = (e) => {
+    const itemHeight = 450;
+    const index = Math.floor(e.target.scrollTop / itemHeight);
+    setVisibleIndex(index);
+  };
+
+  // Sort Parks by Distance
   const getFilteredSearchResults = () => {
     if (!searchresult || searchresult.length === 0) return [];
-
-    // Don't sort if no address is given
     if (!address) return searchresult;
 
     const allHaveDistance = searchresult.every(
       (p) => p.distance?.distance_value != null
     );
-
     if (!allHaveDistance) return searchresult;
 
     return [...searchresult].sort(
@@ -122,36 +95,32 @@ export default function Map() {
     );
   };
 
-
+  // Render UI
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
       <Topbar />
-
-      {/* Horizontal Bar */}
       <div className="horizontal-bar" />
 
-      {/* Main content: full height */}
       <div className="map-page-flex" style={{ flex: 1, overflow: 'hidden' }}>
         
-        {/* Scrollable left column */}
+        {/* Sidebar */}
         <div className="map-info" onScroll={handleScroll}>
-  
           <div className="preference-bar-wrapper">
             <PreferenceBar 
-              address={address} 
-              setAddress={setAddress} 
-              date={date} 
-              setDate={setDate} 
+              address={address}
+              setAddress={setAddress}
+              date={date}
+              setDate={setDate}
               times={times}
               setTimes={setTimes}
               pickleball={pickleball}
               setPickleball={setPickleball}
-            />   
+            />
           </div>
 
-          <div className='vertical-bar-mobile'/>
+          <div className="vertical-bar-mobile" />
 
-          <div className="parktokens-wrapper" style={{ marginLeft: "10px", marginRight: "10px" }}>
+          <div className="parktokens-wrapper" style={{ margin: "0 10px" }}>
             {searchresult?.length > 0 ? (
               getFilteredSearchResults().map((place, index) => (
                 <ParkToken
@@ -163,29 +132,24 @@ export default function Map() {
                 />
               ))
             ) : (
-              <div className="map-heading">
-                  No Courts Available
-              </div>
+              <div className="map-heading">No Courts Available</div>
             )}
           </div>
+        </div>
 
-      </div>
+        {/* Divider */}
+        <div className="vertical-bar" />
+        <div className="horizontal-bar-mobile" />
 
-
-        {/* Vertical Divider */}
-        <div className="vertical-bar"></div>
-        <div className='horizontal-bar-mobile'/>
-
-        {/* Fixed map area */}
+        {/* Map Area */}
         <div className="map-container" style={{ flex: 1 }}>
           <MyMap 
-            markers={getFilteredSearchResults()} 
+            markers={getFilteredSearchResults()}
             addressCoords={addressCoords || {}}
-            visibleIndex={visibleIndex} 
+            visibleIndex={visibleIndex}
           />
         </div>
       </div>
     </div>
-
   );
 }
