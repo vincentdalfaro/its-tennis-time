@@ -17,6 +17,7 @@ def main():
         app,
         origins=[
             "http://localhost:5173",
+            "https://its-tennis-time-git-vinnie-vincent-alfaros-projects-deef64dd.vercel.app",
             "https://your-frontend.vercel.app"
         ],
         methods=["GET", "POST", "OPTIONS"],
