@@ -1,6 +1,7 @@
 from flask import request, jsonify
 from datetime import datetime
 import os
+
 from dotenv import load_dotenv
 from utils.api_helpers import filter_parks, geocode_address
 
@@ -12,8 +13,9 @@ def register_routes(app, collection, logger):
 
     @app.route("/parks", methods=["POST"])
     def get_parks():
-        filters = request.get_json() or {}
 
+
+        filters = request.get_json() or {}
         date_str = filters.get("date")
         times_requested = filters.get("times", [])  # e.g. ["Morning"]
         pickleball = filters.get("pickleball")

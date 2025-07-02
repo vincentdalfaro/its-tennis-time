@@ -8,14 +8,18 @@ import ParkToken from '../components/map/ParkToken.jsx';
 import PreferenceBar from '../components/map/PreferenceBar.jsx';
 import dayjs from 'dayjs';
 
+import useTheme from '../components/ThemeObserver.jsx';
+import downCaretWhite from '../assets/icons-white/down-caret-white.png';
+import upCaretWhite from '../assets/icons-white/up-caret-white.png';
+import downCaretBlack from '../assets/icons-black/down-caret-black.png';
+import upCaretBlack from '../assets/icons-black/up-caret-black.png';
+
 export default function Map() {
-  // Query Params & State Initialization
   const [searchParams] = useSearchParams();
   const [searchresult, setResult] = useState();
   const [address, setAddress] = useState(() => searchParams.get('address') || "");
   const [addressCoords, setAddressCoords] = useState(null);
 
-  // Default Date and Time Slot
   const now = dayjs();
   const currentHour = now.hour();
   let defaultTimes = ['Morning'];
@@ -36,8 +40,18 @@ export default function Map() {
 
   const [pickleball, setPickleball] = useState(false);
   const [visibleIndex, setVisibleIndex] = useState(null);
+  const [showPreferences, setShowPreferences] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
 
-  // Fetch Coordinates from Address
+  const theme = useTheme();
+  const isDark = theme === 'dark';
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 900);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useEffect(() => {
     const fetchCoords = async () => {
       try {
@@ -56,14 +70,12 @@ export default function Map() {
     fetchCoords();
   }, [address]);
 
-  // Fetch Parks based on Filters
   useEffect(() => {
     const fetchData = async () => {
       try {
         const filters = { address, date, times, pickleball };
         const response = await fetchParkCoordinates(filters);
         setResult(response);
-        console.log(response);
       } catch (error) {
         console.error('❌ Error fetching coordinates:', error);
       }
@@ -73,14 +85,12 @@ export default function Map() {
     else if (times.length === 0) setResult([]);
   }, [address, date, times, pickleball]);
 
-  // Scroll Handler for Map Focus
   const handleScroll = (e) => {
     const itemHeight = 450;
     const index = Math.floor(e.target.scrollTop / itemHeight);
     setVisibleIndex(index);
   };
 
-  // Sort Parks by Distance
   const getFilteredSearchResults = () => {
     if (!searchresult || searchresult.length === 0) return [];
     if (!address) return searchresult;
@@ -95,28 +105,55 @@ export default function Map() {
     );
   };
 
-  // Render UI
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
       <Topbar />
       <div className="horizontal-bar" />
 
-      <div className="map-page-flex" style={{ flex: 1, overflow: 'hidden' }}>
-        
-        {/* Sidebar */}
+      <div className="map-page-flex" style={{ flex: 1, overflow: 'hidden', position: 'relative' }}>
         <div className="map-info" onScroll={handleScroll}>
-          <div className="preference-bar-wrapper">
-            <PreferenceBar 
-              address={address}
-              setAddress={setAddress}
-              date={date}
-              setDate={setDate}
-              times={times}
-              setTimes={setTimes}
-              pickleball={pickleball}
-              setPickleball={setPickleball}
-            />
-          </div>
+          {isMobile && showPreferences && (
+            <div className="preference-overlay open">
+              <div style={{ display: "flex" }}>
+                <PreferenceBar 
+                  address={address}
+                  setAddress={setAddress}
+                  date={date}
+                  setDate={setDate}
+                  times={times}
+                  setTimes={setTimes}
+                  pickleball={pickleball}
+                  setPickleball={setPickleball}
+                />
+                <button
+                  onClick={() => setShowPreferences(false)}
+                  className="close-preferences-button"
+                  aria-label="Hide Filters"
+                >
+                  <img
+                    src={isDark ? upCaretWhite : upCaretBlack}  // swap caret icon based on theme
+                    alt="Hide filters"
+                    style={{ width: '20px', height: '20px' }}
+                  />
+                </button>
+              </div>
+            </div>
+          )}
+
+          {!isMobile && (
+            <div className="preference-bar-wrapper">
+              <PreferenceBar 
+                address={address}
+                setAddress={setAddress}
+                date={date}
+                setDate={setDate}
+                times={times}
+                setTimes={setTimes}
+                pickleball={pickleball}
+                setPickleball={setPickleball}
+              />
+            </div>
+          )}
 
           <div className="vertical-bar-mobile" />
 
@@ -137,12 +174,24 @@ export default function Map() {
           </div>
         </div>
 
-        {/* Divider */}
         <div className="vertical-bar" />
         <div className="horizontal-bar-mobile" />
 
-        {/* Map Area */}
-        <div className="map-container" style={{ flex: 1 }}>
+        <div className="map-container" style={{ flex: 1, position: 'relative' }}>
+          {isMobile && !showPreferences && (
+            <button
+              onClick={() => setShowPreferences(true)}
+              className="toggle-settings-button-on-map"
+              aria-label="Show Filters"
+            >
+              <img
+                src={isDark ? downCaretWhite : downCaretBlack}  // swap caret icon based on theme
+                alt="Show filters"
+                style={{ width: '20px', height: '20px' }}
+              />
+            </button>
+          )}
+
           <MyMap 
             markers={getFilteredSearchResults()}
             addressCoords={addressCoords || {}}
