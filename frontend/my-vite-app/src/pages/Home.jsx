@@ -43,7 +43,7 @@ export default function Home() {
 
     <div className = "home-flex">
 
-      <div className="white-text" style={{ marginTop: "100px", fontSize: "30px" }}>
+      <div style={{ marginTop: "100px", fontSize: "30px" }}>
         Find a Court
       </div>
       

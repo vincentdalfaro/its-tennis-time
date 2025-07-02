@@ -49,10 +49,10 @@ export default function DateButton({ width, date: rawDate, onChange }) {
   return (
     <div
       ref={wrapperRef}
-      style={{ position: "relative", display: "inline-block", width }}
+      style={{ position: "relative", display: "inline-block", width}}
     >
       <button
-        className={`button button-calendar ${calendarOpen ? 'calendar-open' : ''}`}
+        className={`button ${calendarOpen ? 'calendar-open' : ''}`}
         style={{ width: "100%" }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}

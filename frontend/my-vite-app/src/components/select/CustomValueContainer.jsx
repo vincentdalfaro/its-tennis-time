@@ -10,25 +10,28 @@ const CustomValueContainer = ({ children, ...props }) => {
   return (
     <components.ValueContainer
       {...props}
+      className={isOpen ? 'select-color-open' : 'select-color-close'}
       style={{
-        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        flex: 1,
+        minWidth: 0,
         paddingLeft: 6,
-        display: 'flex',         
-        alignItems: 'center',     
-        overflow: 'hidden',
       }}
-      className={isOpen ? 'select-color-open': 'select-color-close'}
     >
       {selected.length > 0 ? (
         <div
-          className = "custom-value-style"
+          className="custom-value-style"
+          title={selectedLabels}
         >
           {selectedLabels}
         </div>
       ) : (
-        values
+        values // this renders placeholder
       )}
-      {input}
+      <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+        {input}
+      </div>
     </components.ValueContainer>
   );
 };
