@@ -1,5 +1,4 @@
-2025-07-02 11:57:17,389 INFO Logger is enabled
-2025-07-02 11:57:17,868 INFO Successfully connected to MongoDB
-2025-07-02 11:57:17,911 WARNING  * Debugger is active!
-2025-07-02 11:57:17,918 INFO  * Debugger PIN: 452-302-233
-2025-07-02 11:57:23,965 INFO  * Detected change in '/Users/vincentalfaro/Desktop/its-tennis-time/backend/main.py', reloading
+2025-07-02 12:00:45,547 INFO Logger is enabled
+2025-07-02 12:00:46,033 INFO Successfully connected to MongoDB
+2025-07-02 12:00:46,073 WARNING  * Debugger is active!
+2025-07-02 12:00:46,082 INFO  * Debugger PIN: 452-302-233
