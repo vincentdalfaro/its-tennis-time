@@ -18,6 +18,7 @@ def main():
         origins=[
             "http://localhost:5173",  # Local development
             "https://its-tennis-time-git-vinnie-vincent-alfaros-projects-deef64dd.vercel.app",  # Vercel preview
+            "https://your-frontend.vercel.app",  # Replace with your actual Vercel frontend URL
             "https://www.itstennistime.org",  # Production (www)
             "https://itstennistime.org",  # Production (non-www)
         ],
