@@ -156,8 +156,9 @@ export default function Map() {
           )}
 
           <div className="vertical-bar-mobile" />
+          <div className="horizontal-bar" />
 
-          <div className="parktokens-wrapper" style={{ margin: "0 10px" }}>
+          <div className="parktokens-wrapper" style={{ margin: "0 10px", overflowY: "auto", marginBottom: "10px" }}>
             {searchresult?.length > 0 ? (
               getFilteredSearchResults().map((place, index) => (
                 <ParkToken
