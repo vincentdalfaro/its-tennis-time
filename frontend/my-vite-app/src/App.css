@@ -124,8 +124,8 @@ input::placeholder {
 .map-info {
   display: flex;
   flex-direction: column;
-  width: 400px; 
-  overflow-y: scroll;
+  width: 400px;
+  overflow: hidden; /* stop scroll here */
 }
 
 .vertical-bar {
@@ -311,6 +311,11 @@ input::placeholder {
     flex-shrink: 0;   /* prevent shrinking */
     flex-grow: 0;     /* prevent growing */
   }
+
+  .horizontal-bar{
+    display: none;
+  }
+
   /* Floating toggle button ON MAP (mobile only) */
   .toggle-settings-button-on-map {
     position: absolute;
@@ -398,7 +403,8 @@ input::placeholder {
 
   .parktokens-wrapper {
     flex: 1;
-    overflow-y: auto;
+    overflow-y: auto; /* move scroll here */
+    margin: 0 10px;
   }
 
   .preference_box {
