@@ -146,8 +146,26 @@ input::placeholder {
   color: var(--text-color);
   height: 400px;
   display: flex;
+  overflow-y: scroll;
   flex-direction: column;
 }
+
+.summary-style {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6; /* collapsed line count */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  margin: 20px;
+}
+
+.summary-style.expanded {
+  display: block; /* Remove -webkit-box */
+  overflow: visible;
+  max-height: none;
+}
+
 
 /* Preference Bar */
 .preference_box {

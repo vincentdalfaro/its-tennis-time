@@ -9,27 +9,32 @@ import lightsIconBlack from "../../assets/icons-black/lights-black.png";
 import TimeButtons from "./TimeButtons.jsx";
 import useTheme from "../ThemeObserver.jsx";
 
+import { useState } from "react"; // ADD THIS AT THE TOP
+
 function ParkToken({ place, index, pickleball, address }) {
-  // Get current theme and dark mode status
   const theme = useTheme();
   const isDark = theme === 'dark';
 
-  // Extract and sort unique available times across all courts
+  const [expanded, setExpanded] = useState(false); // ADD THIS
+
   const allTimes = Array.from(new Set(
     (place.courts || [])
       .flatMap(court => court.availableTimes)
-      .filter(Boolean) // Remove nulls/undefined
+      .filter(Boolean)
   )).sort((a, b) => a.localeCompare(b));
 
-  // Open location page in new tab on click
   function handleClick() {
     const url = `https://www.rec.us/locations/${place["locationId"]}`;
     window.open(url, '_blank');
   }
 
+  function toggleSummary() {
+    setExpanded(prev => !prev);
+  }
+
   return (
     <div>
-      {/* Park Name and Distance */}
+      {/* Title & Distance */}
       <div
         style={{
           fontSize: "50px",
@@ -41,7 +46,6 @@ function ParkToken({ place, index, pickleball, address }) {
         <div style={{ flex: 1 }}>
           {place.name}
         </div>
-
         {address && place?.distance?.distance_text && (
           <div style={{ fontSize: "15px", marginTop: "auto", marginBottom: "10px" }}>
             {place.distance.distance_text}
@@ -49,49 +53,40 @@ function ParkToken({ place, index, pickleball, address }) {
         )}
       </div>
 
-      {/* Park Details Box */}
+      {/* Details Box */}
       <div className="white-box" style={{ fontSize: "18px" }}>
         <div style={{ marginLeft: "20px", marginRight: "20px", display: "flex", alignItems: "center" }}>
-
-          {/* Neighborhood Icon and Name */}
-          <img 
-            src={isDark ? neighborhoodIconWhite : neighborhoodIconBlack} 
-            style={{ height: "20px", width: "auto", marginRight: "5px" }} 
-          />
+          <img src={isDark ? neighborhoodIconWhite : neighborhoodIconBlack} style={{ height: "20px", marginRight: "5px" }} />
           {place["neighborhood"]}
 
-          {/* Tennis Court Icon and Number */}
-          <img 
-            src={isDark ? tennisCourtWhite : tennisCourtBlack} 
-            style={{ height: "20px", width: "auto", marginLeft: "25px", marginRight: "5px" }} 
-          />
+          <img src={isDark ? tennisCourtWhite : tennisCourtBlack} style={{ height: "20px", marginLeft: "25px", marginRight: "5px" }} />
           {place.numCourts}
 
-          {/* Show reservable courts count based on pickleball toggle */}
           {pickleball ? place["reservable_pickle"] : place["reservable_tennis"]}
 
-          {/* Restroom Icon if available */}
-          {place.restrooms && 
-            <img 
-              src={isDark ? toiletIconWhite : toiletIconBlack} 
-              style={{ height: "20px", width: "auto", marginLeft: "25px", marginRight: "5px" }} 
-            />
+          {place.restrooms &&
+            <img src={isDark ? toiletIconWhite : toiletIconBlack} style={{ height: "20px", marginLeft: "25px", marginRight: "5px" }} />
           }
 
-          {/* Lights Icon if available */}
-          {place.lights && 
-            <img 
-              src={isDark ? lightsIconWhite : lightsIconBlack} 
-              style={{ height: "20px", width: "auto", marginLeft: "15px" }} 
-            />
+          {place.lights &&
+            <img src={isDark ? lightsIconWhite : lightsIconBlack} style={{ height: "20px", marginLeft: "15px" }} />
           }
         </div>
 
-        {/* Time Buttons for available times */}
+        {/* Summary with expand/collapse */}
+        <div
+          className={`summary-style ${expanded ? 'expanded' : ''}`}
+          onClick={toggleSummary}
+        >
+          {place.summary}
+        </div>
+
+        {/* Time buttons */}
         <TimeButtons allTimes={allTimes} handleClick={handleClick} theme={theme} />
       </div>
     </div>
   );
 }
+
 
 export default ParkToken;
