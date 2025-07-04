@@ -3,7 +3,7 @@ import Topbar from '../components/Topbar.jsx';
 
 export default function About() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column'}}>
       <Topbar />
       <div className="horizontal-bar" />
 
