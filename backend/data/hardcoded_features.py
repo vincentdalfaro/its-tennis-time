@@ -2,7 +2,7 @@ park_features = {
     "81cd2b08-8ea6-40ee-8c89-aeba92506576": {
         "lights": False,
         "restrooms": False,
-        "buslines": ["19", "45", "PH"],  # Converted set to list
+        "buslines": ["19", "45", "PH"], 
     },
     "c41c7b8f-cb09-415a-b8ea-ad4b82d792b9": {
         "lights": False,
