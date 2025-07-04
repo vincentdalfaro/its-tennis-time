@@ -73,16 +73,16 @@ function ParkToken({ place, index, pickleball, address }) {
           }
         </div>
 
-        {/* Summary with expand/collapse */}
         <div
-          className={`summary-style ${expanded ? 'expanded' : ''}`}
-          onClick={toggleSummary}
+            className={`summary-style ${expanded ? 'expanded' : ''}`}
+            onClick={toggleSummary}
         >
-          {place.summary}
+            {place.summary}
         </div>
 
-        {/* Time buttons */}
-        <TimeButtons allTimes={allTimes} handleClick={handleClick} theme={theme} />
+        <div style={{ flexShrink: 0 }}>
+         <TimeButtons allTimes={allTimes} handleClick={handleClick} theme={theme} />
+        </div>
       </div>
     </div>
   );

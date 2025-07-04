@@ -140,30 +140,32 @@ input::placeholder {
 
 /* Park Token Styles */
 .white-box {
+  height: 400px;        /* fixed height */
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;     /* scroll the whole white box vertically */
   border: 1.5px solid var(--text-color);
   border-radius: 2px;
   padding: 1px;
   color: var(--text-color);
-  height: 400px;
-  display: flex;
-  overflow-y: scroll;
-  flex-direction: column;
+  box-sizing: border-box;
 }
 
 .summary-style {
+  margin: 20px;
+  cursor: pointer;
+  overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 6; /* collapsed line count */
-  overflow: hidden;
+  -webkit-line-clamp: 6; /* collapsed lines */
   text-overflow: ellipsis;
-  cursor: pointer;
-  margin: 20px;
+  transition: all 0.3s ease;
 }
 
 .summary-style.expanded {
-  display: block; /* Remove -webkit-box */
+  display: block;       /* show full text */
   overflow: visible;
-  max-height: none;
+  -webkit-line-clamp: unset;
 }
 
 
@@ -291,13 +293,13 @@ input::placeholder {
 .times-scroll {
   overflow-x: auto;
   white-space: nowrap;
-  margin-top: 10px;
+  margin-bottom: 10px;
   margin-left: 10px;
 }
 
 .times-expand {
   margin-left: 10px;
-  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 
