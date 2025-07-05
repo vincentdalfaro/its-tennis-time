@@ -2,7 +2,7 @@ import '../App.css';
 import Topbar from '../components/Topbar.jsx';
 import MyMap from '../components/map/map-component/MapComponent.jsx';
 import { useSearchParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { fetchParkCoordinates, fetchAddressCoordinates } from '../api/api.jsx';
 import ParkToken from '../components/map/ParkToken.jsx';
 import PreferenceBar from '../components/map/PreferenceBar.jsx';
@@ -46,6 +46,23 @@ export default function Map() {
   const theme = useTheme();
   const isDark = theme === 'dark';
 
+  // Inside Map function:
+const tokenRefs = useRef([]);
+
+// Clear and reset refs when results update
+useEffect(() => {
+  tokenRefs.current = [];
+}, [searchresult]);
+const scrollContainerRef = useRef(null);
+
+const scrollToIndex = (index) => {
+  const ref = tokenRefs.current[index];
+  if (ref && ref.scrollIntoView) {
+    ref.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  setVisibleIndex(index);
+};
+
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 900);
     window.addEventListener('resize', handleResize);
@@ -86,9 +103,10 @@ export default function Map() {
   }, [address, date, times, pickleball]);
 
   const handleScroll = (e) => {
-    const itemHeight = 450;
+    const itemHeight = 460;
     const index = Math.floor(e.target.scrollTop / itemHeight);
     setVisibleIndex(index);
+    console.log(visibleIndex)
   };
 
   const getFilteredSearchResults = () => {
@@ -98,7 +116,7 @@ export default function Map() {
     const allHaveDistance = searchresult.every(
       (p) => p.distance?.distance_value != null
     );
-    if (!allHaveDistance) return searchresult;
+    if (!allHaveDistance) return searchrexsult;
 
     return [...searchresult].sort(
       (a, b) => a.distance.distance_value - b.distance.distance_value
@@ -158,20 +176,29 @@ export default function Map() {
           <div className="vertical-bar-mobile" />
           <div className="horizontal-bar" />
 
-          <div className="parktokens-wrapper" style={{ margin: "0 10px", overflowY: "auto", marginBottom: "10px" }}>
+          <div 
+            className="parktokens-wrapper" 
+            style={{ margin: "0 10px", overflowY: "auto", marginBottom: "10px" }}
+            onScroll={handleScroll}
+            ref={scrollContainerRef}
+          >
             {searchresult?.length > 0 ? (
-              getFilteredSearchResults().map((place, index) => (
+            getFilteredSearchResults().map((place, index) => (
+              <div
+                key={place.locationId}
+                ref={(el) => tokenRefs.current[index] = el} // ⬅ Attach ref here
+              >
                 <ParkToken
-                  key={place.locationId}
                   place={place}
                   index={index}
                   pickleball={pickleball}
                   address={address}
                 />
-              ))
-            ) : (
-              <div className="map-heading">No Courts Available</div>
-            )}
+              </div>
+            ))
+          ) : (
+            <div className="map-heading">No Courts Available</div>
+          )}
           </div>
         </div>
 
@@ -197,6 +224,7 @@ export default function Map() {
             markers={getFilteredSearchResults()}
             addressCoords={addressCoords || {}}
             visibleIndex={visibleIndex}
+            onMarkerClick={scrollToIndex}
           />
         </div>
       </div>
