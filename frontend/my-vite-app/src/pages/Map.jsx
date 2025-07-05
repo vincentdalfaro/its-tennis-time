@@ -116,7 +116,7 @@ const scrollToIndex = (index) => {
     const allHaveDistance = searchresult.every(
       (p) => p.distance?.distance_value != null
     );
-    if (!allHaveDistance) return searchrexsult;
+    if (!allHaveDistance) return searchresult;
 
     return [...searchresult].sort(
       (a, b) => a.distance.distance_value - b.distance.distance_value
