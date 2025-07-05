@@ -16,10 +16,10 @@ const center = {
   lat: 37.756,
 };
 
-function MyMap({markers, addressCoords, visibleIndex}) {
+function MyMap({ markers, addressCoords, visibleIndex, onMarkerClick }) {
 
   const theme = useTheme()
-const isDark = theme === 'dark'
+  const isDark = theme === 'dark'
 
   return (
     <GoogleMap
@@ -27,7 +27,7 @@ const isDark = theme === 'dark'
       center={center}
       zoom={11}
       options={{
-        styles: (isDark ? mapStyleDark: mapStyleLight),
+        styles: (isDark ? mapStyleDark : mapStyleLight),
         scrollwheel: true,
         disableDefaultUI: true,
         gestureHandling: 'greedy',
@@ -35,29 +35,29 @@ const isDark = theme === 'dark'
       }}
     >
       {markers.map((marker, i) => (
-      <Marker
-        key={marker.locationId}
-        position={{ lat: parseFloat(marker.lat), lng: parseFloat(marker.lng) }}
-        icon={{
-          url: isDark ? mapPinWhite: mapPinBlack,
-          scaledSize: new window.google.maps.Size(
-            visibleIndex === i ? 60 : 30,
-            visibleIndex === i ? 60 : 30
-          )
-        }}
-      /> 
-     ))}
+        <Marker
+          key={marker.locationId}
+          position={{ lat: parseFloat(marker.lat), lng: parseFloat(marker.lng) }}
+          icon={{
+            url: isDark ? mapPinWhite : mapPinBlack,
+            scaledSize: new window.google.maps.Size(
+              visibleIndex === i ? 60 : 30,
+              visibleIndex === i ? 60 : 30
+            ),
+          }}
+          onClick={() => onMarkerClick && onMarkerClick(i)}  // <-- new handler here
+        />
+      ))}
 
-    {addressCoords?.lat && addressCoords?.lng && (
-      <Marker
-        position={{ lat: addressCoords.lat, lng: addressCoords.lng }}
-        icon = {{
-          url: mapPinRed,
-          scaledSize: new window.google.maps.Size(40, 40),
-        }}
-      />
-    )}
-
+      {addressCoords?.lat && addressCoords?.lng && (
+        <Marker
+          position={{ lat: addressCoords.lat, lng: addressCoords.lng }}
+          icon={{
+            url: mapPinRed,
+            scaledSize: new window.google.maps.Size(40, 40),
+          }}
+        />
+      )}
     </GoogleMap>
   );
 }

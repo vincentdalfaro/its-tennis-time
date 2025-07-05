@@ -1,7 +1,7 @@
-2025-07-04 16:41:07,297 INFO Logger is enabled
-2025-07-04 16:41:07,875 INFO Successfully connected to MongoDB
-2025-07-04 16:41:07,876 INFO Fetching reservation data from API...
-2025-07-04 16:41:07,888 DEBUG Starting new HTTPS connection (1): api.rec.us:443
-2025-07-04 16:41:11,875 DEBUG https://api.rec.us:443 "GET /v1/locations/availability?publishedSites=true&organizationSlug=san-francisco-rec-park HTTP/1.1" 200 None
-2025-07-04 16:41:11,905 INFO Fetched 28 parks from API
-2025-07-04 16:41:23,734 INFO ✅ Done. Updated availableTimes for 0 courts.
+2025-07-04 17:04:56,684 INFO Logger is enabled
+2025-07-04 17:04:57,311 INFO Successfully connected to MongoDB
+2025-07-04 17:04:57,312 INFO Fetching reservation data from API...
+2025-07-04 17:04:57,323 DEBUG Starting new HTTPS connection (1): api.rec.us:443
+2025-07-04 17:05:01,628 DEBUG https://api.rec.us:443 "GET /v1/locations/availability?publishedSites=true&organizationSlug=san-francisco-rec-park HTTP/1.1" 200 None
+2025-07-04 17:05:01,658 INFO Fetched 28 parks from API
+2025-07-04 17:05:13,566 INFO ✅ Done. Updated availableTimes for 0 courts.
